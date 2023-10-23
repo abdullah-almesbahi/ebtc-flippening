@@ -1,19 +1,17 @@
-import { useMetaMask } from 'metamask-react'
+import { useWeb3Modal } from '@web3modal/wagmi/react'
+import { useAccount } from 'wagmi'
 
 function ConnectWallet2({ onNext }) {
-  const { status, connect } = useMetaMask()
+  const { status } = useAccount()
+  const { open } = useWeb3Modal()
 
   let walletStatus
 
-  if (status === 'initializing') walletStatus = 'Synchronisation with MetaMask ongoing...'
+  if (status === 'connecting') walletStatus = 'Synchronisation with MetaMask ongoing...'
 
-  if (status === 'unavailable') {
-    walletStatus = 'MetaMask not available'
-  }
-
-  if (status === 'notConnected') {
+  if (status === 'disconnected') {
     walletStatus = (
-      <button className="btn btn-primary" onClick={connect}>
+      <button className="btn btn-primary" data-bs-dismiss="modal" onClick={open} type="button">
         Connect to MetaMask
       </button>
     )
@@ -24,7 +22,7 @@ function ConnectWallet2({ onNext }) {
   }
 
   if (status === 'connected') {
-    walletStatus = 'MetaMask Connected'
+    walletStatus = 'Wallet Connected'
   }
 
   return <div>{walletStatus}</div>

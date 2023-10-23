@@ -57,9 +57,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
               border: '1px solid rgba(138, 138, 160, 0.3)',
             }}
           >
-            <option selected value="stETH">
-              stETH
-            </option>
+            <option value="stETH">stETH</option>
             <option value="ETH">ETH</option>
             <option value="USDC">USDC</option>
           </select>

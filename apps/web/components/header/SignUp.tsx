@@ -1,9 +1,9 @@
 'use client'
-import { useMetaMask } from 'metamask-react'
+import { useAccount } from 'wagmi'
 import useMatchMedia from '@/hooks/useMatchMedia'
 
 export default function SignUp(): JSX.Element {
-  const { status } = useMetaMask()
+  const { status } = useAccount()
 
   // checking media query
   const isMatch = useMatchMedia('(max-width: 991px)')
