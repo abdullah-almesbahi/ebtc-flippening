@@ -1,6 +1,7 @@
-import type { Metadata } from 'next'
+'use client'
+import { SessionProvider } from 'next-auth/react'
+import Twitter from '@/views/Auth/components/Twitter'
 import Breadcrumb from '@/components/breadcrumb'
-import SignupWizard from '@/views/Auth'
 
 const item = {
   title: 'Sign Up',
@@ -19,15 +20,11 @@ const item = {
   ],
 }
 
-export const metadata: Metadata = {
-  title: 'Axies | NFT Marketplace React/Next Js Template | Sign Up',
-}
-
-export default function page(): JSX.Element {
+export default function Signup(): JSX.Element {
   return (
-    <>
+    <SessionProvider>
       <Breadcrumb data={item} />
-      <SignupWizard />
-    </>
+      <Twitter />
+    </SessionProvider>
   )
 }
