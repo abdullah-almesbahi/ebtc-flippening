@@ -11,7 +11,14 @@ function ConnectWallet2({ onNext }) {
 
   if (status === 'disconnected') {
     walletStatus = (
-      <button className="btn btn-primary" data-bs-dismiss="modal" onClick={open} type="button">
+      <button
+        className="btn btn-primary"
+        data-bs-dismiss="modal"
+        onClick={() => {
+          return open()
+        }}
+        type="button"
+      >
         Connect to MetaMask
       </button>
     )

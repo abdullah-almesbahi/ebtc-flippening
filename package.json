@@ -2,8 +2,8 @@
   "name": "ebtc-flippening",
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "dotenv -e .env -- turbo run dev",
+    "build": "dotenv -- turbo run build",
+    "dev": "dotenv -- turbo run dev",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
