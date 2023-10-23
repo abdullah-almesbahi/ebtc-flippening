@@ -8,7 +8,7 @@ export default function Shares(): JSX.Element {
   const { shares } = useFlippeningStore()
 
   useEffect(() => {
-    useFlippeningStore.setState({ shares: { ...shares, results: fakeData } })
+    useFlippeningStore.setState({ shares: fakeData })
   }, [])
 
   const [countOfItemsShown, setCountOfItemsShown] = useState(1)
@@ -56,7 +56,7 @@ export default function Shares(): JSX.Element {
       <div className="container-fluid">
         <div className="row">
           <div className="widget widget-recent-post mg-bt-43">
-            <ul>{shares.results?.map((item, index) => sharesInfo({ item, index }))}</ul>
+            <ul>{shares.map((item, index) => sharesInfo({ item, index }))}</ul>
           </div>
         </div>
         <div className="col-md-12 wrap-inner load-more text-center">

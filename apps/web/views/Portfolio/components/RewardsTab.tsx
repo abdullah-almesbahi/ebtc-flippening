@@ -8,7 +8,7 @@ export default function RewardsTab(): JSX.Element {
   const { rewards } = useFlippeningStore()
 
   useEffect(() => {
-    useFlippeningStore.setState({ rewards: { ...rewards, results: fakeData } })
+    useFlippeningStore.setState({ rewards: fakeData })
   }, [])
 
   const [countOfItemsShown, setCountOfItemsShown] = useState(1)
@@ -82,7 +82,7 @@ export default function RewardsTab(): JSX.Element {
         </div>
       </div>
       <div className="widget widget-recent-post mg-bt-43">
-        <ul>{rewards?.results?.map((item, index) => rewardsInfo({ item, index }))}</ul>
+        {rewards.length > 0 && <ul>{rewards?.map((item, index) => rewardsInfo({ item, index }))}</ul>}
       </div>
       <div className="col-md-12 wrap-inner load-more text-center">
         <button

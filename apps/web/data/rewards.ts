@@ -1,4 +1,6 @@
-export const rewards = [
+import type { Reward } from '@/store/types'
+
+export const rewards: Reward[] = [
   {
     pfpUrl: 'https://pbs.twimg.com/profile_images/1678431985981849606/Cz1OdAeB.jpg',
     rewardsAmount: '1',

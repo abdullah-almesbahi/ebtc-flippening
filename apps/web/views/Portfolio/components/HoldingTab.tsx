@@ -1,13 +1,14 @@
+'use client'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { useFlippeningStore } from '@/store/flippening'
 import { holding as fakeData } from '@/data/holding'
+import { useFlippeningStore } from '@/store/flippening'
 
-export default function holdingTab(): JSX.Element {
+export default function HoldingTab(): JSX.Element {
   const { holding } = useFlippeningStore()
 
   useEffect(() => {
-    useFlippeningStore.setState({ holding: { ...holding, results: fakeData } })
+    useFlippeningStore.setState({ holding: fakeData })
   }, [])
 
   const [countOfItemsShown, setCountOfItemsShown] = useState(1)
@@ -32,7 +33,7 @@ export default function holdingTab(): JSX.Element {
   return (
     <div className="side-bar details list-items col-lg-6 m-auto">
       <div className="widget widget-recent-post mg-bt-43">
-        <ul>{holding?.results?.map((item, index) => holdingInfo({ item, index }))}</ul>
+        {holding.length > 0 && <ul>{holding?.map((item, index) => holdingInfo({ item, index }))}</ul>}
       </div>
       <div className="col-md-12 wrap-inner load-more text-center">
         <button

@@ -1,7 +1,7 @@
 import { BetPosition } from '@/store/types'
 
-export const getRoundPosition = (lockPrice: bigint, closePrice: bigint) => {
-  if (!closePrice) {
+export const getRoundPosition = (lockPrice: string | null, closePrice: string | null): BetPosition | null => {
+  if (!closePrice || !lockPrice) {
     return null
   }
 

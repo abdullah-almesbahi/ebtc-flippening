@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { BetPosition, type Bet } from '@/store/types'
 
 export const bets: Bet[] = [
@@ -12,8 +13,8 @@ export const bets: Bet[] = [
     claimedBlock: null,
     claimedSTETH: null,
     claimedNetSTETH: null,
-    createdAt: '1697973425',
-    updatedAt: '1697973425',
+    createdAt: 1697973425,
+    updatedAt: 1697973425,
     round: {
       id: '217040',
       epoch: '217040',
@@ -41,8 +42,8 @@ export const bets: Bet[] = [
     },
     user: {
       id: '0xd8b53f94144b5bad90b156ecca28422c26c08e6c',
-      createdAt: '1662016384',
-      updatedAt: '1697973425',
+      createdAt: 1662016384,
+      updatedAt: 1697973425,
       block: '20945326',
       totalBets: '40403',
       totalBetsBull: '18830',
@@ -68,8 +69,8 @@ export const bets: Bet[] = [
     claimedBlock: null,
     claimedSTETH: null,
     claimedNetSTETH: null,
-    createdAt: '1697971594',
-    updatedAt: '1697971594',
+    createdAt: 1697971594,
+    updatedAt: 1697971594,
     round: {
       id: '217034',
       epoch: '217034',
@@ -97,8 +98,8 @@ export const bets: Bet[] = [
     },
     user: {
       id: '0xd8b53f94144b5bad90b156ecca28422c26c08e6c',
-      createdAt: '1662016384',
-      updatedAt: '1697973425',
+      createdAt: 1662016384,
+      updatedAt: 1697973425,
       block: '20945326',
       totalBets: '40403',
       totalBetsBull: '18830',
@@ -124,8 +125,8 @@ export const bets: Bet[] = [
     claimedBlock: null,
     claimedSTETH: null,
     claimedNetSTETH: null,
-    createdAt: '1697970066',
-    updatedAt: '1697970066',
+    createdAt: 1697970066,
+    updatedAt: 1697970066,
     round: {
       id: '217029',
       epoch: '217029',
@@ -153,8 +154,8 @@ export const bets: Bet[] = [
     },
     user: {
       id: '0xd8b53f94144b5bad90b156ecca28422c26c08e6c',
-      createdAt: '1662016384',
-      updatedAt: '1697973425',
+      createdAt: 1662016384,
+      updatedAt: 1697973425,
       block: '20945326',
       totalBets: '40403',
       totalBetsBull: '18830',
@@ -180,8 +181,8 @@ export const bets: Bet[] = [
     claimedBlock: null,
     claimedSTETH: null,
     claimedNetSTETH: null,
-    createdAt: '1697969149',
-    updatedAt: '1697969149',
+    createdAt: 1697969149,
+    updatedAt: 1697969149,
     round: {
       id: '217026',
       epoch: '217026',
@@ -209,8 +210,8 @@ export const bets: Bet[] = [
     },
     user: {
       id: '0xd8b53f94144b5bad90b156ecca28422c26c08e6c',
-      createdAt: '1662016384',
-      updatedAt: '1697973425',
+      createdAt: 1662016384,
+      updatedAt: 1697973425,
       block: '20945326',
       totalBets: '40403',
       totalBetsBull: '18830',
@@ -236,8 +237,8 @@ export const bets: Bet[] = [
     claimedBlock: null,
     claimedSTETH: null,
     claimedNetSTETH: null,
-    createdAt: '1697968843',
-    updatedAt: '1697968843',
+    createdAt: 1697968843,
+    updatedAt: 1697968843,
     round: {
       id: '217025',
       epoch: '217025',
@@ -265,8 +266,8 @@ export const bets: Bet[] = [
     },
     user: {
       id: '0xd8b53f94144b5bad90b156ecca28422c26c08e6c',
-      createdAt: '1662016384',
-      updatedAt: '1697973425',
+      createdAt: 1662016384,
+      updatedAt: 1697973425,
       block: '20945326',
       totalBets: '40403',
       totalBetsBull: '18830',

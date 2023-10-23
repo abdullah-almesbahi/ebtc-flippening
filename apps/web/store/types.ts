@@ -103,6 +103,35 @@ export interface Round {
   bets?: Bet[]
 }
 
+export interface Reward {
+  pfpUrl: string
+  createdAt: number
+  rewardsAmount: string
+}
+export interface Holders {
+  username: string
+  address: string
+  pfpUrl: string
+  shareAmount: string
+  createdAt: number
+}
+
+interface TraderSubject {
+  address: string
+  pfpUrl: string
+  username: string
+  name: string
+}
+
+export interface Share {
+  trader: TraderSubject
+  subject: TraderSubject
+  isBuy: boolean
+  shareAmount: string
+  ethAmount: string
+  createdAt: number
+}
+
 export interface NodeRound {
   epoch: number
   startTimestamp: number | null
@@ -134,6 +163,10 @@ export interface FlippeningStore {
   minBetAmount: string
   bufferSeconds: number
   history: Bet[]
+  holders: Holders[]
+  holding: Holders[]
+  rewards: Reward[]
+  shares: Share[]
   totalHistory: number
   currentHistoryPage: number
   hasHistoryLoaded: boolean

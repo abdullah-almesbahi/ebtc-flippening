@@ -1,4 +1,6 @@
-export const shares = [
+import type { Share } from '@/store/types'
+
+export const shares: Share[] = [
   {
     trader: {
       address: '0x5a7f8bdb1564b426f4e6e6f3088bca3eb73d2bde',

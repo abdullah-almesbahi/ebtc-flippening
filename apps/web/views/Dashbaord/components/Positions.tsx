@@ -60,6 +60,7 @@ export default function Positions(): JSX.Element {
                 nextEl: '.live-bet-right',
               }}
               onBeforeDestroy={() => {
+                // @ts-expect-error
                 setSwiper(null)
               }}
               onSwiper={setSwiper}
@@ -72,7 +73,7 @@ export default function Positions(): JSX.Element {
               <div className="swiper-button-prev live-bet-right btn-slide-prev" />
               {rounds.map((round) => (
                 <SwiperSlide key={round.epoch}>
-                  {({ isActive }) => <RoundCard isActive={isChangeTransition ? isActive : null} round={round} />}
+                  {({ isActive }) => <RoundCard isActive={isChangeTransition ? isActive : undefined} round={round} />}
                 </SwiperSlide>
               ))}
             </Swiper>

@@ -7,7 +7,7 @@ export default function SharesTab(): JSX.Element {
   const { shares } = useFlippeningStore()
 
   useEffect(() => {
-    useFlippeningStore.setState({ shares: { ...shares, results: fakeData } })
+    useFlippeningStore.setState({ shares: fakeData })
   }, [])
 
   const [countOfItemsShown, setCountOfItemsShown] = useState(1)
@@ -53,7 +53,7 @@ export default function SharesTab(): JSX.Element {
   return (
     <div className="side-bar details list-items col-lg-6 m-auto">
       <div className="widget widget-recent-post mg-bt-43">
-        <ul>{shares.results?.map((item, index) => sharesInfo({ item, index }))}</ul>
+        {shares.length > 0 && <ul>{shares?.map((item, index) => sharesInfo({ item, index }))}</ul>}
       </div>
       <div className="col-md-12 wrap-inner load-more text-center">
         <button

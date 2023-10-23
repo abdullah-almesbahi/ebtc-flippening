@@ -53,5 +53,8 @@ module.exports = {
       },
     ],
     '@typescript-eslint/no-unsafe-member-access': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'unicorn/filename-case': 'off',
   },
 }

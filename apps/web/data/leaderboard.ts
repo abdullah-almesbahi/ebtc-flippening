@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { User } from '@/store/types'
 
 export const leaderboard: User[] = [

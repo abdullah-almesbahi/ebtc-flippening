@@ -1,4 +1,6 @@
-export const holders = [
+import type { Holders } from '@/store/types'
+
+export const holders: Holders[] = [
   {
     username: 'kingtan',
     address: '0x2afd3729d934d358614a1730633103640a7f2acb',

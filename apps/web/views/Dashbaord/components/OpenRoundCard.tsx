@@ -4,18 +4,10 @@ import CardHeader from './RoundCard/CardHeader'
 import SetPositionCard from './SetPositionCard'
 import Card from './Card'
 import { BetPosition } from '@/store/types'
-import type { NodeRound, ReduxNodeLedger } from '@/store/types'
+import type { NodeRound } from '@/store/types'
 
 interface OpenRoundCardProps {
   round: NodeRound
-  betAmount?: ReduxNodeLedger['amount']
-  hasEnteredUp: boolean
-  hasEnteredDown: boolean
-  hasClaimedUp: boolean
-  hasClaimedDown: boolean
-  bullMultiplier: string
-  bearMultiplier: string
-  isActive?: boolean
 }
 
 interface StateType {

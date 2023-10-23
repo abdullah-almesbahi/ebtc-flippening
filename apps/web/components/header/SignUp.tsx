@@ -9,7 +9,7 @@ export default function SignUp(): JSX.Element {
   const isMatch = useMatchMedia('(max-width: 991px)')
 
   if (status === 'connected') {
-    return null
+    return <></>
   }
 
   return (

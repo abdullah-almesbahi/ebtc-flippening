@@ -1,5 +1,4 @@
 'use client'
-
 import { useMetaMask } from 'metamask-react'
 
 export default function WalletConnectButton(): JSX.Element {

@@ -9,10 +9,10 @@ interface Context {
   destroySwiper: () => void
 }
 
-export const SwiperContext = createContext<Context>(undefined)
+export const SwiperContext = createContext<Context | undefined>(undefined)
 
 function SwiperProvider({ children }) {
-  const [swiper, setSwiper] = useState<SwiperCore>(null)
+  const [swiper, setSwiper] = useState<SwiperCore | null>(null)
 
   const destroySwiper = useCallback(() => {
     if (swiper) {
@@ -23,6 +23,7 @@ function SwiperProvider({ children }) {
 
   const providerValue = useMemo(() => ({ swiper, setSwiper, destroySwiper }), [swiper, destroySwiper])
 
+  // @ts-expect-error
   return <SwiperContext.Provider value={providerValue}>{children}</SwiperContext.Provider>
 }
 

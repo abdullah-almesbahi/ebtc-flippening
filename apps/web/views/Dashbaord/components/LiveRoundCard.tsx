@@ -1,35 +1,19 @@
-import { useMemo } from 'react'
 import CardHeader from './RoundCard/CardHeader'
 import Card from './Card'
 import { BetPosition } from '@/store/types'
-import type { NodeRound, ReduxNodeLedger } from '@/store/types'
-import { getNowInSeconds } from '@/utils/getNowInSeconds'
+import type { NodeRound } from '@/store/types'
 
 interface LiveRoundCardProps {
   round: NodeRound
-  betAmount?: ReduxNodeLedger['amount']
-  hasEnteredUp: boolean
-  hasEnteredDown: boolean
-  hasClaimedUp: boolean
-  hasClaimedDown: boolean
-  bullMultiplier: string
-  bearMultiplier: string
-  isActive?: boolean
 }
 
 export default function LiveRoundCard({ round }: LiveRoundCardProps): JSX.Element {
-  const { lockPrice, closeTimestamp } = round
-  // const { price, refresh } = usePollOraclePrice()
+  const { lockPrice } = round
   const price = 213.1658
 
-  const isHouse = useMemo(() => {
-    const secondsToClose = closeTimestamp ? closeTimestamp - getNowInSeconds() : 0
-    return lockPrice && price === lockPrice && secondsToClose <= SHOW_HOUSE_BEFORE_SECONDS_TO_CLOSE
-  }, [closeTimestamp, lockPrice, price])
+  const isBull = lockPrice && price > Number(lockPrice)
 
-  const isBull = lockPrice && price > lockPrice
-
-  const betPosition = isHouse ? BetPosition.HOUSE : isBull ? BetPosition.BULL : BetPosition.BEAR
+  const betPosition = isBull ? BetPosition.BULL : BetPosition.BEAR
 
   return (
     <Card>

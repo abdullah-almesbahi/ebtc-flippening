@@ -1,10 +1,11 @@
-import type { Bet, User } from '@/store/types'
+import type { User } from '@/store/types'
 
 interface NetWinningsViewProps {
-  data: User | Bet
+  data?: User
 }
 
 export default function NetWinningsView({ data }: NetWinningsViewProps): JSX.Element {
+  if (!data) return <></>
   const netWinnings = `${data?.netSTETH > 0 ? '+' : ''}${data?.netSTETH?.toLocaleString(undefined, {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,

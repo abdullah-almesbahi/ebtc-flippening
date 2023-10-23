@@ -3,7 +3,7 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { useState } from 'react'
 
-type TabType = 'You' | 'Holders' | 'Global'
+type TabType = 'you' | 'holders' | 'global'
 const tab: string[] = ['You', 'Holders', 'Global']
 
 export default function FilterAndSearch({ filter }: { filter: TabType }): JSX.Element {

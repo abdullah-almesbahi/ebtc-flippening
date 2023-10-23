@@ -28,7 +28,7 @@ const urbanist = Urbanist({
   variable: '--urbanist-font',
 })
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
   return (
     <html className="dark is_dark" lang="en">
       <body className={`body  ${rubik.className} ${urbanist.className}`}>

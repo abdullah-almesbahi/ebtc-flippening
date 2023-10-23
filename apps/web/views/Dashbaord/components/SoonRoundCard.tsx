@@ -1,18 +1,10 @@
 import Countdown from 'react-countdown'
 import CardHeader from './RoundCard/CardHeader'
 import Card from './Card'
-import type { NodeRound, ReduxNodeLedger } from '@/store/types'
+import type { NodeRound } from '@/store/types'
 
 interface SoonRoundCardProps {
   round: NodeRound
-  betAmount?: ReduxNodeLedger['amount']
-  hasEnteredUp: boolean
-  hasEnteredDown: boolean
-  hasClaimedUp: boolean
-  hasClaimedDown: boolean
-  bullMultiplier: string
-  bearMultiplier: string
-  isActive?: boolean
 }
 
 export default function SoonRoundCard({ round }: SoonRoundCardProps): JSX.Element {

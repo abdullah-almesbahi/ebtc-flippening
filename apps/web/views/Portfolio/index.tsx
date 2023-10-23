@@ -41,22 +41,24 @@ export default function Portofolio({ address }: { address?: string }): JSX.Eleme
       <div className="ibthemes-container">
         <div className="flat-tabs tab-authors">
           <div className="author-profile flex">
-            <div className="avatar-container">
-              <Image
-                alt="Image"
-                className="avatar"
-                height={500}
-                src={user?.avatar}
-                // style={{ height: '276px', width: '276px' }}
-                width={500}
-              />
-            </div>
+            {user?.avatar ? (
+              <div className="avatar-container">
+                <Image
+                  alt="Image"
+                  className="avatar"
+                  height={500}
+                  src={user.avatar}
+                  // style={{ height: '276px', width: '276px' }}
+                  width={500}
+                />
+              </div>
+            ) : null}
             <div className="infor-profile d-flex">
               <div className="profile-header">
                 <p className="content">Rank: #344</p>
                 {user?.username ? <h2 className="title"> {user.username}</h2> : null}
-                <p className="content">Holding: {user?.holding}</p>
-                <p className="content">Holders: {user?.holders}</p>
+                <p className="content">Holding: 5</p>
+                <p className="content">Holders: 3</p>
                 <p className="content">Rewards:</p>
                 <form>
                   <input className="inputcopy" defaultValue={user?.address} readOnly type="text" />
@@ -66,11 +68,11 @@ export default function Portofolio({ address }: { address?: string }): JSX.Eleme
                 </form>
               </div>
               <div className="profile-header">
-                <p className="content">Portfolio: {user?.portfolio}</p>
-                <p className="content">Claimed rewards: {user?.claimedRewards}</p>
-                <p className="content">Points: {user?.points}</p>
-                <p className="content">Shares: {user?.shares}</p>
-                <p className="content">Market price: {user?.marketPrice}</p>
+                <p className="content">Portfolio: 8</p>
+                <p className="content">Claimed rewards: 4</p>
+                <p className="content">Points: 432</p>
+                <p className="content">Shares: 1</p>
+                <p className="content">Market price: 666</p>
               </div>
             </div>
             <div className="widget-social style-3 flex-column">

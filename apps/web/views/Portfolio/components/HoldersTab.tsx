@@ -7,7 +7,7 @@ export default function HoldersTab(): JSX.Element {
   const { holders } = useFlippeningStore()
 
   useEffect(() => {
-    useFlippeningStore.setState({ holders: { ...holders, results: fakeData } })
+    useFlippeningStore.setState({ holders: fakeData })
   }, [])
 
   const [countOfItemsShown, setCountOfItemsShown] = useState(1)
@@ -32,7 +32,7 @@ export default function HoldersTab(): JSX.Element {
   return (
     <div className="side-bar details list-items col-lg-6 m-auto">
       <div className="widget widget-recent-post mg-bt-43">
-        <ul>{holders?.results?.map((item, index) => holdersInfo({ item, index }))}</ul>
+        {holders.length > 0 && <ul>{holders?.map((item, index) => holdersInfo({ item, index }))}</ul>}
       </div>
       <div className="col-md-12 wrap-inner load-more text-center">
         <button
