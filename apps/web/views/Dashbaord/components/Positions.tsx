@@ -7,10 +7,12 @@ import { Pagination, Navigation, Keyboard, Mousewheel, FreeMode } from 'swiper'
 import { useEffect, useState } from 'react'
 import useSwiper from '../hooks/useSwiper'
 import RoundCard from './RoundCard'
+import PostitionsPlaceholder from './PositionsPlaceholder'
 import { rounds as fakeDataRounds } from '@/data/rounds'
 import { useFlippeningStore } from '@/store/flippening'
+import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
-export default function Positions(): JSX.Element {
+export default function Positions({ data }: { data: DashboardDataQuery['rounds'] }): JSX.Element {
   const [isChangeTransition, setIsChangeTransition] = useState(false)
   const { rounds, setRounds, currentEpoch } = useFlippeningStore()
   const { setSwiper, swiper } = useSwiper()
@@ -33,50 +35,54 @@ export default function Positions(): JSX.Element {
             </div>
           </div>
           <div className="col-md-12">
-            <Swiper
-              breakpoints={{
-                768: {
-                  slidesPerView: 2,
-                  spaceBetween: 30,
-                },
-                1024: {
-                  slidesPerView: 3,
-                  spaceBetween: 30,
-                },
-                1300: {
-                  slidesPerView: 4,
-                  spaceBetween: 30,
-                },
-              }}
-              centeredSlides
-              className="swiper-container carousel-overflow pt-24 auctions"
-              freeMode={{ enabled: true, sticky: true, momentumRatio: 0.25, momentumVelocityRatio: 0.5 }}
-              initialSlide={swiperIndex}
-              keyboard
-              modules={[Keyboard, Mousewheel, FreeMode, Pagination, Navigation]}
-              mousewheel
-              navigation={{
-                prevEl: '.live-bet-next',
-                nextEl: '.live-bet-right',
-              }}
-              onBeforeDestroy={() => {
-                // @ts-expect-error
-                setSwiper(null)
-              }}
-              onSwiper={setSwiper}
-              resizeObserver
-              slidesPerView="auto"
-              spaceBetween={30}
-            >
-              <div className="swiper-pagination mg-t-6" />
-              <div className="swiper-button-next live-bet-next btn-slide-next active" />
-              <div className="swiper-button-prev live-bet-right btn-slide-prev" />
-              {rounds.map((round) => (
-                <SwiperSlide key={round.epoch}>
-                  {({ isActive }) => <RoundCard isActive={isChangeTransition ? isActive : undefined} round={round} />}
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            {data ? (
+              <Swiper
+                breakpoints={{
+                  768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                  },
+                  1300: {
+                    slidesPerView: 4,
+                    spaceBetween: 30,
+                  },
+                }}
+                centeredSlides
+                className="swiper-container carousel-overflow pt-24 auctions"
+                freeMode={{ enabled: true, sticky: true, momentumRatio: 0.25, momentumVelocityRatio: 0.5 }}
+                initialSlide={swiperIndex}
+                keyboard
+                modules={[Keyboard, Mousewheel, FreeMode, Pagination, Navigation]}
+                mousewheel
+                navigation={{
+                  prevEl: '.live-bet-next',
+                  nextEl: '.live-bet-right',
+                }}
+                onBeforeDestroy={() => {
+                  // @ts-expect-error
+                  setSwiper(null)
+                }}
+                onSwiper={setSwiper}
+                resizeObserver
+                slidesPerView="auto"
+                spaceBetween={30}
+              >
+                <div className="swiper-pagination mg-t-6" />
+                <div className="swiper-button-next live-bet-next btn-slide-next active" />
+                <div className="swiper-button-prev live-bet-right btn-slide-prev" />
+                {rounds.map((round) => (
+                  <SwiperSlide key={round.epoch}>
+                    {({ isActive }) => <RoundCard isActive={isChangeTransition ? isActive : undefined} round={round} />}
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            ) : (
+              <PostitionsPlaceholder />
+            )}
           </div>
         </div>
       </div>

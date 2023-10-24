@@ -1,16 +1,11 @@
 'use client'
 import Link from 'next/link'
-import { useEffect } from 'react'
+import LeaderboardPlacehoder from './components/LeaderboardPlacehoder'
 import LeaderboardRow from './components/LeaderboardRow'
-import { useFlippeningStore } from '@/store/flippening'
-import { leaderboard as fakeDataLeaderboards } from '@/data/leaderboard'
+import { useDashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
 export default function Leaderboard(): JSX.Element {
-  const { leaderboard } = useFlippeningStore()
-
-  useEffect(() => {
-    useFlippeningStore.setState({ leaderboard: { ...leaderboard, results: fakeDataLeaderboards } })
-  }, [])
+  const { data, loading } = useDashboardDataQuery()
 
   return (
     <section className="tf-section tf-rank">
@@ -34,9 +29,11 @@ export default function Leaderboard(): JSX.Element {
                   </tr>
                 </thead>
                 <tbody>
-                  {leaderboard.results?.map((item, index) => (
-                    <LeaderboardRow data={item} index={index} key={item.id} />
-                  ))}
+                  {data ? (
+                    data?.topTraders?.map((item, index) => <LeaderboardRow data={item} index={index} key={item.id} />)
+                  ) : (
+                    <LeaderboardPlacehoder />
+                  )}
                 </tbody>
               </table>
             </div>

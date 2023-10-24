@@ -11,7 +11,12 @@ module.exports = {
   reactStrictMode: true,
   transpilePackages: ['ui'],
   images: {
-    domains: ['pbs.twimg.com', 'abs.twimg.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   // TODO: Remove this once we have a proper ESLint config
   eslint: {

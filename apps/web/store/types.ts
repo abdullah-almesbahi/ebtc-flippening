@@ -1,3 +1,5 @@
+import type { Round } from '@/server/graphql/gen/graphql-types'
+
 export enum BetPosition {
   BULL = 'Bull',
   BEAR = 'Bear',
@@ -76,32 +78,32 @@ export interface Bet {
   round?: Round
 }
 
-export interface Round {
-  id: string
-  epoch: number
-  position: BetPosition
-  failed: boolean
-  startAt: number
-  startBlock: number
-  startHash: string
-  lockAt: number
-  lockBlock: number
-  lockHash: string
-  lockPrice: number
-  lockRoundId: string
-  closeAt: number
-  closeBlock: number
-  closeHash: string
-  closePrice: number
-  closeRoundId: string
-  totalBets: number
-  totalAmount: number
-  bullBets: number
-  bullAmount: number
-  bearBets: number
-  bearAmount: number
-  bets?: Bet[]
-}
+// export interface Round {
+//   id: string
+//   epoch: number
+//   position: BetPosition
+//   failed: boolean
+//   startAt: number
+//   startBlock: number
+//   startHash: string
+//   lockAt: number
+//   lockBlock: number
+//   lockHash: string
+//   lockPrice: number
+//   lockRoundId: string
+//   closeAt: number
+//   closeBlock: number
+//   closeHash: string
+//   closePrice: number
+//   closeRoundId: string
+//   totalBets: number
+//   totalAmount: number
+//   bullBets: number
+//   bullAmount: number
+//   bearBets: number
+//   bearAmount: number
+//   bets?: Bet[]
+// }
 
 export interface Reward {
   pfpUrl: string
@@ -182,5 +184,12 @@ export interface FlippeningStore {
     results: User[]
   }
   setRounds: (data: NodeRound[]) => void
+  resetRounds: () => void
+}
+
+export interface RoundStore {
+  rounds: Round[]
+  loading: string
+  setRounds: (data: Round[]) => void
   resetRounds: () => void
 }

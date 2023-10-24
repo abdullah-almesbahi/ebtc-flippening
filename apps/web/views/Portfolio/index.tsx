@@ -6,12 +6,17 @@ import TradesTab from './components/TradesTab'
 import HoldersTab from './components/HoldersTab'
 import HoldingTab from './components/HoldingTab'
 import RewardsTab from './components/RewardsTab'
-import { leaderboard as fakeDataLeaderboards } from '@/data/leaderboard'
+import { usePortfolioDataQuery } from '@/server/graphql/gen/graphql-types'
 
 const tabs = ['SHARES', 'TRADES', 'HOLDERS', 'HOLDING', 'REWARDS']
 
-export default function Portofolio({ address }: { address?: string }): JSX.Element {
-  const user = fakeDataLeaderboards.find((item) => item.address === address)
+export default function Portfolio({ address }: { address?: string }): JSX.Element {
+  const { data } = usePortfolioDataQuery({
+    variables: {
+      address,
+    },
+  })
+
   const [getCurrentTab, setCurrentTab] = useState<string>('shares')
 
   // tab handler
@@ -22,15 +27,15 @@ export default function Portofolio({ address }: { address?: string }): JSX.Eleme
   const getTabInfo = () => {
     switch (getCurrentTab) {
       case 'shares':
-        return <SharesTab />
+        return <SharesTab data={data?.shares} />
       case 'trades':
-        return <TradesTab />
+        return <TradesTab data={data?.bets} />
       case 'holders':
-        return <HoldersTab />
+        return <HoldersTab data={data?.holders} />
       case 'holding':
-        return <HoldingTab />
+        return <HoldingTab data={data?.holding} />
       case 'rewards':
-        return <RewardsTab />
+        return <RewardsTab data={data?.rewards} />
       default:
         return <SharesTab />
     }
@@ -41,13 +46,13 @@ export default function Portofolio({ address }: { address?: string }): JSX.Eleme
       <div className="ibthemes-container">
         <div className="flat-tabs tab-authors">
           <div className="author-profile flex">
-            {user?.avatar ? (
+            {data?.portfolio?.image ? (
               <div className="avatar-container">
                 <Image
                   alt="Image"
                   className="avatar"
                   height={500}
-                  src={user.avatar}
+                  src={data.portfolio.image}
                   // style={{ height: '276px', width: '276px' }}
                   width={500}
                 />
@@ -55,22 +60,22 @@ export default function Portofolio({ address }: { address?: string }): JSX.Eleme
             ) : null}
             <div className="infor-profile d-flex">
               <div className="profile-header">
-                <p className="content">Rank: #344</p>
-                {user?.username ? <h2 className="title"> {user.username}</h2> : null}
-                <p className="content">Holding: 5</p>
-                <p className="content">Holders: 3</p>
-                <p className="content">Rewards:</p>
+                <p className="content">Rank: #{data?.portfolio?.stats?.rank}</p>
+                {data?.portfolio?.username ? <h2 className="title">@{data?.portfolio?.username}</h2> : null}
+                <p className="content">Holding: {data?.portfolio?.stats?.totalSharesHeld}</p>
+                <p className="content">Holders: {data?.portfolio?.stats?.totalShareHolders}</p>
+                <p className="content">Rewards: {data?.portfolio?.stats?.totalRewards}</p>
                 <form>
-                  <input className="inputcopy" defaultValue={user?.address} readOnly type="text" />
+                  <input className="inputcopy" defaultValue={data?.portfolio?.address || ''} readOnly type="text" />
                   <button className="btn-copycode" type="button">
                     <i className="icon-fl-file-1" />
                   </button>
                 </form>
               </div>
               <div className="profile-header">
-                <p className="content">Portfolio: 8</p>
-                <p className="content">Claimed rewards: 4</p>
-                <p className="content">Points: 432</p>
+                <p className="content">Share Value: {data?.portfolio?.stats?.shareValue}</p>
+                <p className="content">Claimed rewards: {data?.portfolio?.stats?.totalRewards}</p>
+                <p className="content">Points: {data?.portfolio?.stats?.points}</p>
                 <p className="content">Shares: 1</p>
                 <p className="content">Market price: 666</p>
               </div>

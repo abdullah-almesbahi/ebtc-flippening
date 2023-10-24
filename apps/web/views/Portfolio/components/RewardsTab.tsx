@@ -1,39 +1,12 @@
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Countdown from 'react-countdown'
-import { useFlippeningStore } from '@/store/flippening'
-import { rewards as fakeData } from '@/data/rewards'
+import type { PortfolioDataQuery } from '@/server/graphql/gen/graphql-types'
+import SharesPlaceholder from '@/views/Shares/components/SharesPlacehoder'
+import { timeAgo } from '@/utils/timeAgo'
 
-export default function RewardsTab(): JSX.Element {
-  const { rewards } = useFlippeningStore()
-
-  useEffect(() => {
-    useFlippeningStore.setState({ rewards: fakeData })
-  }, [])
-
+export default function RewardsTab({ data }: { data?: PortfolioDataQuery['rewards'] }): JSX.Element {
   const [countOfItemsShown, setCountOfItemsShown] = useState(1)
-
-  function timeAgo(timestamp) {
-    const currentTime = Date.now()
-    const timeDifference = currentTime - Number(timestamp) // Difference in milliseconds
-
-    const second = 1000
-    const minute = second * 60
-    const hour = minute * 60
-    const day = hour * 24
-
-    if (timeDifference < minute) {
-      return 'just now'
-    } else if (timeDifference < hour) {
-      const mins = Math.floor(timeDifference / minute)
-      return mins > 1 ? `${mins} minutes ago` : 'a minute ago'
-    } else if (timeDifference < day) {
-      const hrs = Math.floor(timeDifference / hour)
-      return hrs > 1 ? `${hrs} hours ago` : 'an hour ago'
-    }
-    const days = Math.floor(timeDifference / day)
-    return days > 1 ? `${days} days ago` : 'a day ago'
-  }
 
   const renderer = ({ days, hours, minutes, seconds, completed }: any): JSX.Element | string => {
     if (completed) {
@@ -52,15 +25,15 @@ export default function RewardsTab(): JSX.Element {
     )
   }
 
-  const rewardsInfo = ({ item, index }) =>
+  const rewardsInfo = ({ item, index }: { item: PortfolioDataQuery['rewards'][0] }) =>
     index < countOfItemsShown * 6 ? (
       <li className="box-recent-post" key={index + 1}>
         <div className="">
-          <Image alt="image" className="rounded m-2" height={50} src={item?.pfpUrl} width={50} />
+          <Image alt="image" className="rounded m-2" height={50} src={item?.user.image} width={50} />
         </div>
         <div className="d-flex justify-content-between w-100">
           <div className="box-content">
-            <p className="m-0">got {item?.rewardsAmount} ifBTC rewards</p>
+            <p className="m-0">got {item?.amount} fiBTC rewards</p>
           </div>
           <div className="box-content">
             <p className="m-0">{timeAgo(item?.createdAt)}</p>
@@ -82,7 +55,7 @@ export default function RewardsTab(): JSX.Element {
         </div>
       </div>
       <div className="widget widget-recent-post mg-bt-43">
-        {rewards.length > 0 && <ul>{rewards?.map((item, index) => rewardsInfo({ item, index }))}</ul>}
+        {data ? <ul>{data?.map((item, index) => rewardsInfo({ item, index }))}</ul> : <SharesPlaceholder />}
       </div>
       <div className="col-md-12 wrap-inner load-more text-center">
         <button

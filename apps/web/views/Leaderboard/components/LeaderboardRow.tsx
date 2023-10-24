@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import type { User } from '@/store/types'
 import NetWinningsView from '@/components/NetWinningsView'
+import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
 interface LeaderboardRowProps {
   index: number
-  data: User
+  data: DashboardDataQuery['topTraders'][0]
 }
 
 export default function LeaderboardRow({ data, index }: LeaderboardRowProps): JSX.Element {
@@ -19,7 +19,7 @@ export default function LeaderboardRow({ data, index }: LeaderboardRowProps): JS
       <td>
         <div className="d-flex align-items-center">
           <div className="media ">
-            <Image alt="Images" height={80} src={data.avatar} width={80} />
+            <Image alt="Images" height={80} src={data.image} width={80} />
           </div>
           <div className="infor-item flex column1 align-items-center">
             <div className="content-collection">
@@ -35,17 +35,19 @@ export default function LeaderboardRow({ data, index }: LeaderboardRowProps): JS
       </td>
       <td>
         <div className="column">
-          <span>{data.winRate.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 })}%</span>
+          <span>
+            {data.stats?.winRate.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 })}%
+          </span>
         </div>
       </td>
       <td>
         <div className="column">
-          <span>{data.totalBetsClaimed}</span>
+          <span>{data.stats?.totalBetsClaimed}</span>
         </div>
       </td>
       <td>
         <div className="column">
-          <span>{data.totalBets}</span>
+          <span>{data.stats?.totalBets}</span>
         </div>
       </td>
       <td>

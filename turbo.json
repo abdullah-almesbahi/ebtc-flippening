@@ -20,6 +20,9 @@
     "db:seed": {
       "outputs": []
     },
+    "db:migrate:dev": {
+      "outputs": []
+    },
     "generate": {
       "dependsOn": ["^generate"]
     }

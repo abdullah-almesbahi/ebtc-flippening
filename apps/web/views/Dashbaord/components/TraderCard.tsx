@@ -1,20 +1,20 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import type { User } from '@/store/types'
+import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
-interface Props {
-  data: User
+interface TraderCardProps {
+  data: DashboardDataQuery['topTraders'][0]
   index: number
 }
 
-export default function TraderCard({ data, index }: Props): JSX.Element {
+export default function TraderCard({ data, index }: TraderCardProps): JSX.Element {
   const tokenPrice = 2.000000000000000001
   return (
     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
       <div className="sc-author-box">
         <div className="author-avatar">
           <a>
-            <Image alt="Image" className="avatar" height={100} priority src={data.avatar} width={100} />
+            <Image alt="Image" className="avatar" height={100} priority src={data.image} width={100} />
           </a>
           <div className="badge">{index + 1}</div>
         </div>
@@ -25,7 +25,7 @@ export default function TraderCard({ data, index }: Props): JSX.Element {
           <div className="d-flex justify-content-between align-items-center" style={{ marginRight: 10 }}>
             <span className="price">
               PNL:
-              {`$${(tokenPrice * data.netSTETH).toLocaleString(undefined, {
+              {`$${(tokenPrice * data.stats?.netSTETH).toLocaleString(undefined, {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}`}

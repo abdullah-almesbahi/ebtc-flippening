@@ -1,12 +1,12 @@
 import NetWinningsView from '@/components/NetWinningsView'
-import type { Bet } from '@/store/types'
+import { BetPosition, type PortfolioDataQuery } from '@/server/graphql/gen/graphql-types'
 
-interface Props {
+interface TradeTableRowProps {
   index: number
-  data: Bet
+  data: PortfolioDataQuery['bets'][0]
 }
 
-function TradeTableRow({ data, index }: Props) {
+function TradeTableRow({ data, index }: TradeTableRowProps) {
   if (!data) return <></>
   return (
     <tr className="rows">
@@ -18,14 +18,14 @@ function TradeTableRow({ data, index }: Props) {
       <td>
         <div className="column">
           <button
-            className={`btn btn-sm rounded-10 fw-bold ${data.position === 'Bull' ? 'btn-success' : ''} ${
-              data.position === 'Bear' ? 'btn-danger' : ''
+            className={`btn btn-sm rounded-10 fw-bold ${data.position === BetPosition.Bull ? 'btn-success' : ''} ${
+              data.position === BetPosition.Bear ? 'btn-danger' : ''
             } `}
             type="button"
           >
-            {data.position === 'Bull' ? <i className="fa fa-arrow-up fa-1x" /> : ''}
-            {data.position === 'Bear' ? <i className="fa fa-arrow-down fa-1x" /> : ''}{' '}
-            {data.position === 'Bull' ? 'BTC beat ETH' : 'ETH beat BTC'}
+            {data.position === BetPosition.Bull ? <i className="fa fa-arrow-up fa-1x" /> : ''}
+            {data.position === BetPosition.Bear ? <i className="fa fa-arrow-down fa-1x" /> : ''}{' '}
+            {data.position === BetPosition.Bull ? 'BTC beat ETH' : 'ETH beat BTC'}
           </button>
         </div>
       </td>

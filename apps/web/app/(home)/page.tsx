@@ -5,6 +5,6 @@ export const metadata: Metadata = {
   title: 'eBTC | dapp ',
 }
 
-export default function page(): JSX.Element {
+export default function Page(): JSX.Element {
   return <Dashboard />
 }
