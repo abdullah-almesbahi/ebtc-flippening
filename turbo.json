@@ -17,6 +17,9 @@
     "test": {
       "dotEnv": [".env.test.local", ".env.test", ".env"]
     },
+    "db:seed": {
+      "outputs": []
+    },
     "generate": {
       "dependsOn": ["^generate"]
     }

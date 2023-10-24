@@ -60,18 +60,18 @@ model User {
   shareValue           Float         @default(0) // Total value of shares
   rank                 Int           @default(0) // Rank in the leaderboard
   points               Int           @default(0) // Points earned
-  lastTransactionBlock Int // Block number of the last transaction
-  totalBets            Int // Total number of bets
-  totalBetsBull        Int // Total number of bets on bull
-  totalBetsBear        Int // Total number of bets on bear
-  totalSTETH           Float // Total stSTETH bet
-  totalSTETHBull       Float // Total stSTETH bet on bull
-  totalSTETHBear       Float // Total stSTETH bet on bear
-  totalBetsClaimed     Int // Total number of bets claimed (WON)
-  totalSTETHClaimed    Float // Total stSTETH claimed (WON)
-  winRate              Float // Total win rate
-  averageSTETH         Float // Average stSTETH bet
-  netSTETH             Float // Net stSTETH
+  lastTransactionBlock Int           @default(0) // Block number of the last transaction
+  totalBets            Int           @default(0) // Total number of bets
+  totalBetsBull        Int           @default(0) // Total number of bets on bull
+  totalBetsBear        Int           @default(0) // Total number of bets on bear
+  totalSTETH           Float         @default(0) // Total stSTETH bet
+  totalSTETHBull       Float         @default(0) // Total stSTETH bet on bull
+  totalSTETHBear       Float         @default(0) // Total stSTETH bet on bear
+  totalBetsClaimed     Int           @default(0) // Total number of bets claimed (WON)
+  totalSTETHClaimed    Float         @default(0) // Total stSTETH claimed (WON)
+  winRate              Float         @default(0) // Total win rate
+  averageSTETH         Float         @default(0) // Average stSTETH bet
+  netSTETH             Float         @default(0) // Net stSTETH
   createdAt            DateTime      @default(now()) // Date of registration
   updatedAt            DateTime      @updatedAt
   accounts             Account[] // Accounts connected to the user

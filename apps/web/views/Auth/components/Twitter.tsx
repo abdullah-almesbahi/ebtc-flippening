@@ -12,7 +12,7 @@ export default function Twitter(props: TwitterProps): JSX.Element {
   const { data: session, status } = useSession()
   const router = useRouter()
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async () => {
     const res = await signIn('twitter')
 
     if (!res?.error) {
@@ -23,7 +23,13 @@ export default function Twitter(props: TwitterProps): JSX.Element {
   return (
     <div>
       {Boolean(props.error) && <p className="bg-red-100 text-red-600 text-center p-2">Authentication Failed</p>}
-      <button className="btn btn-primary" onClick={onSubmit}>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          onSubmit()
+        }}
+        type="button"
+      >
         Sign up with Twitter
       </button>
     </div>
