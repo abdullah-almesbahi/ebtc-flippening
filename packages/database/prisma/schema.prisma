@@ -47,57 +47,65 @@ model VerificationToken {
 }
 
 model User {
-  id                   String        @id @default(cuid()) // Twitter ID
-  name                 String? // Twitter name
-  email                String?       @unique
-  emailVerified        DateTime?
-  image                String? // Twitter profile image
-  username             String? // Twitter username
-  address              String? // Wallet address
-  totalSharesHeld      Int           @default(0) // Total number of shares holding
-  totalShareHolders    Int           @default(0) // Total number of people holding shares
-  totalRewards         Int           @default(0) // Total number of rewards earned
-  shareValue           Float         @default(0) // Total value of shares
-  rank                 Int           @default(0) // Rank in the leaderboard
-  points               Int           @default(0) // Points earned
-  lastTransactionBlock Int           @default(0) // Block number of the last transaction
-  totalBets            Int           @default(0) // Total number of bets
-  totalBetsBull        Int           @default(0) // Total number of bets on bull
-  totalBetsBear        Int           @default(0) // Total number of bets on bear
-  totalSTETH           Float         @default(0) // Total stSTETH bet
-  totalSTETHBull       Float         @default(0) // Total stSTETH bet on bull
-  totalSTETHBear       Float         @default(0) // Total stSTETH bet on bear
-  totalBetsClaimed     Int           @default(0) // Total number of bets claimed (WON)
-  totalSTETHClaimed    Float         @default(0) // Total stSTETH claimed (WON)
-  winRate              Float         @default(0) // Total win rate
-  averageSTETH         Float         @default(0) // Average stSTETH bet
-  netSTETH             Float         @default(0) // Net stSTETH
-  createdAt            DateTime      @default(now()) // Date of registration
-  updatedAt            DateTime      @updatedAt
-  accounts             Account[] // Accounts connected to the user
-  sessions             Session[] // Sessions of the user
-  rewards              Reward[] // Rewards earned by the user
-  referrals            Referral[] // Referrals of the user
-  bets                 Bet[] // Bets of the user
-  boughtShares         Share[]       @relation("TraderToShare") // Shares bought by the user
-  soldShares           Share[]       @relation("SubjectToShare") // Shares sold by the user
-  allShares            Share[]
-  activityLogs         ActivityLog[] // Activity logs of the user to records how the user earned the points
+  id            String        @id @default(cuid()) // Twitter ID
+  name          String? // Twitter name
+  email         String?       @unique
+  emailVerified DateTime?
+  image         String? // Twitter profile image
+  username      String? // Twitter username
+  address       String? // Wallet address
+  createdAt     DateTime      @default(now()) // Date of registration
+  updatedAt     DateTime      @updatedAt
+  accounts      Account[] // Accounts connected to the user
+  sessions      Session[] // Sessions of the user
+  rewards       Reward[] // Rewards earned by the user
+  referrals     Referral[] // Referrals of the user
+  bets          Bet[] // Bets of the user
+  boughtShares  Share[]       @relation("TraderToShare") // Shares bought by the user
+  soldShares    Share[]       @relation("SubjectToShare") // Shares sold by the user
+  allShares     Share[]
+  activityLogs  ActivityLog[] // Activity logs of the user to records how the user earned the points
+  stats         UserStats?
+}
+
+model UserStats {
+  id                   String @id @default(cuid())
+  lastTransactionBlock Int    @default(0) // Block number of the last transaction
+  totalBets            Int    @default(0) // Total number of bets
+  totalBetsBull        Int    @default(0) // Total number of bets on bull
+  totalBetsBear        Int    @default(0) // Total number of bets on bear
+  totalSTETH           BigInt @default(0) // Total stSTETH bet
+  totalSTETHBull       BigInt @default(0) // Total stSTETH bet on bull
+  totalSTETHBear       BigInt @default(0) // Total stSTETH bet on bear
+  totalBetsClaimed     Int    @default(0) // Total number of bets claimed (WON)
+  totalSTETHClaimed    BigInt @default(0) // Total stSTETH claimed (WON)
+  winRate              BigInt @default(0) // Total win rate
+  averageSTETH         BigInt @default(0) // Average stSTETH bet
+  netSTETH             BigInt @default(0) // Net stSTETH
+  totalSharesHeld      Int    @default(0) // Total number of shares holding
+  totalShareHolders    Int    @default(0) // Total number of people holding shares
+  totalRewards         Int    @default(0) // Total number of rewards earned
+  shareValue           BigInt @default(0) // Total value of shares
+  rank                 Int    @default(0) // Rank in the leaderboard
+  points               Int    @default(0) // Points earned
+  userId               String @unique
+  user                 User   @relation(fields: [userId], references: [id])
 }
 
 model Bet {
   id              String      @id @default(cuid())
   hash            String?     @unique // Transaction hash
-  amount          Float // Amount of stSTETH
+  block           Int?        @unique // Block number
+  amount          BigInt // Amount of stSTETH
   position        BetPosition // Position of the bet
   claimed         Boolean // Whether the bet is claimed
   claimedAt       DateTime? // Date of the claim
   claimedBlock    Int? // Block number of the claim
   claimedHash     String? // Transaction hash of the claim
-  claimedSTETH    Float? // Amount of stSTETH claimed
-  claimedNetSTETH Float? // Net stSTETH claimed
+  claimedSTETH    BigInt? // Amount of stSTETH claimed
+  claimedNetSTETH BigInt? // Net stSTETH claimed
   outcome         String? // can be "win", "loss", or "ongoing"
-  pnl             Float? // Profit and loss
+  pnl             BigInt? // Profit and loss
   openedAt        DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
   closedAt        DateTime? // Date of the close
@@ -118,19 +126,19 @@ model Round {
   lockAt       DateTime // Date of the lock
   lockBlock    Int // Block number of the lock
   lockHash     String // Transaction hash of the lock
-  lockPrice    Float // Price at the time of lock
+  lockPrice    BigInt // Price at the time of lock
   lockRoundId  String // Round ID at the time of lock
   closeAt      DateTime // Date of the close
   closeBlock   Int // Block number of the close
   closeHash    String // Transaction hash of the close
-  closePrice   Float // Price at the time of close
+  closePrice   BigInt // Price at the time of close
   closeRoundId String // Round ID at the time of close
   totalBets    Int // Total number of bets
-  totalAmount  Float // Total amount of stSTETH
+  totalAmount  BigInt // Total amount of stSTETH
   bullBets     Int // Total number of bets on bull
-  bullAmount   Float // Total amount of stSTETH on bull
+  bullAmount   BigInt // Total amount of stSTETH on bull
   bearBets     Int // Total number of bets on bear
-  bearAmount   Float // Total amount of stSTETH on bear
+  bearAmount   BigInt // Total amount of stSTETH on bear
   bets         Bet[] // Bets of the round
 }
 
@@ -138,7 +146,7 @@ model Reward {
   id        String   @id @default(cuid())
   userId    String // User ID of the referrer
   points    Int // Points at the time of reward
-  amount    Float // Amount of fiBTC
+  amount    BigInt // Amount of fiBTC
   epoch     Int // Epoch number
   createdAt DateTime @default(now()) // Date of the reward
   user      User     @relation(fields: [userId], references: [id])
@@ -155,8 +163,8 @@ model Referral {
 model Share {
   id          String   @id @default(cuid())
   isBuy       Boolean // Whether the share is bought
-  shareAmount Float // Amount of shares
-  stethAmount Float // Amount of stSTETH
+  shareAmount BigInt // Amount of shares
+  stethAmount BigInt // Amount of stSTETH
   createdAt   DateTime @default(now())
   traderId    String
   subjectId   String
