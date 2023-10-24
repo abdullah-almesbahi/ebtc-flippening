@@ -16,6 +16,9 @@
     },
     "test": {
       "dotEnv": [".env.test.local", ".env.test", ".env"]
+    },
+    "generate": {
+      "dependsOn": ["^generate"]
     }
   }
 }

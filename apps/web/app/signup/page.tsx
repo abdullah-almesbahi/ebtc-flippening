@@ -1,5 +1,4 @@
 'use client'
-import { SessionProvider } from 'next-auth/react'
 import Twitter from '@/views/Auth/components/Twitter'
 import Breadcrumb from '@/components/breadcrumb'
 
@@ -20,11 +19,18 @@ const item = {
   ],
 }
 
-export default function Signup(): JSX.Element {
+interface SignupProps {
+  searchParams?: Record<'callbackUrl' | 'error', string>
+}
+
+export default function Signup(props: SignupProps): JSX.Element {
+  // <Login
+
+  //     />
   return (
-    <SessionProvider>
+    <>
       <Breadcrumb data={item} />
-      <Twitter />
-    </SessionProvider>
+      <Twitter callbackUrl={props.searchParams?.callbackUrl} error={props.searchParams?.error} />
+    </>
   )
 }

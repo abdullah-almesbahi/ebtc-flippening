@@ -5,16 +5,31 @@
     "build": "dotenv -- turbo run build",
     "dev": "dotenv -- turbo run dev",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:migrate:deploy": "turbo run db:migrate:deploy",
+    "db:push": "turbo run db:push",
+    "db:seed": "turbo run db:seed",
+    "db:migrate:dev": "prisma migrate dev",
+    "generate": "turbo run generate",
+    "reset": "find . -type dir -name node_modules | xargs rm -rf && rm -rf pnpm-lock.josn",
+    "studio": "prisma studio"
   },
   "devDependencies": {
+    "@types/node": "20.8.8",
+    "prisma": "5.4.2",
     "eslint": "^8.48.0",
     "prettier": "^3.0.3",
     "tsconfig": "workspace:*",
     "turbo": "latest",
-    "dotenv-cli": "latest"
+    "dotenv-cli": "latest",
+    "tsup": "7.2.0",
+    "typescript": "5.0.4"
   },
   "packageManager": "pnpm@8.6.0",
+  "prisma": {
+    "schema": "packages/database/prisma/schema.prisma",
+    "seed": "tsx packages/database/src/seed.ts"
+  },
   "workspaces": [
     "apps/*",
     "packages/*"

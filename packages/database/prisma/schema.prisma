@@ -1,0 +1,187 @@
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma-client"
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model User {
+  id                   String        @id @default(cuid()) // Twitter ID
+  name                 String? // Twitter name
+  email                String?       @unique
+  emailVerified        DateTime?
+  image                String? // Twitter profile image
+  username             String? // Twitter username
+  address              String? // Wallet address
+  totalSharesHeld      Int           @default(0) // Total number of shares holding
+  totalShareHolders    Int           @default(0) // Total number of people holding shares
+  totalRewards         Int           @default(0) // Total number of rewards earned
+  shareValue           Float         @default(0) // Total value of shares
+  rank                 Int           @default(0) // Rank in the leaderboard
+  points               Int           @default(0) // Points earned
+  lastTransactionBlock Int // Block number of the last transaction
+  totalBets            Int // Total number of bets
+  totalBetsBull        Int // Total number of bets on bull
+  totalBetsBear        Int // Total number of bets on bear
+  totalSTETH           Float // Total stSTETH bet
+  totalSTETHBull       Float // Total stSTETH bet on bull
+  totalSTETHBear       Float // Total stSTETH bet on bear
+  totalBetsClaimed     Int // Total number of bets claimed (WON)
+  totalSTETHClaimed    Float // Total stSTETH claimed (WON)
+  winRate              Float // Total win rate
+  averageSTETH         Float // Average stSTETH bet
+  netSTETH             Float // Net stSTETH
+  createdAt            DateTime      @default(now()) // Date of registration
+  updatedAt            DateTime      @updatedAt
+  accounts             Account[] // Accounts connected to the user
+  sessions             Session[] // Sessions of the user
+  rewards              Reward[] // Rewards earned by the user
+  referrals            Referral[] // Referrals of the user
+  bets                 Bet[] // Bets of the user
+  boughtShares         Share[]       @relation("TraderToShare") // Shares bought by the user
+  soldShares           Share[]       @relation("SubjectToShare") // Shares sold by the user
+  allShares            Share[]
+  activityLogs         ActivityLog[] // Activity logs of the user to records how the user earned the points
+}
+
+model Bet {
+  id              String      @id @default(cuid())
+  hash            String?     @unique // Transaction hash
+  amount          Float // Amount of stSTETH
+  position        BetPosition // Position of the bet
+  claimed         Boolean // Whether the bet is claimed
+  claimedAt       DateTime? // Date of the claim
+  claimedBlock    Int? // Block number of the claim
+  claimedHash     String? // Transaction hash of the claim
+  claimedSTETH    Float? // Amount of stSTETH claimed
+  claimedNetSTETH Float? // Net stSTETH claimed
+  outcome         String? // can be "win", "loss", or "ongoing"
+  pnl             Float? // Profit and loss
+  openedAt        DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  closedAt        DateTime? // Date of the close
+  userId          String
+  roundId         String
+  user            User        @relation(fields: [userId], references: [id])
+  round           Round       @relation(fields: [roundId], references: [id])
+}
+
+model Round {
+  id           String      @id @default(cuid())
+  epoch        Int // Epoch number
+  position     BetPosition // Position of the round
+  failed       Boolean // Whether the round failed
+  startAt      DateTime // Date of the start
+  startBlock   Int // Block number of the start
+  startHash    String // Transaction hash of the start
+  lockAt       DateTime // Date of the lock
+  lockBlock    Int // Block number of the lock
+  lockHash     String // Transaction hash of the lock
+  lockPrice    Float // Price at the time of lock
+  lockRoundId  String // Round ID at the time of lock
+  closeAt      DateTime // Date of the close
+  closeBlock   Int // Block number of the close
+  closeHash    String // Transaction hash of the close
+  closePrice   Float // Price at the time of close
+  closeRoundId String // Round ID at the time of close
+  totalBets    Int // Total number of bets
+  totalAmount  Float // Total amount of stSTETH
+  bullBets     Int // Total number of bets on bull
+  bullAmount   Float // Total amount of stSTETH on bull
+  bearBets     Int // Total number of bets on bear
+  bearAmount   Float // Total amount of stSTETH on bear
+  bets         Bet[] // Bets of the round
+}
+
+model Reward {
+  id        String   @id @default(cuid())
+  userId    String // User ID of the referrer
+  points    Int // Points at the time of reward
+  amount    Float // Amount of fiBTC
+  epoch     Int // Epoch number
+  createdAt DateTime @default(now()) // Date of the reward
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Referral {
+  id           String  @id @default(cuid())
+  userId       String // User ID of the referrer
+  referralCode String  @unique // Referral code of the referrer
+  used         Boolean // Whether the referral code is used
+  user         User    @relation(fields: [userId], references: [id])
+}
+
+model Share {
+  id          String   @id @default(cuid())
+  isBuy       Boolean // Whether the share is bought
+  shareAmount Float // Amount of shares
+  stethAmount Float // Amount of stSTETH
+  createdAt   DateTime @default(now())
+  traderId    String
+  subjectId   String
+  trader      User     @relation("TraderToShare", fields: [traderId], references: [id]) // Trader
+  subject     User     @relation("SubjectToShare", fields: [subjectId], references: [id]) // Subject
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?
+}
+
+model ActivityLog {
+  id           String       @id @default(cuid())
+  userId       String
+  activityType ActivityType
+  points       Int // Points earned from this activity
+  occurredAt   DateTime     @default(now())
+  user         User         @relation(fields: [userId], references: [id])
+}
+
+enum BetPosition {
+  BULL
+  BEAR
+}
+
+enum ActivityType {
+  BET_PLACED
+  SHARE_BOUGHT
+  REWARD_EARNED
+}

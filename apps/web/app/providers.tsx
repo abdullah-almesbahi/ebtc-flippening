@@ -1,5 +1,6 @@
 'use client'
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+import { SessionProvider } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { WagmiConfig } from 'wagmi'
 import { sepolia, mainnet } from 'wagmi/chains'
@@ -27,5 +28,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setReady(true)
   }, [])
-  return <>{ready ? <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig> : null}</>
+  return (
+    <>
+      {ready ? (
+        <WagmiConfig config={wagmiConfig}>
+          <SessionProvider>{children}</SessionProvider>
+        </WagmiConfig>
+      ) : null}
+    </>
+  )
 }

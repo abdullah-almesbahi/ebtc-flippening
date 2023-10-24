@@ -1,16 +1,29 @@
 'use client'
 import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
-export default function Twitter(): JSX.Element {
+interface TwitterProps {
+  className?: string
+  callbackUrl?: string
+  error?: string
+}
+
+export default function Twitter(props: TwitterProps): JSX.Element {
   const { data: session, status } = useSession()
+  const router = useRouter()
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const res = await signIn('twitter')
+
+    if (!res?.error) {
+      router.push(props.callbackUrl ?? 'http://localhost:3000')
+    }
+  }
+
   return (
     <div>
-      <button
-        className="btn btn-primary"
-        onClick={() => {
-          signIn()
-        }}
-      >
+      {Boolean(props.error) && <p className="bg-red-100 text-red-600 text-center p-2">Authentication Failed</p>}
+      <button className="btn btn-primary" onClick={onSubmit}>
         Sign up with Twitter
       </button>
     </div>

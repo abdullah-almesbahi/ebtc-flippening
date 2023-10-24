@@ -1,4 +1,4 @@
-import type { Share } from '@/store/types'
++import type { Share } from '@/store/types'
 
 export const shares: Share[] = [
   {
