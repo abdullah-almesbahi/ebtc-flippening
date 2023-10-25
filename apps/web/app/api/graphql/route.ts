@@ -5,11 +5,11 @@ import { buildSchema } from 'type-graphql'
 import { prisma, resolvers } from 'database'
 import type { GraphQLContext } from '@/server/graphql/context'
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
+// const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// }
 
 const schema = buildSchema({
   resolvers,

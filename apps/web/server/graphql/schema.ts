@@ -13,7 +13,7 @@ function buildTypeDefsAndResolversSync(options: BuildSchemaOptions) {
 }
 
 export const { resolvers, typeDefs } = buildTypeDefsAndResolversSync({
-  resolvers: [...generatedResolvers],
+  resolvers: generatedResolvers,
   // scalarsMap: [{ type: Date, scalar: DateTimeResolver }],
   validate: false,
 })

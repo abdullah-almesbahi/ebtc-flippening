@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
+import { formatBigNumber, weiToEth } from '@/utils/format'
 
 interface TraderCardProps {
   data: DashboardDataQuery['topTraders'][0]
@@ -13,9 +14,11 @@ export default function TraderCard({ data, index }: TraderCardProps): JSX.Elemen
     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
       <div className="sc-author-box">
         <div className="author-avatar">
-          <a>
-            <Image alt="Image" className="avatar" height={100} priority src={data.image} width={100} />
-          </a>
+          {data.image ? (
+            <a>
+              <Image alt="Image" className="avatar" height={100} priority src={data.image} width={100} />
+            </a>
+          ) : null}
           <div className="badge">{index + 1}</div>
         </div>
         <div className="author-infor d-flex flex-column w-100">
@@ -25,10 +28,7 @@ export default function TraderCard({ data, index }: TraderCardProps): JSX.Elemen
           <div className="d-flex justify-content-between align-items-center" style={{ marginRight: 10 }}>
             <span className="price">
               PNL:
-              {`$${(tokenPrice * data.stats?.netSTETH).toLocaleString(undefined, {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}`}
+              {`$${formatBigNumber(weiToEth(data.stats?.netSTETH).multipliedBy(tokenPrice))}`}
             </span>
             <a
               className="sc-button btn-sm fl-button pri-3 mr-5"

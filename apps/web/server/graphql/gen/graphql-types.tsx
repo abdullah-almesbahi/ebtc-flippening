@@ -15,8 +15,8 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  BigInt: { input: any; output: any; }
   DateTime: { input: any; output: any; }
+  Decimal: { input: any; output: any; }
 };
 
 export type Account = {
@@ -841,20 +841,20 @@ export type AggregateVerificationToken = {
 
 export type Bet = {
   __typename?: 'Bet';
-  amount: Scalars['BigInt']['output'];
+  amount: Scalars['Decimal']['output'];
   block?: Maybe<Scalars['Int']['output']>;
   claimed: Scalars['Boolean']['output'];
   claimedAt?: Maybe<Scalars['DateTime']['output']>;
   claimedBlock?: Maybe<Scalars['Int']['output']>;
   claimedHash?: Maybe<Scalars['String']['output']>;
-  claimedNetSTETH?: Maybe<Scalars['BigInt']['output']>;
-  claimedSTETH?: Maybe<Scalars['BigInt']['output']>;
+  claimedNetSTETH?: Maybe<Scalars['Decimal']['output']>;
+  claimedSTETH?: Maybe<Scalars['Decimal']['output']>;
   closedAt?: Maybe<Scalars['DateTime']['output']>;
   hash?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   openedAt: Scalars['DateTime']['output'];
   outcome?: Maybe<Scalars['String']['output']>;
-  pnl?: Maybe<Scalars['BigInt']['output']>;
+  pnl?: Maybe<Scalars['Decimal']['output']>;
   position: BetPosition;
   round: Round;
   roundId: Scalars['String']['output'];
@@ -865,12 +865,12 @@ export type Bet = {
 
 export type BetAvgAggregate = {
   __typename?: 'BetAvgAggregate';
-  amount?: Maybe<Scalars['Float']['output']>;
+  amount?: Maybe<Scalars['Decimal']['output']>;
   block?: Maybe<Scalars['Float']['output']>;
   claimedBlock?: Maybe<Scalars['Float']['output']>;
-  claimedNetSTETH?: Maybe<Scalars['Float']['output']>;
-  claimedSTETH?: Maybe<Scalars['Float']['output']>;
-  pnl?: Maybe<Scalars['Float']['output']>;
+  claimedNetSTETH?: Maybe<Scalars['Decimal']['output']>;
+  claimedSTETH?: Maybe<Scalars['Decimal']['output']>;
+  pnl?: Maybe<Scalars['Decimal']['output']>;
 };
 
 export type BetAvgOrderByAggregateInput = {
@@ -927,20 +927,20 @@ export type BetCountOrderByAggregateInput = {
 };
 
 export type BetCreateInput = {
-  amount: Scalars['BigInt']['input'];
+  amount: Scalars['Decimal']['input'];
   block?: InputMaybe<Scalars['Int']['input']>;
   claimed: Scalars['Boolean']['input'];
   claimedAt?: InputMaybe<Scalars['DateTime']['input']>;
   claimedBlock?: InputMaybe<Scalars['Int']['input']>;
   claimedHash?: InputMaybe<Scalars['String']['input']>;
-  claimedNetSTETH?: InputMaybe<Scalars['BigInt']['input']>;
-  claimedSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  claimedNetSTETH?: InputMaybe<Scalars['Decimal']['input']>;
+  claimedSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   closedAt?: InputMaybe<Scalars['DateTime']['input']>;
   hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   openedAt?: InputMaybe<Scalars['DateTime']['input']>;
   outcome?: InputMaybe<Scalars['String']['input']>;
-  pnl?: InputMaybe<Scalars['BigInt']['input']>;
+  pnl?: InputMaybe<Scalars['Decimal']['input']>;
   position: BetPosition;
   round: RoundCreateNestedOneWithoutBetsInput;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -948,20 +948,20 @@ export type BetCreateInput = {
 };
 
 export type BetCreateManyInput = {
-  amount: Scalars['BigInt']['input'];
+  amount: Scalars['Decimal']['input'];
   block?: InputMaybe<Scalars['Int']['input']>;
   claimed: Scalars['Boolean']['input'];
   claimedAt?: InputMaybe<Scalars['DateTime']['input']>;
   claimedBlock?: InputMaybe<Scalars['Int']['input']>;
   claimedHash?: InputMaybe<Scalars['String']['input']>;
-  claimedNetSTETH?: InputMaybe<Scalars['BigInt']['input']>;
-  claimedSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  claimedNetSTETH?: InputMaybe<Scalars['Decimal']['input']>;
+  claimedSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   closedAt?: InputMaybe<Scalars['DateTime']['input']>;
   hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   openedAt?: InputMaybe<Scalars['DateTime']['input']>;
   outcome?: InputMaybe<Scalars['String']['input']>;
-  pnl?: InputMaybe<Scalars['BigInt']['input']>;
+  pnl?: InputMaybe<Scalars['Decimal']['input']>;
   position: BetPosition;
   roundId: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -969,20 +969,20 @@ export type BetCreateManyInput = {
 };
 
 export type BetCreateManyRoundInput = {
-  amount: Scalars['BigInt']['input'];
+  amount: Scalars['Decimal']['input'];
   block?: InputMaybe<Scalars['Int']['input']>;
   claimed: Scalars['Boolean']['input'];
   claimedAt?: InputMaybe<Scalars['DateTime']['input']>;
   claimedBlock?: InputMaybe<Scalars['Int']['input']>;
   claimedHash?: InputMaybe<Scalars['String']['input']>;
-  claimedNetSTETH?: InputMaybe<Scalars['BigInt']['input']>;
-  claimedSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  claimedNetSTETH?: InputMaybe<Scalars['Decimal']['input']>;
+  claimedSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   closedAt?: InputMaybe<Scalars['DateTime']['input']>;
   hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   openedAt?: InputMaybe<Scalars['DateTime']['input']>;
   outcome?: InputMaybe<Scalars['String']['input']>;
-  pnl?: InputMaybe<Scalars['BigInt']['input']>;
+  pnl?: InputMaybe<Scalars['Decimal']['input']>;
   position: BetPosition;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   userId: Scalars['String']['input'];
@@ -994,20 +994,20 @@ export type BetCreateManyRoundInputEnvelope = {
 };
 
 export type BetCreateManyUserInput = {
-  amount: Scalars['BigInt']['input'];
+  amount: Scalars['Decimal']['input'];
   block?: InputMaybe<Scalars['Int']['input']>;
   claimed: Scalars['Boolean']['input'];
   claimedAt?: InputMaybe<Scalars['DateTime']['input']>;
   claimedBlock?: InputMaybe<Scalars['Int']['input']>;
   claimedHash?: InputMaybe<Scalars['String']['input']>;
-  claimedNetSTETH?: InputMaybe<Scalars['BigInt']['input']>;
-  claimedSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  claimedNetSTETH?: InputMaybe<Scalars['Decimal']['input']>;
+  claimedSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   closedAt?: InputMaybe<Scalars['DateTime']['input']>;
   hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   openedAt?: InputMaybe<Scalars['DateTime']['input']>;
   outcome?: InputMaybe<Scalars['String']['input']>;
-  pnl?: InputMaybe<Scalars['BigInt']['input']>;
+  pnl?: InputMaybe<Scalars['Decimal']['input']>;
   position: BetPosition;
   roundId: Scalars['String']['input'];
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1043,40 +1043,40 @@ export type BetCreateOrConnectWithoutUserInput = {
 };
 
 export type BetCreateWithoutRoundInput = {
-  amount: Scalars['BigInt']['input'];
+  amount: Scalars['Decimal']['input'];
   block?: InputMaybe<Scalars['Int']['input']>;
   claimed: Scalars['Boolean']['input'];
   claimedAt?: InputMaybe<Scalars['DateTime']['input']>;
   claimedBlock?: InputMaybe<Scalars['Int']['input']>;
   claimedHash?: InputMaybe<Scalars['String']['input']>;
-  claimedNetSTETH?: InputMaybe<Scalars['BigInt']['input']>;
-  claimedSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  claimedNetSTETH?: InputMaybe<Scalars['Decimal']['input']>;
+  claimedSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   closedAt?: InputMaybe<Scalars['DateTime']['input']>;
   hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   openedAt?: InputMaybe<Scalars['DateTime']['input']>;
   outcome?: InputMaybe<Scalars['String']['input']>;
-  pnl?: InputMaybe<Scalars['BigInt']['input']>;
+  pnl?: InputMaybe<Scalars['Decimal']['input']>;
   position: BetPosition;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   user: UserCreateNestedOneWithoutBetsInput;
 };
 
 export type BetCreateWithoutUserInput = {
-  amount: Scalars['BigInt']['input'];
+  amount: Scalars['Decimal']['input'];
   block?: InputMaybe<Scalars['Int']['input']>;
   claimed: Scalars['Boolean']['input'];
   claimedAt?: InputMaybe<Scalars['DateTime']['input']>;
   claimedBlock?: InputMaybe<Scalars['Int']['input']>;
   claimedHash?: InputMaybe<Scalars['String']['input']>;
-  claimedNetSTETH?: InputMaybe<Scalars['BigInt']['input']>;
-  claimedSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  claimedNetSTETH?: InputMaybe<Scalars['Decimal']['input']>;
+  claimedSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   closedAt?: InputMaybe<Scalars['DateTime']['input']>;
   hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   openedAt?: InputMaybe<Scalars['DateTime']['input']>;
   outcome?: InputMaybe<Scalars['String']['input']>;
-  pnl?: InputMaybe<Scalars['BigInt']['input']>;
+  pnl?: InputMaybe<Scalars['Decimal']['input']>;
   position: BetPosition;
   round: RoundCreateNestedOneWithoutBetsInput;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -1089,20 +1089,20 @@ export type BetGroupBy = {
   _max?: Maybe<BetMaxAggregate>;
   _min?: Maybe<BetMinAggregate>;
   _sum?: Maybe<BetSumAggregate>;
-  amount: Scalars['BigInt']['output'];
+  amount: Scalars['Decimal']['output'];
   block?: Maybe<Scalars['Int']['output']>;
   claimed: Scalars['Boolean']['output'];
   claimedAt?: Maybe<Scalars['DateTime']['output']>;
   claimedBlock?: Maybe<Scalars['Int']['output']>;
   claimedHash?: Maybe<Scalars['String']['output']>;
-  claimedNetSTETH?: Maybe<Scalars['BigInt']['output']>;
-  claimedSTETH?: Maybe<Scalars['BigInt']['output']>;
+  claimedNetSTETH?: Maybe<Scalars['Decimal']['output']>;
+  claimedSTETH?: Maybe<Scalars['Decimal']['output']>;
   closedAt?: Maybe<Scalars['DateTime']['output']>;
   hash?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   openedAt: Scalars['DateTime']['output'];
   outcome?: Maybe<Scalars['String']['output']>;
-  pnl?: Maybe<Scalars['BigInt']['output']>;
+  pnl?: Maybe<Scalars['Decimal']['output']>;
   position: BetPosition;
   roundId: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
@@ -1117,20 +1117,20 @@ export type BetListRelationFilter = {
 
 export type BetMaxAggregate = {
   __typename?: 'BetMaxAggregate';
-  amount?: Maybe<Scalars['BigInt']['output']>;
+  amount?: Maybe<Scalars['Decimal']['output']>;
   block?: Maybe<Scalars['Int']['output']>;
   claimed?: Maybe<Scalars['Boolean']['output']>;
   claimedAt?: Maybe<Scalars['DateTime']['output']>;
   claimedBlock?: Maybe<Scalars['Int']['output']>;
   claimedHash?: Maybe<Scalars['String']['output']>;
-  claimedNetSTETH?: Maybe<Scalars['BigInt']['output']>;
-  claimedSTETH?: Maybe<Scalars['BigInt']['output']>;
+  claimedNetSTETH?: Maybe<Scalars['Decimal']['output']>;
+  claimedSTETH?: Maybe<Scalars['Decimal']['output']>;
   closedAt?: Maybe<Scalars['DateTime']['output']>;
   hash?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   openedAt?: Maybe<Scalars['DateTime']['output']>;
   outcome?: Maybe<Scalars['String']['output']>;
-  pnl?: Maybe<Scalars['BigInt']['output']>;
+  pnl?: Maybe<Scalars['Decimal']['output']>;
   position?: Maybe<BetPosition>;
   roundId?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1160,20 +1160,20 @@ export type BetMaxOrderByAggregateInput = {
 
 export type BetMinAggregate = {
   __typename?: 'BetMinAggregate';
-  amount?: Maybe<Scalars['BigInt']['output']>;
+  amount?: Maybe<Scalars['Decimal']['output']>;
   block?: Maybe<Scalars['Int']['output']>;
   claimed?: Maybe<Scalars['Boolean']['output']>;
   claimedAt?: Maybe<Scalars['DateTime']['output']>;
   claimedBlock?: Maybe<Scalars['Int']['output']>;
   claimedHash?: Maybe<Scalars['String']['output']>;
-  claimedNetSTETH?: Maybe<Scalars['BigInt']['output']>;
-  claimedSTETH?: Maybe<Scalars['BigInt']['output']>;
+  claimedNetSTETH?: Maybe<Scalars['Decimal']['output']>;
+  claimedSTETH?: Maybe<Scalars['Decimal']['output']>;
   closedAt?: Maybe<Scalars['DateTime']['output']>;
   hash?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   openedAt?: Maybe<Scalars['DateTime']['output']>;
   outcome?: Maybe<Scalars['String']['output']>;
-  pnl?: Maybe<Scalars['BigInt']['output']>;
+  pnl?: Maybe<Scalars['Decimal']['output']>;
   position?: Maybe<BetPosition>;
   roundId?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1284,20 +1284,20 @@ export type BetScalarWhereInput = {
   AND?: InputMaybe<Array<BetScalarWhereInput>>;
   NOT?: InputMaybe<Array<BetScalarWhereInput>>;
   OR?: InputMaybe<Array<BetScalarWhereInput>>;
-  amount?: InputMaybe<BigIntFilter>;
+  amount?: InputMaybe<DecimalFilter>;
   block?: InputMaybe<IntNullableFilter>;
   claimed?: InputMaybe<BoolFilter>;
   claimedAt?: InputMaybe<DateTimeNullableFilter>;
   claimedBlock?: InputMaybe<IntNullableFilter>;
   claimedHash?: InputMaybe<StringNullableFilter>;
-  claimedNetSTETH?: InputMaybe<BigIntNullableFilter>;
-  claimedSTETH?: InputMaybe<BigIntNullableFilter>;
+  claimedNetSTETH?: InputMaybe<DecimalNullableFilter>;
+  claimedSTETH?: InputMaybe<DecimalNullableFilter>;
   closedAt?: InputMaybe<DateTimeNullableFilter>;
   hash?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
   openedAt?: InputMaybe<DateTimeFilter>;
   outcome?: InputMaybe<StringNullableFilter>;
-  pnl?: InputMaybe<BigIntNullableFilter>;
+  pnl?: InputMaybe<DecimalNullableFilter>;
   position?: InputMaybe<EnumBetPositionFilter>;
   roundId?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
@@ -1308,20 +1308,20 @@ export type BetScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<BetScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<BetScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<BetScalarWhereWithAggregatesInput>>;
-  amount?: InputMaybe<BigIntWithAggregatesFilter>;
+  amount?: InputMaybe<DecimalWithAggregatesFilter>;
   block?: InputMaybe<IntNullableWithAggregatesFilter>;
   claimed?: InputMaybe<BoolWithAggregatesFilter>;
   claimedAt?: InputMaybe<DateTimeNullableWithAggregatesFilter>;
   claimedBlock?: InputMaybe<IntNullableWithAggregatesFilter>;
   claimedHash?: InputMaybe<StringNullableWithAggregatesFilter>;
-  claimedNetSTETH?: InputMaybe<BigIntNullableWithAggregatesFilter>;
-  claimedSTETH?: InputMaybe<BigIntNullableWithAggregatesFilter>;
+  claimedNetSTETH?: InputMaybe<DecimalNullableWithAggregatesFilter>;
+  claimedSTETH?: InputMaybe<DecimalNullableWithAggregatesFilter>;
   closedAt?: InputMaybe<DateTimeNullableWithAggregatesFilter>;
   hash?: InputMaybe<StringNullableWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   openedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   outcome?: InputMaybe<StringNullableWithAggregatesFilter>;
-  pnl?: InputMaybe<BigIntNullableWithAggregatesFilter>;
+  pnl?: InputMaybe<DecimalNullableWithAggregatesFilter>;
   position?: InputMaybe<EnumBetPositionWithAggregatesFilter>;
   roundId?: InputMaybe<StringWithAggregatesFilter>;
   updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
@@ -1330,12 +1330,12 @@ export type BetScalarWhereWithAggregatesInput = {
 
 export type BetSumAggregate = {
   __typename?: 'BetSumAggregate';
-  amount?: Maybe<Scalars['BigInt']['output']>;
+  amount?: Maybe<Scalars['Decimal']['output']>;
   block?: Maybe<Scalars['Int']['output']>;
   claimedBlock?: Maybe<Scalars['Int']['output']>;
-  claimedNetSTETH?: Maybe<Scalars['BigInt']['output']>;
-  claimedSTETH?: Maybe<Scalars['BigInt']['output']>;
-  pnl?: Maybe<Scalars['BigInt']['output']>;
+  claimedNetSTETH?: Maybe<Scalars['Decimal']['output']>;
+  claimedSTETH?: Maybe<Scalars['Decimal']['output']>;
+  pnl?: Maybe<Scalars['Decimal']['output']>;
 };
 
 export type BetSumOrderByAggregateInput = {
@@ -1348,20 +1348,20 @@ export type BetSumOrderByAggregateInput = {
 };
 
 export type BetUpdateInput = {
-  amount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  amount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   block?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   claimed?: InputMaybe<BoolFieldUpdateOperationsInput>;
   claimedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   claimedBlock?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   claimedHash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  claimedNetSTETH?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
-  claimedSTETH?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
+  claimedNetSTETH?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
+  claimedSTETH?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
   closedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   openedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   outcome?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  pnl?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
+  pnl?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
   position?: InputMaybe<EnumBetPositionFieldUpdateOperationsInput>;
   round?: InputMaybe<RoundUpdateOneRequiredWithoutBetsNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -1369,20 +1369,20 @@ export type BetUpdateInput = {
 };
 
 export type BetUpdateManyMutationInput = {
-  amount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  amount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   block?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   claimed?: InputMaybe<BoolFieldUpdateOperationsInput>;
   claimedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   claimedBlock?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   claimedHash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  claimedNetSTETH?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
-  claimedSTETH?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
+  claimedNetSTETH?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
+  claimedSTETH?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
   closedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   openedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   outcome?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  pnl?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
+  pnl?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
   position?: InputMaybe<EnumBetPositionFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
 };
@@ -1436,40 +1436,40 @@ export type BetUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type BetUpdateWithoutRoundInput = {
-  amount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  amount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   block?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   claimed?: InputMaybe<BoolFieldUpdateOperationsInput>;
   claimedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   claimedBlock?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   claimedHash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  claimedNetSTETH?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
-  claimedSTETH?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
+  claimedNetSTETH?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
+  claimedSTETH?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
   closedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   openedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   outcome?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  pnl?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
+  pnl?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
   position?: InputMaybe<EnumBetPositionFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutBetsNestedInput>;
 };
 
 export type BetUpdateWithoutUserInput = {
-  amount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  amount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   block?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   claimed?: InputMaybe<BoolFieldUpdateOperationsInput>;
   claimedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   claimedBlock?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   claimedHash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  claimedNetSTETH?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
-  claimedSTETH?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
+  claimedNetSTETH?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
+  claimedSTETH?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
   closedAt?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
   hash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   openedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   outcome?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  pnl?: InputMaybe<NullableBigIntFieldUpdateOperationsInput>;
+  pnl?: InputMaybe<NullableDecimalFieldUpdateOperationsInput>;
   position?: InputMaybe<EnumBetPositionFieldUpdateOperationsInput>;
   round?: InputMaybe<RoundUpdateOneRequiredWithoutBetsNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -1491,20 +1491,20 @@ export type BetWhereInput = {
   AND?: InputMaybe<Array<BetWhereInput>>;
   NOT?: InputMaybe<Array<BetWhereInput>>;
   OR?: InputMaybe<Array<BetWhereInput>>;
-  amount?: InputMaybe<BigIntFilter>;
+  amount?: InputMaybe<DecimalFilter>;
   block?: InputMaybe<IntNullableFilter>;
   claimed?: InputMaybe<BoolFilter>;
   claimedAt?: InputMaybe<DateTimeNullableFilter>;
   claimedBlock?: InputMaybe<IntNullableFilter>;
   claimedHash?: InputMaybe<StringNullableFilter>;
-  claimedNetSTETH?: InputMaybe<BigIntNullableFilter>;
-  claimedSTETH?: InputMaybe<BigIntNullableFilter>;
+  claimedNetSTETH?: InputMaybe<DecimalNullableFilter>;
+  claimedSTETH?: InputMaybe<DecimalNullableFilter>;
   closedAt?: InputMaybe<DateTimeNullableFilter>;
   hash?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
   openedAt?: InputMaybe<DateTimeFilter>;
   outcome?: InputMaybe<StringNullableFilter>;
-  pnl?: InputMaybe<BigIntNullableFilter>;
+  pnl?: InputMaybe<DecimalNullableFilter>;
   position?: InputMaybe<EnumBetPositionFilter>;
   round?: InputMaybe<RoundRelationFilter>;
   roundId?: InputMaybe<StringFilter>;
@@ -1517,88 +1517,26 @@ export type BetWhereUniqueInput = {
   AND?: InputMaybe<Array<BetWhereInput>>;
   NOT?: InputMaybe<Array<BetWhereInput>>;
   OR?: InputMaybe<Array<BetWhereInput>>;
-  amount?: InputMaybe<BigIntFilter>;
+  amount?: InputMaybe<DecimalFilter>;
   block?: InputMaybe<Scalars['Int']['input']>;
   claimed?: InputMaybe<BoolFilter>;
   claimedAt?: InputMaybe<DateTimeNullableFilter>;
   claimedBlock?: InputMaybe<IntNullableFilter>;
   claimedHash?: InputMaybe<StringNullableFilter>;
-  claimedNetSTETH?: InputMaybe<BigIntNullableFilter>;
-  claimedSTETH?: InputMaybe<BigIntNullableFilter>;
+  claimedNetSTETH?: InputMaybe<DecimalNullableFilter>;
+  claimedSTETH?: InputMaybe<DecimalNullableFilter>;
   closedAt?: InputMaybe<DateTimeNullableFilter>;
   hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   openedAt?: InputMaybe<DateTimeFilter>;
   outcome?: InputMaybe<StringNullableFilter>;
-  pnl?: InputMaybe<BigIntNullableFilter>;
+  pnl?: InputMaybe<DecimalNullableFilter>;
   position?: InputMaybe<EnumBetPositionFilter>;
   round?: InputMaybe<RoundRelationFilter>;
   roundId?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
-};
-
-export type BigIntFieldUpdateOperationsInput = {
-  decrement?: InputMaybe<Scalars['BigInt']['input']>;
-  divide?: InputMaybe<Scalars['BigInt']['input']>;
-  increment?: InputMaybe<Scalars['BigInt']['input']>;
-  multiply?: InputMaybe<Scalars['BigInt']['input']>;
-  set?: InputMaybe<Scalars['BigInt']['input']>;
-};
-
-export type BigIntFilter = {
-  equals?: InputMaybe<Scalars['BigInt']['input']>;
-  gt?: InputMaybe<Scalars['BigInt']['input']>;
-  gte?: InputMaybe<Scalars['BigInt']['input']>;
-  in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-  lt?: InputMaybe<Scalars['BigInt']['input']>;
-  lte?: InputMaybe<Scalars['BigInt']['input']>;
-  not?: InputMaybe<NestedBigIntFilter>;
-  notIn?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-};
-
-export type BigIntNullableFilter = {
-  equals?: InputMaybe<Scalars['BigInt']['input']>;
-  gt?: InputMaybe<Scalars['BigInt']['input']>;
-  gte?: InputMaybe<Scalars['BigInt']['input']>;
-  in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-  lt?: InputMaybe<Scalars['BigInt']['input']>;
-  lte?: InputMaybe<Scalars['BigInt']['input']>;
-  not?: InputMaybe<NestedBigIntNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-};
-
-export type BigIntNullableWithAggregatesFilter = {
-  _avg?: InputMaybe<NestedFloatNullableFilter>;
-  _count?: InputMaybe<NestedIntNullableFilter>;
-  _max?: InputMaybe<NestedBigIntNullableFilter>;
-  _min?: InputMaybe<NestedBigIntNullableFilter>;
-  _sum?: InputMaybe<NestedBigIntNullableFilter>;
-  equals?: InputMaybe<Scalars['BigInt']['input']>;
-  gt?: InputMaybe<Scalars['BigInt']['input']>;
-  gte?: InputMaybe<Scalars['BigInt']['input']>;
-  in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-  lt?: InputMaybe<Scalars['BigInt']['input']>;
-  lte?: InputMaybe<Scalars['BigInt']['input']>;
-  not?: InputMaybe<NestedBigIntNullableWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-};
-
-export type BigIntWithAggregatesFilter = {
-  _avg?: InputMaybe<NestedFloatFilter>;
-  _count?: InputMaybe<NestedIntFilter>;
-  _max?: InputMaybe<NestedBigIntFilter>;
-  _min?: InputMaybe<NestedBigIntFilter>;
-  _sum?: InputMaybe<NestedBigIntFilter>;
-  equals?: InputMaybe<Scalars['BigInt']['input']>;
-  gt?: InputMaybe<Scalars['BigInt']['input']>;
-  gte?: InputMaybe<Scalars['BigInt']['input']>;
-  in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-  lt?: InputMaybe<Scalars['BigInt']['input']>;
-  lte?: InputMaybe<Scalars['BigInt']['input']>;
-  not?: InputMaybe<NestedBigIntWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['BigInt']['input']>>;
 };
 
 export type BoolFieldUpdateOperationsInput = {
@@ -1672,6 +1610,68 @@ export type DateTimeWithAggregatesFilter = {
   notIn?: InputMaybe<Array<Scalars['DateTime']['input']>>;
 };
 
+export type DecimalFieldUpdateOperationsInput = {
+  decrement?: InputMaybe<Scalars['Decimal']['input']>;
+  divide?: InputMaybe<Scalars['Decimal']['input']>;
+  increment?: InputMaybe<Scalars['Decimal']['input']>;
+  multiply?: InputMaybe<Scalars['Decimal']['input']>;
+  set?: InputMaybe<Scalars['Decimal']['input']>;
+};
+
+export type DecimalFilter = {
+  equals?: InputMaybe<Scalars['Decimal']['input']>;
+  gt?: InputMaybe<Scalars['Decimal']['input']>;
+  gte?: InputMaybe<Scalars['Decimal']['input']>;
+  in?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+  lt?: InputMaybe<Scalars['Decimal']['input']>;
+  lte?: InputMaybe<Scalars['Decimal']['input']>;
+  not?: InputMaybe<NestedDecimalFilter>;
+  notIn?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+};
+
+export type DecimalNullableFilter = {
+  equals?: InputMaybe<Scalars['Decimal']['input']>;
+  gt?: InputMaybe<Scalars['Decimal']['input']>;
+  gte?: InputMaybe<Scalars['Decimal']['input']>;
+  in?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+  lt?: InputMaybe<Scalars['Decimal']['input']>;
+  lte?: InputMaybe<Scalars['Decimal']['input']>;
+  not?: InputMaybe<NestedDecimalNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+};
+
+export type DecimalNullableWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedDecimalNullableFilter>;
+  _count?: InputMaybe<NestedIntNullableFilter>;
+  _max?: InputMaybe<NestedDecimalNullableFilter>;
+  _min?: InputMaybe<NestedDecimalNullableFilter>;
+  _sum?: InputMaybe<NestedDecimalNullableFilter>;
+  equals?: InputMaybe<Scalars['Decimal']['input']>;
+  gt?: InputMaybe<Scalars['Decimal']['input']>;
+  gte?: InputMaybe<Scalars['Decimal']['input']>;
+  in?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+  lt?: InputMaybe<Scalars['Decimal']['input']>;
+  lte?: InputMaybe<Scalars['Decimal']['input']>;
+  not?: InputMaybe<NestedDecimalNullableWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+};
+
+export type DecimalWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedDecimalFilter>;
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedDecimalFilter>;
+  _min?: InputMaybe<NestedDecimalFilter>;
+  _sum?: InputMaybe<NestedDecimalFilter>;
+  equals?: InputMaybe<Scalars['Decimal']['input']>;
+  gt?: InputMaybe<Scalars['Decimal']['input']>;
+  gte?: InputMaybe<Scalars['Decimal']['input']>;
+  in?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+  lt?: InputMaybe<Scalars['Decimal']['input']>;
+  lte?: InputMaybe<Scalars['Decimal']['input']>;
+  not?: InputMaybe<NestedDecimalWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+};
+
 export type EnumActivityTypeFieldUpdateOperationsInput = {
   set?: InputMaybe<ActivityType>;
 };
@@ -1712,6 +1712,41 @@ export type EnumBetPositionWithAggregatesFilter = {
   in?: InputMaybe<Array<BetPosition>>;
   not?: InputMaybe<NestedEnumBetPositionWithAggregatesFilter>;
   notIn?: InputMaybe<Array<BetPosition>>;
+};
+
+export type FloatFieldUpdateOperationsInput = {
+  decrement?: InputMaybe<Scalars['Float']['input']>;
+  divide?: InputMaybe<Scalars['Float']['input']>;
+  increment?: InputMaybe<Scalars['Float']['input']>;
+  multiply?: InputMaybe<Scalars['Float']['input']>;
+  set?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type FloatFilter = {
+  equals?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  in?: InputMaybe<Array<Scalars['Float']['input']>>;
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  not?: InputMaybe<NestedFloatFilter>;
+  notIn?: InputMaybe<Array<Scalars['Float']['input']>>;
+};
+
+export type FloatWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedFloatFilter>;
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedFloatFilter>;
+  _min?: InputMaybe<NestedFloatFilter>;
+  _sum?: InputMaybe<NestedFloatFilter>;
+  equals?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  in?: InputMaybe<Array<Scalars['Float']['input']>>;
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  not?: InputMaybe<NestedFloatWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<Scalars['Float']['input']>>;
 };
 
 export type IntFieldUpdateOperationsInput = {
@@ -2297,60 +2332,6 @@ export type MutationUpsertOneVerificationTokenArgs = {
   where: VerificationTokenWhereUniqueInput;
 };
 
-export type NestedBigIntFilter = {
-  equals?: InputMaybe<Scalars['BigInt']['input']>;
-  gt?: InputMaybe<Scalars['BigInt']['input']>;
-  gte?: InputMaybe<Scalars['BigInt']['input']>;
-  in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-  lt?: InputMaybe<Scalars['BigInt']['input']>;
-  lte?: InputMaybe<Scalars['BigInt']['input']>;
-  not?: InputMaybe<NestedBigIntFilter>;
-  notIn?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-};
-
-export type NestedBigIntNullableFilter = {
-  equals?: InputMaybe<Scalars['BigInt']['input']>;
-  gt?: InputMaybe<Scalars['BigInt']['input']>;
-  gte?: InputMaybe<Scalars['BigInt']['input']>;
-  in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-  lt?: InputMaybe<Scalars['BigInt']['input']>;
-  lte?: InputMaybe<Scalars['BigInt']['input']>;
-  not?: InputMaybe<NestedBigIntNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-};
-
-export type NestedBigIntNullableWithAggregatesFilter = {
-  _avg?: InputMaybe<NestedFloatNullableFilter>;
-  _count?: InputMaybe<NestedIntNullableFilter>;
-  _max?: InputMaybe<NestedBigIntNullableFilter>;
-  _min?: InputMaybe<NestedBigIntNullableFilter>;
-  _sum?: InputMaybe<NestedBigIntNullableFilter>;
-  equals?: InputMaybe<Scalars['BigInt']['input']>;
-  gt?: InputMaybe<Scalars['BigInt']['input']>;
-  gte?: InputMaybe<Scalars['BigInt']['input']>;
-  in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-  lt?: InputMaybe<Scalars['BigInt']['input']>;
-  lte?: InputMaybe<Scalars['BigInt']['input']>;
-  not?: InputMaybe<NestedBigIntNullableWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-};
-
-export type NestedBigIntWithAggregatesFilter = {
-  _avg?: InputMaybe<NestedFloatFilter>;
-  _count?: InputMaybe<NestedIntFilter>;
-  _max?: InputMaybe<NestedBigIntFilter>;
-  _min?: InputMaybe<NestedBigIntFilter>;
-  _sum?: InputMaybe<NestedBigIntFilter>;
-  equals?: InputMaybe<Scalars['BigInt']['input']>;
-  gt?: InputMaybe<Scalars['BigInt']['input']>;
-  gte?: InputMaybe<Scalars['BigInt']['input']>;
-  in?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-  lt?: InputMaybe<Scalars['BigInt']['input']>;
-  lte?: InputMaybe<Scalars['BigInt']['input']>;
-  not?: InputMaybe<NestedBigIntWithAggregatesFilter>;
-  notIn?: InputMaybe<Array<Scalars['BigInt']['input']>>;
-};
-
 export type NestedBoolFilter = {
   equals?: InputMaybe<Scalars['Boolean']['input']>;
   not?: InputMaybe<NestedBoolFilter>;
@@ -2414,6 +2395,60 @@ export type NestedDateTimeWithAggregatesFilter = {
   notIn?: InputMaybe<Array<Scalars['DateTime']['input']>>;
 };
 
+export type NestedDecimalFilter = {
+  equals?: InputMaybe<Scalars['Decimal']['input']>;
+  gt?: InputMaybe<Scalars['Decimal']['input']>;
+  gte?: InputMaybe<Scalars['Decimal']['input']>;
+  in?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+  lt?: InputMaybe<Scalars['Decimal']['input']>;
+  lte?: InputMaybe<Scalars['Decimal']['input']>;
+  not?: InputMaybe<NestedDecimalFilter>;
+  notIn?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+};
+
+export type NestedDecimalNullableFilter = {
+  equals?: InputMaybe<Scalars['Decimal']['input']>;
+  gt?: InputMaybe<Scalars['Decimal']['input']>;
+  gte?: InputMaybe<Scalars['Decimal']['input']>;
+  in?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+  lt?: InputMaybe<Scalars['Decimal']['input']>;
+  lte?: InputMaybe<Scalars['Decimal']['input']>;
+  not?: InputMaybe<NestedDecimalNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+};
+
+export type NestedDecimalNullableWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedDecimalNullableFilter>;
+  _count?: InputMaybe<NestedIntNullableFilter>;
+  _max?: InputMaybe<NestedDecimalNullableFilter>;
+  _min?: InputMaybe<NestedDecimalNullableFilter>;
+  _sum?: InputMaybe<NestedDecimalNullableFilter>;
+  equals?: InputMaybe<Scalars['Decimal']['input']>;
+  gt?: InputMaybe<Scalars['Decimal']['input']>;
+  gte?: InputMaybe<Scalars['Decimal']['input']>;
+  in?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+  lt?: InputMaybe<Scalars['Decimal']['input']>;
+  lte?: InputMaybe<Scalars['Decimal']['input']>;
+  not?: InputMaybe<NestedDecimalNullableWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+};
+
+export type NestedDecimalWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedDecimalFilter>;
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedDecimalFilter>;
+  _min?: InputMaybe<NestedDecimalFilter>;
+  _sum?: InputMaybe<NestedDecimalFilter>;
+  equals?: InputMaybe<Scalars['Decimal']['input']>;
+  gt?: InputMaybe<Scalars['Decimal']['input']>;
+  gte?: InputMaybe<Scalars['Decimal']['input']>;
+  in?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+  lt?: InputMaybe<Scalars['Decimal']['input']>;
+  lte?: InputMaybe<Scalars['Decimal']['input']>;
+  not?: InputMaybe<NestedDecimalWithAggregatesFilter>;
+  notIn?: InputMaybe<Array<Scalars['Decimal']['input']>>;
+};
+
 export type NestedEnumActivityTypeFilter = {
   equals?: InputMaybe<ActivityType>;
   in?: InputMaybe<Array<ActivityType>>;
@@ -2467,6 +2502,22 @@ export type NestedFloatNullableFilter = {
   lt?: InputMaybe<Scalars['Float']['input']>;
   lte?: InputMaybe<Scalars['Float']['input']>;
   not?: InputMaybe<NestedFloatNullableFilter>;
+  notIn?: InputMaybe<Array<Scalars['Float']['input']>>;
+};
+
+export type NestedFloatWithAggregatesFilter = {
+  _avg?: InputMaybe<NestedFloatFilter>;
+  _count?: InputMaybe<NestedIntFilter>;
+  _max?: InputMaybe<NestedFloatFilter>;
+  _min?: InputMaybe<NestedFloatFilter>;
+  _sum?: InputMaybe<NestedFloatFilter>;
+  equals?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  in?: InputMaybe<Array<Scalars['Float']['input']>>;
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  not?: InputMaybe<NestedFloatWithAggregatesFilter>;
   notIn?: InputMaybe<Array<Scalars['Float']['input']>>;
 };
 
@@ -2586,16 +2637,16 @@ export type NestedStringWithAggregatesFilter = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type NullableBigIntFieldUpdateOperationsInput = {
-  decrement?: InputMaybe<Scalars['BigInt']['input']>;
-  divide?: InputMaybe<Scalars['BigInt']['input']>;
-  increment?: InputMaybe<Scalars['BigInt']['input']>;
-  multiply?: InputMaybe<Scalars['BigInt']['input']>;
-  set?: InputMaybe<Scalars['BigInt']['input']>;
-};
-
 export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
+export type NullableDecimalFieldUpdateOperationsInput = {
+  decrement?: InputMaybe<Scalars['Decimal']['input']>;
+  divide?: InputMaybe<Scalars['Decimal']['input']>;
+  increment?: InputMaybe<Scalars['Decimal']['input']>;
+  multiply?: InputMaybe<Scalars['Decimal']['input']>;
+  set?: InputMaybe<Scalars['Decimal']['input']>;
 };
 
 export type NullableIntFieldUpdateOperationsInput = {
@@ -3587,9 +3638,10 @@ export type ReferralWhereUniqueInput = {
 
 export type Reward = {
   __typename?: 'Reward';
-  amount: Scalars['BigInt']['output'];
+  amount: Scalars['Decimal']['output'];
+  block?: Maybe<Scalars['Int']['output']>;
   createdAt: Scalars['DateTime']['output'];
-  epoch: Scalars['Int']['output'];
+  hash?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   points: Scalars['Int']['output'];
   user: User;
@@ -3598,14 +3650,14 @@ export type Reward = {
 
 export type RewardAvgAggregate = {
   __typename?: 'RewardAvgAggregate';
-  amount?: Maybe<Scalars['Float']['output']>;
-  epoch?: Maybe<Scalars['Float']['output']>;
+  amount?: Maybe<Scalars['Decimal']['output']>;
+  block?: Maybe<Scalars['Float']['output']>;
   points?: Maybe<Scalars['Float']['output']>;
 };
 
 export type RewardAvgOrderByAggregateInput = {
   amount?: InputMaybe<SortOrder>;
-  epoch?: InputMaybe<SortOrder>;
+  block?: InputMaybe<SortOrder>;
   points?: InputMaybe<SortOrder>;
 };
 
@@ -3613,8 +3665,9 @@ export type RewardCountAggregate = {
   __typename?: 'RewardCountAggregate';
   _all: Scalars['Int']['output'];
   amount: Scalars['Int']['output'];
+  block: Scalars['Int']['output'];
   createdAt: Scalars['Int']['output'];
-  epoch: Scalars['Int']['output'];
+  hash: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
   points: Scalars['Int']['output'];
   userId: Scalars['Int']['output'];
@@ -3622,35 +3675,39 @@ export type RewardCountAggregate = {
 
 export type RewardCountOrderByAggregateInput = {
   amount?: InputMaybe<SortOrder>;
+  block?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
-  epoch?: InputMaybe<SortOrder>;
+  hash?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   points?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
 
 export type RewardCreateInput = {
-  amount: Scalars['BigInt']['input'];
+  amount: Scalars['Decimal']['input'];
+  block?: InputMaybe<Scalars['Int']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  epoch: Scalars['Int']['input'];
+  hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   points: Scalars['Int']['input'];
   user: UserCreateNestedOneWithoutRewardsInput;
 };
 
 export type RewardCreateManyInput = {
-  amount: Scalars['BigInt']['input'];
+  amount: Scalars['Decimal']['input'];
+  block?: InputMaybe<Scalars['Int']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  epoch: Scalars['Int']['input'];
+  hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   points: Scalars['Int']['input'];
   userId: Scalars['String']['input'];
 };
 
 export type RewardCreateManyUserInput = {
-  amount: Scalars['BigInt']['input'];
+  amount: Scalars['Decimal']['input'];
+  block?: InputMaybe<Scalars['Int']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  epoch: Scalars['Int']['input'];
+  hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   points: Scalars['Int']['input'];
 };
@@ -3673,9 +3730,10 @@ export type RewardCreateOrConnectWithoutUserInput = {
 };
 
 export type RewardCreateWithoutUserInput = {
-  amount: Scalars['BigInt']['input'];
+  amount: Scalars['Decimal']['input'];
+  block?: InputMaybe<Scalars['Int']['input']>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  epoch: Scalars['Int']['input'];
+  hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   points: Scalars['Int']['input'];
 };
@@ -3687,9 +3745,10 @@ export type RewardGroupBy = {
   _max?: Maybe<RewardMaxAggregate>;
   _min?: Maybe<RewardMinAggregate>;
   _sum?: Maybe<RewardSumAggregate>;
-  amount: Scalars['BigInt']['output'];
+  amount: Scalars['Decimal']['output'];
+  block?: Maybe<Scalars['Int']['output']>;
   createdAt: Scalars['DateTime']['output'];
-  epoch: Scalars['Int']['output'];
+  hash?: Maybe<Scalars['String']['output']>;
   id: Scalars['String']['output'];
   points: Scalars['Int']['output'];
   userId: Scalars['String']['output'];
@@ -3703,9 +3762,10 @@ export type RewardListRelationFilter = {
 
 export type RewardMaxAggregate = {
   __typename?: 'RewardMaxAggregate';
-  amount?: Maybe<Scalars['BigInt']['output']>;
+  amount?: Maybe<Scalars['Decimal']['output']>;
+  block?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  epoch?: Maybe<Scalars['Int']['output']>;
+  hash?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   points?: Maybe<Scalars['Int']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
@@ -3713,8 +3773,9 @@ export type RewardMaxAggregate = {
 
 export type RewardMaxOrderByAggregateInput = {
   amount?: InputMaybe<SortOrder>;
+  block?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
-  epoch?: InputMaybe<SortOrder>;
+  hash?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   points?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
@@ -3722,9 +3783,10 @@ export type RewardMaxOrderByAggregateInput = {
 
 export type RewardMinAggregate = {
   __typename?: 'RewardMinAggregate';
-  amount?: Maybe<Scalars['BigInt']['output']>;
+  amount?: Maybe<Scalars['Decimal']['output']>;
+  block?: Maybe<Scalars['Int']['output']>;
   createdAt?: Maybe<Scalars['DateTime']['output']>;
-  epoch?: Maybe<Scalars['Int']['output']>;
+  hash?: Maybe<Scalars['String']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   points?: Maybe<Scalars['Int']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
@@ -3732,8 +3794,9 @@ export type RewardMinAggregate = {
 
 export type RewardMinOrderByAggregateInput = {
   amount?: InputMaybe<SortOrder>;
+  block?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
-  epoch?: InputMaybe<SortOrder>;
+  hash?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   points?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
@@ -3750,8 +3813,9 @@ export type RewardOrderByWithAggregationInput = {
   _min?: InputMaybe<RewardMinOrderByAggregateInput>;
   _sum?: InputMaybe<RewardSumOrderByAggregateInput>;
   amount?: InputMaybe<SortOrder>;
+  block?: InputMaybe<SortOrderInput>;
   createdAt?: InputMaybe<SortOrder>;
-  epoch?: InputMaybe<SortOrder>;
+  hash?: InputMaybe<SortOrderInput>;
   id?: InputMaybe<SortOrder>;
   points?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
@@ -3759,8 +3823,9 @@ export type RewardOrderByWithAggregationInput = {
 
 export type RewardOrderByWithRelationInput = {
   amount?: InputMaybe<SortOrder>;
+  block?: InputMaybe<SortOrderInput>;
   createdAt?: InputMaybe<SortOrder>;
-  epoch?: InputMaybe<SortOrder>;
+  hash?: InputMaybe<SortOrderInput>;
   id?: InputMaybe<SortOrder>;
   points?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
@@ -3769,8 +3834,9 @@ export type RewardOrderByWithRelationInput = {
 
 export enum RewardScalarFieldEnum {
   Amount = 'amount',
+  Block = 'block',
   CreatedAt = 'createdAt',
-  Epoch = 'epoch',
+  Hash = 'hash',
   Id = 'id',
   Points = 'points',
   UserId = 'userId'
@@ -3780,9 +3846,10 @@ export type RewardScalarWhereInput = {
   AND?: InputMaybe<Array<RewardScalarWhereInput>>;
   NOT?: InputMaybe<Array<RewardScalarWhereInput>>;
   OR?: InputMaybe<Array<RewardScalarWhereInput>>;
-  amount?: InputMaybe<BigIntFilter>;
+  amount?: InputMaybe<DecimalFilter>;
+  block?: InputMaybe<IntNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
-  epoch?: InputMaybe<IntFilter>;
+  hash?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
   points?: InputMaybe<IntFilter>;
   userId?: InputMaybe<StringFilter>;
@@ -3792,9 +3859,10 @@ export type RewardScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<RewardScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<RewardScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<RewardScalarWhereWithAggregatesInput>>;
-  amount?: InputMaybe<BigIntWithAggregatesFilter>;
+  amount?: InputMaybe<DecimalWithAggregatesFilter>;
+  block?: InputMaybe<IntNullableWithAggregatesFilter>;
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
-  epoch?: InputMaybe<IntWithAggregatesFilter>;
+  hash?: InputMaybe<StringNullableWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   points?: InputMaybe<IntWithAggregatesFilter>;
   userId?: InputMaybe<StringWithAggregatesFilter>;
@@ -3802,30 +3870,32 @@ export type RewardScalarWhereWithAggregatesInput = {
 
 export type RewardSumAggregate = {
   __typename?: 'RewardSumAggregate';
-  amount?: Maybe<Scalars['BigInt']['output']>;
-  epoch?: Maybe<Scalars['Int']['output']>;
+  amount?: Maybe<Scalars['Decimal']['output']>;
+  block?: Maybe<Scalars['Int']['output']>;
   points?: Maybe<Scalars['Int']['output']>;
 };
 
 export type RewardSumOrderByAggregateInput = {
   amount?: InputMaybe<SortOrder>;
-  epoch?: InputMaybe<SortOrder>;
+  block?: InputMaybe<SortOrder>;
   points?: InputMaybe<SortOrder>;
 };
 
 export type RewardUpdateInput = {
-  amount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  amount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  block?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  epoch?: InputMaybe<IntFieldUpdateOperationsInput>;
+  hash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   points?: InputMaybe<IntFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutRewardsNestedInput>;
 };
 
 export type RewardUpdateManyMutationInput = {
-  amount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  amount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  block?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  epoch?: InputMaybe<IntFieldUpdateOperationsInput>;
+  hash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   points?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
@@ -3855,9 +3925,10 @@ export type RewardUpdateWithWhereUniqueWithoutUserInput = {
 };
 
 export type RewardUpdateWithoutUserInput = {
-  amount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  amount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  block?: InputMaybe<NullableIntFieldUpdateOperationsInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  epoch?: InputMaybe<IntFieldUpdateOperationsInput>;
+  hash?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   points?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
@@ -3872,9 +3943,10 @@ export type RewardWhereInput = {
   AND?: InputMaybe<Array<RewardWhereInput>>;
   NOT?: InputMaybe<Array<RewardWhereInput>>;
   OR?: InputMaybe<Array<RewardWhereInput>>;
-  amount?: InputMaybe<BigIntFilter>;
+  amount?: InputMaybe<DecimalFilter>;
+  block?: InputMaybe<IntNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
-  epoch?: InputMaybe<IntFilter>;
+  hash?: InputMaybe<StringNullableFilter>;
   id?: InputMaybe<StringFilter>;
   points?: InputMaybe<IntFilter>;
   user?: InputMaybe<UserRelationFilter>;
@@ -3885,9 +3957,10 @@ export type RewardWhereUniqueInput = {
   AND?: InputMaybe<Array<RewardWhereInput>>;
   NOT?: InputMaybe<Array<RewardWhereInput>>;
   OR?: InputMaybe<Array<RewardWhereInput>>;
-  amount?: InputMaybe<BigIntFilter>;
+  amount?: InputMaybe<DecimalFilter>;
+  block?: InputMaybe<Scalars['Int']['input']>;
   createdAt?: InputMaybe<DateTimeFilter>;
-  epoch?: InputMaybe<IntFilter>;
+  hash?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   points?: InputMaybe<IntFilter>;
   user?: InputMaybe<UserRelationFilter>;
@@ -3897,15 +3970,15 @@ export type RewardWhereUniqueInput = {
 export type Round = {
   __typename?: 'Round';
   _count?: Maybe<RoundCount>;
-  bearAmount: Scalars['BigInt']['output'];
+  bearAmount: Scalars['Decimal']['output'];
   bearBets: Scalars['Int']['output'];
   bets: Array<Bet>;
-  bullAmount: Scalars['BigInt']['output'];
+  bullAmount: Scalars['Decimal']['output'];
   bullBets: Scalars['Int']['output'];
   closeAt: Scalars['DateTime']['output'];
   closeBlock: Scalars['Int']['output'];
   closeHash: Scalars['String']['output'];
-  closePrice: Scalars['BigInt']['output'];
+  closePrice: Scalars['Decimal']['output'];
   closeRoundId: Scalars['String']['output'];
   epoch: Scalars['Int']['output'];
   failed: Scalars['Boolean']['output'];
@@ -3913,13 +3986,13 @@ export type Round = {
   lockAt: Scalars['DateTime']['output'];
   lockBlock: Scalars['Int']['output'];
   lockHash: Scalars['String']['output'];
-  lockPrice: Scalars['BigInt']['output'];
+  lockPrice: Scalars['Decimal']['output'];
   lockRoundId: Scalars['String']['output'];
   position: BetPosition;
   startAt: Scalars['DateTime']['output'];
   startBlock: Scalars['Int']['output'];
   startHash: Scalars['String']['output'];
-  totalAmount: Scalars['BigInt']['output'];
+  totalAmount: Scalars['Decimal']['output'];
   totalBets: Scalars['Int']['output'];
 };
 
@@ -3935,17 +4008,17 @@ export type RoundBetsArgs = {
 
 export type RoundAvgAggregate = {
   __typename?: 'RoundAvgAggregate';
-  bearAmount?: Maybe<Scalars['Float']['output']>;
+  bearAmount?: Maybe<Scalars['Decimal']['output']>;
   bearBets?: Maybe<Scalars['Float']['output']>;
-  bullAmount?: Maybe<Scalars['Float']['output']>;
+  bullAmount?: Maybe<Scalars['Decimal']['output']>;
   bullBets?: Maybe<Scalars['Float']['output']>;
   closeBlock?: Maybe<Scalars['Float']['output']>;
-  closePrice?: Maybe<Scalars['Float']['output']>;
+  closePrice?: Maybe<Scalars['Decimal']['output']>;
   epoch?: Maybe<Scalars['Float']['output']>;
   lockBlock?: Maybe<Scalars['Float']['output']>;
-  lockPrice?: Maybe<Scalars['Float']['output']>;
+  lockPrice?: Maybe<Scalars['Decimal']['output']>;
   startBlock?: Maybe<Scalars['Float']['output']>;
-  totalAmount?: Maybe<Scalars['Float']['output']>;
+  totalAmount?: Maybe<Scalars['Decimal']['output']>;
   totalBets?: Maybe<Scalars['Float']['output']>;
 };
 
@@ -4029,15 +4102,15 @@ export type RoundCountOrderByAggregateInput = {
 };
 
 export type RoundCreateInput = {
-  bearAmount: Scalars['BigInt']['input'];
+  bearAmount: Scalars['Decimal']['input'];
   bearBets: Scalars['Int']['input'];
   bets?: InputMaybe<BetCreateNestedManyWithoutRoundInput>;
-  bullAmount: Scalars['BigInt']['input'];
+  bullAmount: Scalars['Decimal']['input'];
   bullBets: Scalars['Int']['input'];
   closeAt: Scalars['DateTime']['input'];
   closeBlock: Scalars['Int']['input'];
   closeHash: Scalars['String']['input'];
-  closePrice: Scalars['BigInt']['input'];
+  closePrice: Scalars['Decimal']['input'];
   closeRoundId: Scalars['String']['input'];
   epoch: Scalars['Int']['input'];
   failed: Scalars['Boolean']['input'];
@@ -4045,25 +4118,25 @@ export type RoundCreateInput = {
   lockAt: Scalars['DateTime']['input'];
   lockBlock: Scalars['Int']['input'];
   lockHash: Scalars['String']['input'];
-  lockPrice: Scalars['BigInt']['input'];
+  lockPrice: Scalars['Decimal']['input'];
   lockRoundId: Scalars['String']['input'];
   position: BetPosition;
   startAt: Scalars['DateTime']['input'];
   startBlock: Scalars['Int']['input'];
   startHash: Scalars['String']['input'];
-  totalAmount: Scalars['BigInt']['input'];
+  totalAmount: Scalars['Decimal']['input'];
   totalBets: Scalars['Int']['input'];
 };
 
 export type RoundCreateManyInput = {
-  bearAmount: Scalars['BigInt']['input'];
+  bearAmount: Scalars['Decimal']['input'];
   bearBets: Scalars['Int']['input'];
-  bullAmount: Scalars['BigInt']['input'];
+  bullAmount: Scalars['Decimal']['input'];
   bullBets: Scalars['Int']['input'];
   closeAt: Scalars['DateTime']['input'];
   closeBlock: Scalars['Int']['input'];
   closeHash: Scalars['String']['input'];
-  closePrice: Scalars['BigInt']['input'];
+  closePrice: Scalars['Decimal']['input'];
   closeRoundId: Scalars['String']['input'];
   epoch: Scalars['Int']['input'];
   failed: Scalars['Boolean']['input'];
@@ -4071,13 +4144,13 @@ export type RoundCreateManyInput = {
   lockAt: Scalars['DateTime']['input'];
   lockBlock: Scalars['Int']['input'];
   lockHash: Scalars['String']['input'];
-  lockPrice: Scalars['BigInt']['input'];
+  lockPrice: Scalars['Decimal']['input'];
   lockRoundId: Scalars['String']['input'];
   position: BetPosition;
   startAt: Scalars['DateTime']['input'];
   startBlock: Scalars['Int']['input'];
   startHash: Scalars['String']['input'];
-  totalAmount: Scalars['BigInt']['input'];
+  totalAmount: Scalars['Decimal']['input'];
   totalBets: Scalars['Int']['input'];
 };
 
@@ -4093,14 +4166,14 @@ export type RoundCreateOrConnectWithoutBetsInput = {
 };
 
 export type RoundCreateWithoutBetsInput = {
-  bearAmount: Scalars['BigInt']['input'];
+  bearAmount: Scalars['Decimal']['input'];
   bearBets: Scalars['Int']['input'];
-  bullAmount: Scalars['BigInt']['input'];
+  bullAmount: Scalars['Decimal']['input'];
   bullBets: Scalars['Int']['input'];
   closeAt: Scalars['DateTime']['input'];
   closeBlock: Scalars['Int']['input'];
   closeHash: Scalars['String']['input'];
-  closePrice: Scalars['BigInt']['input'];
+  closePrice: Scalars['Decimal']['input'];
   closeRoundId: Scalars['String']['input'];
   epoch: Scalars['Int']['input'];
   failed: Scalars['Boolean']['input'];
@@ -4108,13 +4181,13 @@ export type RoundCreateWithoutBetsInput = {
   lockAt: Scalars['DateTime']['input'];
   lockBlock: Scalars['Int']['input'];
   lockHash: Scalars['String']['input'];
-  lockPrice: Scalars['BigInt']['input'];
+  lockPrice: Scalars['Decimal']['input'];
   lockRoundId: Scalars['String']['input'];
   position: BetPosition;
   startAt: Scalars['DateTime']['input'];
   startBlock: Scalars['Int']['input'];
   startHash: Scalars['String']['input'];
-  totalAmount: Scalars['BigInt']['input'];
+  totalAmount: Scalars['Decimal']['input'];
   totalBets: Scalars['Int']['input'];
 };
 
@@ -4125,14 +4198,14 @@ export type RoundGroupBy = {
   _max?: Maybe<RoundMaxAggregate>;
   _min?: Maybe<RoundMinAggregate>;
   _sum?: Maybe<RoundSumAggregate>;
-  bearAmount: Scalars['BigInt']['output'];
+  bearAmount: Scalars['Decimal']['output'];
   bearBets: Scalars['Int']['output'];
-  bullAmount: Scalars['BigInt']['output'];
+  bullAmount: Scalars['Decimal']['output'];
   bullBets: Scalars['Int']['output'];
   closeAt: Scalars['DateTime']['output'];
   closeBlock: Scalars['Int']['output'];
   closeHash: Scalars['String']['output'];
-  closePrice: Scalars['BigInt']['output'];
+  closePrice: Scalars['Decimal']['output'];
   closeRoundId: Scalars['String']['output'];
   epoch: Scalars['Int']['output'];
   failed: Scalars['Boolean']['output'];
@@ -4140,26 +4213,26 @@ export type RoundGroupBy = {
   lockAt: Scalars['DateTime']['output'];
   lockBlock: Scalars['Int']['output'];
   lockHash: Scalars['String']['output'];
-  lockPrice: Scalars['BigInt']['output'];
+  lockPrice: Scalars['Decimal']['output'];
   lockRoundId: Scalars['String']['output'];
   position: BetPosition;
   startAt: Scalars['DateTime']['output'];
   startBlock: Scalars['Int']['output'];
   startHash: Scalars['String']['output'];
-  totalAmount: Scalars['BigInt']['output'];
+  totalAmount: Scalars['Decimal']['output'];
   totalBets: Scalars['Int']['output'];
 };
 
 export type RoundMaxAggregate = {
   __typename?: 'RoundMaxAggregate';
-  bearAmount?: Maybe<Scalars['BigInt']['output']>;
+  bearAmount?: Maybe<Scalars['Decimal']['output']>;
   bearBets?: Maybe<Scalars['Int']['output']>;
-  bullAmount?: Maybe<Scalars['BigInt']['output']>;
+  bullAmount?: Maybe<Scalars['Decimal']['output']>;
   bullBets?: Maybe<Scalars['Int']['output']>;
   closeAt?: Maybe<Scalars['DateTime']['output']>;
   closeBlock?: Maybe<Scalars['Int']['output']>;
   closeHash?: Maybe<Scalars['String']['output']>;
-  closePrice?: Maybe<Scalars['BigInt']['output']>;
+  closePrice?: Maybe<Scalars['Decimal']['output']>;
   closeRoundId?: Maybe<Scalars['String']['output']>;
   epoch?: Maybe<Scalars['Int']['output']>;
   failed?: Maybe<Scalars['Boolean']['output']>;
@@ -4167,13 +4240,13 @@ export type RoundMaxAggregate = {
   lockAt?: Maybe<Scalars['DateTime']['output']>;
   lockBlock?: Maybe<Scalars['Int']['output']>;
   lockHash?: Maybe<Scalars['String']['output']>;
-  lockPrice?: Maybe<Scalars['BigInt']['output']>;
+  lockPrice?: Maybe<Scalars['Decimal']['output']>;
   lockRoundId?: Maybe<Scalars['String']['output']>;
   position?: Maybe<BetPosition>;
   startAt?: Maybe<Scalars['DateTime']['output']>;
   startBlock?: Maybe<Scalars['Int']['output']>;
   startHash?: Maybe<Scalars['String']['output']>;
-  totalAmount?: Maybe<Scalars['BigInt']['output']>;
+  totalAmount?: Maybe<Scalars['Decimal']['output']>;
   totalBets?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -4205,14 +4278,14 @@ export type RoundMaxOrderByAggregateInput = {
 
 export type RoundMinAggregate = {
   __typename?: 'RoundMinAggregate';
-  bearAmount?: Maybe<Scalars['BigInt']['output']>;
+  bearAmount?: Maybe<Scalars['Decimal']['output']>;
   bearBets?: Maybe<Scalars['Int']['output']>;
-  bullAmount?: Maybe<Scalars['BigInt']['output']>;
+  bullAmount?: Maybe<Scalars['Decimal']['output']>;
   bullBets?: Maybe<Scalars['Int']['output']>;
   closeAt?: Maybe<Scalars['DateTime']['output']>;
   closeBlock?: Maybe<Scalars['Int']['output']>;
   closeHash?: Maybe<Scalars['String']['output']>;
-  closePrice?: Maybe<Scalars['BigInt']['output']>;
+  closePrice?: Maybe<Scalars['Decimal']['output']>;
   closeRoundId?: Maybe<Scalars['String']['output']>;
   epoch?: Maybe<Scalars['Int']['output']>;
   failed?: Maybe<Scalars['Boolean']['output']>;
@@ -4220,13 +4293,13 @@ export type RoundMinAggregate = {
   lockAt?: Maybe<Scalars['DateTime']['output']>;
   lockBlock?: Maybe<Scalars['Int']['output']>;
   lockHash?: Maybe<Scalars['String']['output']>;
-  lockPrice?: Maybe<Scalars['BigInt']['output']>;
+  lockPrice?: Maybe<Scalars['Decimal']['output']>;
   lockRoundId?: Maybe<Scalars['String']['output']>;
   position?: Maybe<BetPosition>;
   startAt?: Maybe<Scalars['DateTime']['output']>;
   startBlock?: Maybe<Scalars['Int']['output']>;
   startHash?: Maybe<Scalars['String']['output']>;
-  totalAmount?: Maybe<Scalars['BigInt']['output']>;
+  totalAmount?: Maybe<Scalars['Decimal']['output']>;
   totalBets?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -4349,14 +4422,14 @@ export type RoundScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<RoundScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<RoundScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<RoundScalarWhereWithAggregatesInput>>;
-  bearAmount?: InputMaybe<BigIntWithAggregatesFilter>;
+  bearAmount?: InputMaybe<DecimalWithAggregatesFilter>;
   bearBets?: InputMaybe<IntWithAggregatesFilter>;
-  bullAmount?: InputMaybe<BigIntWithAggregatesFilter>;
+  bullAmount?: InputMaybe<DecimalWithAggregatesFilter>;
   bullBets?: InputMaybe<IntWithAggregatesFilter>;
   closeAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   closeBlock?: InputMaybe<IntWithAggregatesFilter>;
   closeHash?: InputMaybe<StringWithAggregatesFilter>;
-  closePrice?: InputMaybe<BigIntWithAggregatesFilter>;
+  closePrice?: InputMaybe<DecimalWithAggregatesFilter>;
   closeRoundId?: InputMaybe<StringWithAggregatesFilter>;
   epoch?: InputMaybe<IntWithAggregatesFilter>;
   failed?: InputMaybe<BoolWithAggregatesFilter>;
@@ -4364,29 +4437,29 @@ export type RoundScalarWhereWithAggregatesInput = {
   lockAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   lockBlock?: InputMaybe<IntWithAggregatesFilter>;
   lockHash?: InputMaybe<StringWithAggregatesFilter>;
-  lockPrice?: InputMaybe<BigIntWithAggregatesFilter>;
+  lockPrice?: InputMaybe<DecimalWithAggregatesFilter>;
   lockRoundId?: InputMaybe<StringWithAggregatesFilter>;
   position?: InputMaybe<EnumBetPositionWithAggregatesFilter>;
   startAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   startBlock?: InputMaybe<IntWithAggregatesFilter>;
   startHash?: InputMaybe<StringWithAggregatesFilter>;
-  totalAmount?: InputMaybe<BigIntWithAggregatesFilter>;
+  totalAmount?: InputMaybe<DecimalWithAggregatesFilter>;
   totalBets?: InputMaybe<IntWithAggregatesFilter>;
 };
 
 export type RoundSumAggregate = {
   __typename?: 'RoundSumAggregate';
-  bearAmount?: Maybe<Scalars['BigInt']['output']>;
+  bearAmount?: Maybe<Scalars['Decimal']['output']>;
   bearBets?: Maybe<Scalars['Int']['output']>;
-  bullAmount?: Maybe<Scalars['BigInt']['output']>;
+  bullAmount?: Maybe<Scalars['Decimal']['output']>;
   bullBets?: Maybe<Scalars['Int']['output']>;
   closeBlock?: Maybe<Scalars['Int']['output']>;
-  closePrice?: Maybe<Scalars['BigInt']['output']>;
+  closePrice?: Maybe<Scalars['Decimal']['output']>;
   epoch?: Maybe<Scalars['Int']['output']>;
   lockBlock?: Maybe<Scalars['Int']['output']>;
-  lockPrice?: Maybe<Scalars['BigInt']['output']>;
+  lockPrice?: Maybe<Scalars['Decimal']['output']>;
   startBlock?: Maybe<Scalars['Int']['output']>;
-  totalAmount?: Maybe<Scalars['BigInt']['output']>;
+  totalAmount?: Maybe<Scalars['Decimal']['output']>;
   totalBets?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -4406,15 +4479,15 @@ export type RoundSumOrderByAggregateInput = {
 };
 
 export type RoundUpdateInput = {
-  bearAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  bearAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   bearBets?: InputMaybe<IntFieldUpdateOperationsInput>;
   bets?: InputMaybe<BetUpdateManyWithoutRoundNestedInput>;
-  bullAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  bullAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   bullBets?: InputMaybe<IntFieldUpdateOperationsInput>;
   closeAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   closeBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
   closeHash?: InputMaybe<StringFieldUpdateOperationsInput>;
-  closePrice?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  closePrice?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   closeRoundId?: InputMaybe<StringFieldUpdateOperationsInput>;
   epoch?: InputMaybe<IntFieldUpdateOperationsInput>;
   failed?: InputMaybe<BoolFieldUpdateOperationsInput>;
@@ -4422,25 +4495,25 @@ export type RoundUpdateInput = {
   lockAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   lockBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
   lockHash?: InputMaybe<StringFieldUpdateOperationsInput>;
-  lockPrice?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  lockPrice?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   lockRoundId?: InputMaybe<StringFieldUpdateOperationsInput>;
   position?: InputMaybe<EnumBetPositionFieldUpdateOperationsInput>;
   startAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   startBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
   startHash?: InputMaybe<StringFieldUpdateOperationsInput>;
-  totalAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  totalAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   totalBets?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
 export type RoundUpdateManyMutationInput = {
-  bearAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  bearAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   bearBets?: InputMaybe<IntFieldUpdateOperationsInput>;
-  bullAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  bullAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   bullBets?: InputMaybe<IntFieldUpdateOperationsInput>;
   closeAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   closeBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
   closeHash?: InputMaybe<StringFieldUpdateOperationsInput>;
-  closePrice?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  closePrice?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   closeRoundId?: InputMaybe<StringFieldUpdateOperationsInput>;
   epoch?: InputMaybe<IntFieldUpdateOperationsInput>;
   failed?: InputMaybe<BoolFieldUpdateOperationsInput>;
@@ -4448,13 +4521,13 @@ export type RoundUpdateManyMutationInput = {
   lockAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   lockBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
   lockHash?: InputMaybe<StringFieldUpdateOperationsInput>;
-  lockPrice?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  lockPrice?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   lockRoundId?: InputMaybe<StringFieldUpdateOperationsInput>;
   position?: InputMaybe<EnumBetPositionFieldUpdateOperationsInput>;
   startAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   startBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
   startHash?: InputMaybe<StringFieldUpdateOperationsInput>;
-  totalAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  totalAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   totalBets?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
@@ -4472,14 +4545,14 @@ export type RoundUpdateToOneWithWhereWithoutBetsInput = {
 };
 
 export type RoundUpdateWithoutBetsInput = {
-  bearAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  bearAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   bearBets?: InputMaybe<IntFieldUpdateOperationsInput>;
-  bullAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  bullAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   bullBets?: InputMaybe<IntFieldUpdateOperationsInput>;
   closeAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   closeBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
   closeHash?: InputMaybe<StringFieldUpdateOperationsInput>;
-  closePrice?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  closePrice?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   closeRoundId?: InputMaybe<StringFieldUpdateOperationsInput>;
   epoch?: InputMaybe<IntFieldUpdateOperationsInput>;
   failed?: InputMaybe<BoolFieldUpdateOperationsInput>;
@@ -4487,13 +4560,13 @@ export type RoundUpdateWithoutBetsInput = {
   lockAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   lockBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
   lockHash?: InputMaybe<StringFieldUpdateOperationsInput>;
-  lockPrice?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  lockPrice?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   lockRoundId?: InputMaybe<StringFieldUpdateOperationsInput>;
   position?: InputMaybe<EnumBetPositionFieldUpdateOperationsInput>;
   startAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   startBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
   startHash?: InputMaybe<StringFieldUpdateOperationsInput>;
-  totalAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  totalAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   totalBets?: InputMaybe<IntFieldUpdateOperationsInput>;
 };
 
@@ -4507,15 +4580,15 @@ export type RoundWhereInput = {
   AND?: InputMaybe<Array<RoundWhereInput>>;
   NOT?: InputMaybe<Array<RoundWhereInput>>;
   OR?: InputMaybe<Array<RoundWhereInput>>;
-  bearAmount?: InputMaybe<BigIntFilter>;
+  bearAmount?: InputMaybe<DecimalFilter>;
   bearBets?: InputMaybe<IntFilter>;
   bets?: InputMaybe<BetListRelationFilter>;
-  bullAmount?: InputMaybe<BigIntFilter>;
+  bullAmount?: InputMaybe<DecimalFilter>;
   bullBets?: InputMaybe<IntFilter>;
   closeAt?: InputMaybe<DateTimeFilter>;
   closeBlock?: InputMaybe<IntFilter>;
   closeHash?: InputMaybe<StringFilter>;
-  closePrice?: InputMaybe<BigIntFilter>;
+  closePrice?: InputMaybe<DecimalFilter>;
   closeRoundId?: InputMaybe<StringFilter>;
   epoch?: InputMaybe<IntFilter>;
   failed?: InputMaybe<BoolFilter>;
@@ -4523,13 +4596,13 @@ export type RoundWhereInput = {
   lockAt?: InputMaybe<DateTimeFilter>;
   lockBlock?: InputMaybe<IntFilter>;
   lockHash?: InputMaybe<StringFilter>;
-  lockPrice?: InputMaybe<BigIntFilter>;
+  lockPrice?: InputMaybe<DecimalFilter>;
   lockRoundId?: InputMaybe<StringFilter>;
   position?: InputMaybe<EnumBetPositionFilter>;
   startAt?: InputMaybe<DateTimeFilter>;
   startBlock?: InputMaybe<IntFilter>;
   startHash?: InputMaybe<StringFilter>;
-  totalAmount?: InputMaybe<BigIntFilter>;
+  totalAmount?: InputMaybe<DecimalFilter>;
   totalBets?: InputMaybe<IntFilter>;
 };
 
@@ -4537,15 +4610,15 @@ export type RoundWhereUniqueInput = {
   AND?: InputMaybe<Array<RoundWhereInput>>;
   NOT?: InputMaybe<Array<RoundWhereInput>>;
   OR?: InputMaybe<Array<RoundWhereInput>>;
-  bearAmount?: InputMaybe<BigIntFilter>;
+  bearAmount?: InputMaybe<DecimalFilter>;
   bearBets?: InputMaybe<IntFilter>;
   bets?: InputMaybe<BetListRelationFilter>;
-  bullAmount?: InputMaybe<BigIntFilter>;
+  bullAmount?: InputMaybe<DecimalFilter>;
   bullBets?: InputMaybe<IntFilter>;
   closeAt?: InputMaybe<DateTimeFilter>;
   closeBlock?: InputMaybe<IntFilter>;
   closeHash?: InputMaybe<StringFilter>;
-  closePrice?: InputMaybe<BigIntFilter>;
+  closePrice?: InputMaybe<DecimalFilter>;
   closeRoundId?: InputMaybe<StringFilter>;
   epoch?: InputMaybe<IntFilter>;
   failed?: InputMaybe<BoolFilter>;
@@ -4553,13 +4626,13 @@ export type RoundWhereUniqueInput = {
   lockAt?: InputMaybe<DateTimeFilter>;
   lockBlock?: InputMaybe<IntFilter>;
   lockHash?: InputMaybe<StringFilter>;
-  lockPrice?: InputMaybe<BigIntFilter>;
+  lockPrice?: InputMaybe<DecimalFilter>;
   lockRoundId?: InputMaybe<StringFilter>;
   position?: InputMaybe<EnumBetPositionFilter>;
   startAt?: InputMaybe<DateTimeFilter>;
   startBlock?: InputMaybe<IntFilter>;
   startHash?: InputMaybe<StringFilter>;
-  totalAmount?: InputMaybe<BigIntFilter>;
+  totalAmount?: InputMaybe<DecimalFilter>;
   totalBets?: InputMaybe<IntFilter>;
 };
 
@@ -4800,28 +4873,21 @@ export type SessionWhereUniqueInput = {
 
 export type Share = {
   __typename?: 'Share';
-  User?: Maybe<User>;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['String']['output'];
   isBuy: Scalars['Boolean']['output'];
-  shareAmount: Scalars['BigInt']['output'];
-  stethAmount: Scalars['BigInt']['output'];
+  shareAmount: Scalars['Decimal']['output'];
+  stethAmount: Scalars['Decimal']['output'];
   subject: User;
   subjectId: Scalars['String']['output'];
   trader: User;
   traderId: Scalars['String']['output'];
-  userId?: Maybe<Scalars['String']['output']>;
-};
-
-
-export type ShareUserArgs = {
-  where?: InputMaybe<UserWhereInput>;
 };
 
 export type ShareAvgAggregate = {
   __typename?: 'ShareAvgAggregate';
-  shareAmount?: Maybe<Scalars['Float']['output']>;
-  stethAmount?: Maybe<Scalars['Float']['output']>;
+  shareAmount?: Maybe<Scalars['Decimal']['output']>;
+  stethAmount?: Maybe<Scalars['Decimal']['output']>;
 };
 
 export type ShareAvgOrderByAggregateInput = {
@@ -4839,7 +4905,6 @@ export type ShareCountAggregate = {
   stethAmount: Scalars['Int']['output'];
   subjectId: Scalars['Int']['output'];
   traderId: Scalars['Int']['output'];
-  userId: Scalars['Int']['output'];
 };
 
 export type ShareCountOrderByAggregateInput = {
@@ -4850,16 +4915,14 @@ export type ShareCountOrderByAggregateInput = {
   stethAmount?: InputMaybe<SortOrder>;
   subjectId?: InputMaybe<SortOrder>;
   traderId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
 };
 
 export type ShareCreateInput = {
-  User?: InputMaybe<UserCreateNestedOneWithoutAllSharesInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   isBuy: Scalars['Boolean']['input'];
-  shareAmount: Scalars['BigInt']['input'];
-  stethAmount: Scalars['BigInt']['input'];
+  shareAmount: Scalars['Decimal']['input'];
+  stethAmount: Scalars['Decimal']['input'];
   subject: UserCreateNestedOneWithoutSoldSharesInput;
   trader: UserCreateNestedOneWithoutBoughtSharesInput;
 };
@@ -4868,21 +4931,19 @@ export type ShareCreateManyInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   isBuy: Scalars['Boolean']['input'];
-  shareAmount: Scalars['BigInt']['input'];
-  stethAmount: Scalars['BigInt']['input'];
+  shareAmount: Scalars['Decimal']['input'];
+  stethAmount: Scalars['Decimal']['input'];
   subjectId: Scalars['String']['input'];
   traderId: Scalars['String']['input'];
-  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ShareCreateManySubjectInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   isBuy: Scalars['Boolean']['input'];
-  shareAmount: Scalars['BigInt']['input'];
-  stethAmount: Scalars['BigInt']['input'];
+  shareAmount: Scalars['Decimal']['input'];
+  stethAmount: Scalars['Decimal']['input'];
   traderId: Scalars['String']['input'];
-  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ShareCreateManySubjectInputEnvelope = {
@@ -4894,29 +4955,13 @@ export type ShareCreateManyTraderInput = {
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   isBuy: Scalars['Boolean']['input'];
-  shareAmount: Scalars['BigInt']['input'];
-  stethAmount: Scalars['BigInt']['input'];
+  shareAmount: Scalars['Decimal']['input'];
+  stethAmount: Scalars['Decimal']['input'];
   subjectId: Scalars['String']['input'];
-  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ShareCreateManyTraderInputEnvelope = {
   data: Array<ShareCreateManyTraderInput>;
-  skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type ShareCreateManyUserInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  id?: InputMaybe<Scalars['String']['input']>;
-  isBuy: Scalars['Boolean']['input'];
-  shareAmount: Scalars['BigInt']['input'];
-  stethAmount: Scalars['BigInt']['input'];
-  subjectId: Scalars['String']['input'];
-  traderId: Scalars['String']['input'];
-};
-
-export type ShareCreateManyUserInputEnvelope = {
-  data: Array<ShareCreateManyUserInput>;
   skipDuplicates?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -4934,13 +4979,6 @@ export type ShareCreateNestedManyWithoutTraderInput = {
   createMany?: InputMaybe<ShareCreateManyTraderInputEnvelope>;
 };
 
-export type ShareCreateNestedManyWithoutUserInput = {
-  connect?: InputMaybe<Array<ShareWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<ShareCreateOrConnectWithoutUserInput>>;
-  create?: InputMaybe<Array<ShareCreateWithoutUserInput>>;
-  createMany?: InputMaybe<ShareCreateManyUserInputEnvelope>;
-};
-
 export type ShareCreateOrConnectWithoutSubjectInput = {
   create: ShareCreateWithoutSubjectInput;
   where: ShareWhereUniqueInput;
@@ -4951,39 +4989,22 @@ export type ShareCreateOrConnectWithoutTraderInput = {
   where: ShareWhereUniqueInput;
 };
 
-export type ShareCreateOrConnectWithoutUserInput = {
-  create: ShareCreateWithoutUserInput;
-  where: ShareWhereUniqueInput;
-};
-
 export type ShareCreateWithoutSubjectInput = {
-  User?: InputMaybe<UserCreateNestedOneWithoutAllSharesInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   isBuy: Scalars['Boolean']['input'];
-  shareAmount: Scalars['BigInt']['input'];
-  stethAmount: Scalars['BigInt']['input'];
+  shareAmount: Scalars['Decimal']['input'];
+  stethAmount: Scalars['Decimal']['input'];
   trader: UserCreateNestedOneWithoutBoughtSharesInput;
 };
 
 export type ShareCreateWithoutTraderInput = {
-  User?: InputMaybe<UserCreateNestedOneWithoutAllSharesInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   isBuy: Scalars['Boolean']['input'];
-  shareAmount: Scalars['BigInt']['input'];
-  stethAmount: Scalars['BigInt']['input'];
+  shareAmount: Scalars['Decimal']['input'];
+  stethAmount: Scalars['Decimal']['input'];
   subject: UserCreateNestedOneWithoutSoldSharesInput;
-};
-
-export type ShareCreateWithoutUserInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  id?: InputMaybe<Scalars['String']['input']>;
-  isBuy: Scalars['Boolean']['input'];
-  shareAmount: Scalars['BigInt']['input'];
-  stethAmount: Scalars['BigInt']['input'];
-  subject: UserCreateNestedOneWithoutSoldSharesInput;
-  trader: UserCreateNestedOneWithoutBoughtSharesInput;
 };
 
 export type ShareGroupBy = {
@@ -4996,11 +5017,10 @@ export type ShareGroupBy = {
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['String']['output'];
   isBuy: Scalars['Boolean']['output'];
-  shareAmount: Scalars['BigInt']['output'];
-  stethAmount: Scalars['BigInt']['output'];
+  shareAmount: Scalars['Decimal']['output'];
+  stethAmount: Scalars['Decimal']['output'];
   subjectId: Scalars['String']['output'];
   traderId: Scalars['String']['output'];
-  userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type ShareListRelationFilter = {
@@ -5014,11 +5034,10 @@ export type ShareMaxAggregate = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   isBuy?: Maybe<Scalars['Boolean']['output']>;
-  shareAmount?: Maybe<Scalars['BigInt']['output']>;
-  stethAmount?: Maybe<Scalars['BigInt']['output']>;
+  shareAmount?: Maybe<Scalars['Decimal']['output']>;
+  stethAmount?: Maybe<Scalars['Decimal']['output']>;
   subjectId?: Maybe<Scalars['String']['output']>;
   traderId?: Maybe<Scalars['String']['output']>;
-  userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type ShareMaxOrderByAggregateInput = {
@@ -5029,7 +5048,6 @@ export type ShareMaxOrderByAggregateInput = {
   stethAmount?: InputMaybe<SortOrder>;
   subjectId?: InputMaybe<SortOrder>;
   traderId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
 };
 
 export type ShareMinAggregate = {
@@ -5037,11 +5055,10 @@ export type ShareMinAggregate = {
   createdAt?: Maybe<Scalars['DateTime']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   isBuy?: Maybe<Scalars['Boolean']['output']>;
-  shareAmount?: Maybe<Scalars['BigInt']['output']>;
-  stethAmount?: Maybe<Scalars['BigInt']['output']>;
+  shareAmount?: Maybe<Scalars['Decimal']['output']>;
+  stethAmount?: Maybe<Scalars['Decimal']['output']>;
   subjectId?: Maybe<Scalars['String']['output']>;
   traderId?: Maybe<Scalars['String']['output']>;
-  userId?: Maybe<Scalars['String']['output']>;
 };
 
 export type ShareMinOrderByAggregateInput = {
@@ -5052,7 +5069,6 @@ export type ShareMinOrderByAggregateInput = {
   stethAmount?: InputMaybe<SortOrder>;
   subjectId?: InputMaybe<SortOrder>;
   traderId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrder>;
 };
 
 export type ShareOrderByRelationAggregateInput = {
@@ -5072,11 +5088,9 @@ export type ShareOrderByWithAggregationInput = {
   stethAmount?: InputMaybe<SortOrder>;
   subjectId?: InputMaybe<SortOrder>;
   traderId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrderInput>;
 };
 
 export type ShareOrderByWithRelationInput = {
-  User?: InputMaybe<UserOrderByWithRelationInput>;
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   isBuy?: InputMaybe<SortOrder>;
@@ -5086,7 +5100,6 @@ export type ShareOrderByWithRelationInput = {
   subjectId?: InputMaybe<SortOrder>;
   trader?: InputMaybe<UserOrderByWithRelationInput>;
   traderId?: InputMaybe<SortOrder>;
-  userId?: InputMaybe<SortOrderInput>;
 };
 
 export enum ShareScalarFieldEnum {
@@ -5096,8 +5109,7 @@ export enum ShareScalarFieldEnum {
   ShareAmount = 'shareAmount',
   StethAmount = 'stethAmount',
   SubjectId = 'subjectId',
-  TraderId = 'traderId',
-  UserId = 'userId'
+  TraderId = 'traderId'
 }
 
 export type ShareScalarWhereInput = {
@@ -5107,11 +5119,10 @@ export type ShareScalarWhereInput = {
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   isBuy?: InputMaybe<BoolFilter>;
-  shareAmount?: InputMaybe<BigIntFilter>;
-  stethAmount?: InputMaybe<BigIntFilter>;
+  shareAmount?: InputMaybe<DecimalFilter>;
+  stethAmount?: InputMaybe<DecimalFilter>;
   subjectId?: InputMaybe<StringFilter>;
   traderId?: InputMaybe<StringFilter>;
-  userId?: InputMaybe<StringNullableFilter>;
 };
 
 export type ShareScalarWhereWithAggregatesInput = {
@@ -5121,17 +5132,16 @@ export type ShareScalarWhereWithAggregatesInput = {
   createdAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   isBuy?: InputMaybe<BoolWithAggregatesFilter>;
-  shareAmount?: InputMaybe<BigIntWithAggregatesFilter>;
-  stethAmount?: InputMaybe<BigIntWithAggregatesFilter>;
+  shareAmount?: InputMaybe<DecimalWithAggregatesFilter>;
+  stethAmount?: InputMaybe<DecimalWithAggregatesFilter>;
   subjectId?: InputMaybe<StringWithAggregatesFilter>;
   traderId?: InputMaybe<StringWithAggregatesFilter>;
-  userId?: InputMaybe<StringNullableWithAggregatesFilter>;
 };
 
 export type ShareSumAggregate = {
   __typename?: 'ShareSumAggregate';
-  shareAmount?: Maybe<Scalars['BigInt']['output']>;
-  stethAmount?: Maybe<Scalars['BigInt']['output']>;
+  shareAmount?: Maybe<Scalars['Decimal']['output']>;
+  stethAmount?: Maybe<Scalars['Decimal']['output']>;
 };
 
 export type ShareSumOrderByAggregateInput = {
@@ -5140,12 +5150,11 @@ export type ShareSumOrderByAggregateInput = {
 };
 
 export type ShareUpdateInput = {
-  User?: InputMaybe<UserUpdateOneWithoutAllSharesNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   isBuy?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  shareAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  stethAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  shareAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  stethAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   subject?: InputMaybe<UserUpdateOneRequiredWithoutSoldSharesNestedInput>;
   trader?: InputMaybe<UserUpdateOneRequiredWithoutBoughtSharesNestedInput>;
 };
@@ -5154,8 +5163,8 @@ export type ShareUpdateManyMutationInput = {
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   isBuy?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  shareAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  stethAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  shareAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  stethAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
 };
 
 export type ShareUpdateManyWithWhereWithoutSubjectInput = {
@@ -5164,11 +5173,6 @@ export type ShareUpdateManyWithWhereWithoutSubjectInput = {
 };
 
 export type ShareUpdateManyWithWhereWithoutTraderInput = {
-  data: ShareUpdateManyMutationInput;
-  where: ShareScalarWhereInput;
-};
-
-export type ShareUpdateManyWithWhereWithoutUserInput = {
   data: ShareUpdateManyMutationInput;
   where: ShareScalarWhereInput;
 };
@@ -5201,20 +5205,6 @@ export type ShareUpdateManyWithoutTraderNestedInput = {
   upsert?: InputMaybe<Array<ShareUpsertWithWhereUniqueWithoutTraderInput>>;
 };
 
-export type ShareUpdateManyWithoutUserNestedInput = {
-  connect?: InputMaybe<Array<ShareWhereUniqueInput>>;
-  connectOrCreate?: InputMaybe<Array<ShareCreateOrConnectWithoutUserInput>>;
-  create?: InputMaybe<Array<ShareCreateWithoutUserInput>>;
-  createMany?: InputMaybe<ShareCreateManyUserInputEnvelope>;
-  delete?: InputMaybe<Array<ShareWhereUniqueInput>>;
-  deleteMany?: InputMaybe<Array<ShareScalarWhereInput>>;
-  disconnect?: InputMaybe<Array<ShareWhereUniqueInput>>;
-  set?: InputMaybe<Array<ShareWhereUniqueInput>>;
-  update?: InputMaybe<Array<ShareUpdateWithWhereUniqueWithoutUserInput>>;
-  updateMany?: InputMaybe<Array<ShareUpdateManyWithWhereWithoutUserInput>>;
-  upsert?: InputMaybe<Array<ShareUpsertWithWhereUniqueWithoutUserInput>>;
-};
-
 export type ShareUpdateWithWhereUniqueWithoutSubjectInput = {
   data: ShareUpdateWithoutSubjectInput;
   where: ShareWhereUniqueInput;
@@ -5225,39 +5215,22 @@ export type ShareUpdateWithWhereUniqueWithoutTraderInput = {
   where: ShareWhereUniqueInput;
 };
 
-export type ShareUpdateWithWhereUniqueWithoutUserInput = {
-  data: ShareUpdateWithoutUserInput;
-  where: ShareWhereUniqueInput;
-};
-
 export type ShareUpdateWithoutSubjectInput = {
-  User?: InputMaybe<UserUpdateOneWithoutAllSharesNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   isBuy?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  shareAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  stethAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  shareAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  stethAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   trader?: InputMaybe<UserUpdateOneRequiredWithoutBoughtSharesNestedInput>;
 };
 
 export type ShareUpdateWithoutTraderInput = {
-  User?: InputMaybe<UserUpdateOneWithoutAllSharesNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   isBuy?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  shareAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  stethAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  shareAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  stethAmount?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   subject?: InputMaybe<UserUpdateOneRequiredWithoutSoldSharesNestedInput>;
-};
-
-export type ShareUpdateWithoutUserInput = {
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  isBuy?: InputMaybe<BoolFieldUpdateOperationsInput>;
-  shareAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  stethAmount?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  subject?: InputMaybe<UserUpdateOneRequiredWithoutSoldSharesNestedInput>;
-  trader?: InputMaybe<UserUpdateOneRequiredWithoutBoughtSharesNestedInput>;
 };
 
 export type ShareUpsertWithWhereUniqueWithoutSubjectInput = {
@@ -5272,44 +5245,34 @@ export type ShareUpsertWithWhereUniqueWithoutTraderInput = {
   where: ShareWhereUniqueInput;
 };
 
-export type ShareUpsertWithWhereUniqueWithoutUserInput = {
-  create: ShareCreateWithoutUserInput;
-  update: ShareUpdateWithoutUserInput;
-  where: ShareWhereUniqueInput;
-};
-
 export type ShareWhereInput = {
   AND?: InputMaybe<Array<ShareWhereInput>>;
   NOT?: InputMaybe<Array<ShareWhereInput>>;
   OR?: InputMaybe<Array<ShareWhereInput>>;
-  User?: InputMaybe<UserNullableRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
   isBuy?: InputMaybe<BoolFilter>;
-  shareAmount?: InputMaybe<BigIntFilter>;
-  stethAmount?: InputMaybe<BigIntFilter>;
+  shareAmount?: InputMaybe<DecimalFilter>;
+  stethAmount?: InputMaybe<DecimalFilter>;
   subject?: InputMaybe<UserRelationFilter>;
   subjectId?: InputMaybe<StringFilter>;
   trader?: InputMaybe<UserRelationFilter>;
   traderId?: InputMaybe<StringFilter>;
-  userId?: InputMaybe<StringNullableFilter>;
 };
 
 export type ShareWhereUniqueInput = {
   AND?: InputMaybe<Array<ShareWhereInput>>;
   NOT?: InputMaybe<Array<ShareWhereInput>>;
   OR?: InputMaybe<Array<ShareWhereInput>>;
-  User?: InputMaybe<UserNullableRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
   isBuy?: InputMaybe<BoolFilter>;
-  shareAmount?: InputMaybe<BigIntFilter>;
-  stethAmount?: InputMaybe<BigIntFilter>;
+  shareAmount?: InputMaybe<DecimalFilter>;
+  stethAmount?: InputMaybe<DecimalFilter>;
   subject?: InputMaybe<UserRelationFilter>;
   subjectId?: InputMaybe<StringFilter>;
   trader?: InputMaybe<UserRelationFilter>;
   traderId?: InputMaybe<StringFilter>;
-  userId?: InputMaybe<StringNullableFilter>;
 };
 
 export enum SortOrder {
@@ -5398,7 +5361,6 @@ export type User = {
   accounts: Array<Account>;
   activityLogs: Array<ActivityLog>;
   address?: Maybe<Scalars['String']['output']>;
-  allShares: Array<Share>;
   bets: Array<Bet>;
   boughtShares: Array<Share>;
   createdAt: Scalars['DateTime']['output'];
@@ -5434,16 +5396,6 @@ export type UserActivityLogsArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<ActivityLogWhereInput>;
-};
-
-
-export type UserAllSharesArgs = {
-  cursor?: InputMaybe<ShareWhereUniqueInput>;
-  distinct?: InputMaybe<Array<ShareScalarFieldEnum>>;
-  orderBy?: InputMaybe<Array<ShareOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']['input']>;
-  take?: InputMaybe<Scalars['Int']['input']>;
-  where?: InputMaybe<ShareWhereInput>;
 };
 
 
@@ -5515,7 +5467,6 @@ export type UserCount = {
   __typename?: 'UserCount';
   accounts: Scalars['Int']['output'];
   activityLogs: Scalars['Int']['output'];
-  allShares: Scalars['Int']['output'];
   bets: Scalars['Int']['output'];
   boughtShares: Scalars['Int']['output'];
   referrals: Scalars['Int']['output'];
@@ -5532,11 +5483,6 @@ export type UserCountAccountsArgs = {
 
 export type UserCountActivityLogsArgs = {
   where?: InputMaybe<ActivityLogWhereInput>;
-};
-
-
-export type UserCountAllSharesArgs = {
-  where?: InputMaybe<ShareWhereInput>;
 };
 
 
@@ -5599,7 +5545,6 @@ export type UserCreateInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
   address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareCreateNestedManyWithoutUserInput>;
   bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
   boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5639,12 +5584,6 @@ export type UserCreateNestedOneWithoutActivityLogsInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutActivityLogsInput>;
   create?: InputMaybe<UserCreateWithoutActivityLogsInput>;
-};
-
-export type UserCreateNestedOneWithoutAllSharesInput = {
-  connect?: InputMaybe<UserWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutAllSharesInput>;
-  create?: InputMaybe<UserCreateWithoutAllSharesInput>;
 };
 
 export type UserCreateNestedOneWithoutBetsInput = {
@@ -5699,11 +5638,6 @@ export type UserCreateOrConnectWithoutActivityLogsInput = {
   where: UserWhereUniqueInput;
 };
 
-export type UserCreateOrConnectWithoutAllSharesInput = {
-  create: UserCreateWithoutAllSharesInput;
-  where: UserWhereUniqueInput;
-};
-
 export type UserCreateOrConnectWithoutBetsInput = {
   create: UserCreateWithoutBetsInput;
   where: UserWhereUniqueInput;
@@ -5742,7 +5676,6 @@ export type UserCreateOrConnectWithoutStatsInput = {
 export type UserCreateWithoutAccountsInput = {
   activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
   address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareCreateNestedManyWithoutUserInput>;
   bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
   boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5762,28 +5695,6 @@ export type UserCreateWithoutAccountsInput = {
 
 export type UserCreateWithoutActivityLogsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
-  address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareCreateNestedManyWithoutUserInput>;
-  bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
-  boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
-  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
-  email?: InputMaybe<Scalars['String']['input']>;
-  emailVerified?: InputMaybe<Scalars['DateTime']['input']>;
-  id?: InputMaybe<Scalars['String']['input']>;
-  image?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
-  rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
-  sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
-  soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
-  stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
-  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
-  username?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type UserCreateWithoutAllSharesInput = {
-  accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
-  activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
   address?: InputMaybe<Scalars['String']['input']>;
   bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
   boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
@@ -5806,7 +5717,6 @@ export type UserCreateWithoutBetsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
   address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareCreateNestedManyWithoutUserInput>;
   boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
@@ -5827,7 +5737,6 @@ export type UserCreateWithoutBoughtSharesInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
   address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareCreateNestedManyWithoutUserInput>;
   bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
@@ -5848,7 +5757,6 @@ export type UserCreateWithoutReferralsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
   address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareCreateNestedManyWithoutUserInput>;
   bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
   boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5869,7 +5777,6 @@ export type UserCreateWithoutRewardsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
   address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareCreateNestedManyWithoutUserInput>;
   bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
   boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5890,7 +5797,6 @@ export type UserCreateWithoutSessionsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
   address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareCreateNestedManyWithoutUserInput>;
   bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
   boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5911,7 +5817,6 @@ export type UserCreateWithoutSoldSharesInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
   address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareCreateNestedManyWithoutUserInput>;
   bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
   boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -5932,7 +5837,6 @@ export type UserCreateWithoutStatsInput = {
   accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
   activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
   address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareCreateNestedManyWithoutUserInput>;
   bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
   boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
   createdAt?: InputMaybe<Scalars['DateTime']['input']>;
@@ -6015,11 +5919,6 @@ export type UserMinOrderByAggregateInput = {
   username?: InputMaybe<SortOrder>;
 };
 
-export type UserNullableRelationFilter = {
-  is?: InputMaybe<UserWhereInput>;
-  isNot?: InputMaybe<UserWhereInput>;
-};
-
 export type UserOrderByWithAggregationInput = {
   _count?: InputMaybe<UserCountOrderByAggregateInput>;
   _max?: InputMaybe<UserMaxOrderByAggregateInput>;
@@ -6039,7 +5938,6 @@ export type UserOrderByWithRelationInput = {
   accounts?: InputMaybe<AccountOrderByRelationAggregateInput>;
   activityLogs?: InputMaybe<ActivityLogOrderByRelationAggregateInput>;
   address?: InputMaybe<SortOrderInput>;
-  allShares?: InputMaybe<ShareOrderByRelationAggregateInput>;
   bets?: InputMaybe<BetOrderByRelationAggregateInput>;
   boughtShares?: InputMaybe<ShareOrderByRelationAggregateInput>;
   createdAt?: InputMaybe<SortOrder>;
@@ -6091,46 +5989,46 @@ export type UserScalarWhereWithAggregatesInput = {
 
 export type UserStats = {
   __typename?: 'UserStats';
-  averageSTETH: Scalars['BigInt']['output'];
+  averageSTETH: Scalars['Decimal']['output'];
   id: Scalars['String']['output'];
   lastTransactionBlock: Scalars['Int']['output'];
-  netSTETH: Scalars['BigInt']['output'];
+  netSTETH: Scalars['Decimal']['output'];
   points: Scalars['Int']['output'];
   rank: Scalars['Int']['output'];
-  shareValue: Scalars['BigInt']['output'];
+  shareValue: Scalars['Decimal']['output'];
   totalBets: Scalars['Int']['output'];
   totalBetsBear: Scalars['Int']['output'];
   totalBetsBull: Scalars['Int']['output'];
   totalBetsClaimed: Scalars['Int']['output'];
-  totalRewards: Scalars['Int']['output'];
-  totalSTETH: Scalars['BigInt']['output'];
-  totalSTETHBear: Scalars['BigInt']['output'];
-  totalSTETHBull: Scalars['BigInt']['output'];
-  totalSTETHClaimed: Scalars['BigInt']['output'];
+  totalRewards: Scalars['Decimal']['output'];
+  totalSTETH: Scalars['Decimal']['output'];
+  totalSTETHBear: Scalars['Decimal']['output'];
+  totalSTETHBull: Scalars['Decimal']['output'];
+  totalSTETHClaimed: Scalars['Decimal']['output'];
   totalShareHolders: Scalars['Int']['output'];
   totalSharesHeld: Scalars['Int']['output'];
   user: User;
   userId: Scalars['String']['output'];
-  winRate: Scalars['BigInt']['output'];
+  winRate: Scalars['Float']['output'];
 };
 
 export type UserStatsAvgAggregate = {
   __typename?: 'UserStatsAvgAggregate';
-  averageSTETH?: Maybe<Scalars['Float']['output']>;
+  averageSTETH?: Maybe<Scalars['Decimal']['output']>;
   lastTransactionBlock?: Maybe<Scalars['Float']['output']>;
-  netSTETH?: Maybe<Scalars['Float']['output']>;
+  netSTETH?: Maybe<Scalars['Decimal']['output']>;
   points?: Maybe<Scalars['Float']['output']>;
   rank?: Maybe<Scalars['Float']['output']>;
-  shareValue?: Maybe<Scalars['Float']['output']>;
+  shareValue?: Maybe<Scalars['Decimal']['output']>;
   totalBets?: Maybe<Scalars['Float']['output']>;
   totalBetsBear?: Maybe<Scalars['Float']['output']>;
   totalBetsBull?: Maybe<Scalars['Float']['output']>;
   totalBetsClaimed?: Maybe<Scalars['Float']['output']>;
-  totalRewards?: Maybe<Scalars['Float']['output']>;
-  totalSTETH?: Maybe<Scalars['Float']['output']>;
-  totalSTETHBear?: Maybe<Scalars['Float']['output']>;
-  totalSTETHBull?: Maybe<Scalars['Float']['output']>;
-  totalSTETHClaimed?: Maybe<Scalars['Float']['output']>;
+  totalRewards?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETH?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHBear?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHBull?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHClaimed?: Maybe<Scalars['Decimal']['output']>;
   totalShareHolders?: Maybe<Scalars['Float']['output']>;
   totalSharesHeld?: Maybe<Scalars['Float']['output']>;
   winRate?: Maybe<Scalars['Float']['output']>;
@@ -6206,49 +6104,49 @@ export type UserStatsCountOrderByAggregateInput = {
 };
 
 export type UserStatsCreateInput = {
-  averageSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  averageSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   lastTransactionBlock?: InputMaybe<Scalars['Int']['input']>;
-  netSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  netSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   points?: InputMaybe<Scalars['Int']['input']>;
   rank?: InputMaybe<Scalars['Int']['input']>;
-  shareValue?: InputMaybe<Scalars['BigInt']['input']>;
+  shareValue?: InputMaybe<Scalars['Decimal']['input']>;
   totalBets?: InputMaybe<Scalars['Int']['input']>;
   totalBetsBear?: InputMaybe<Scalars['Int']['input']>;
   totalBetsBull?: InputMaybe<Scalars['Int']['input']>;
   totalBetsClaimed?: InputMaybe<Scalars['Int']['input']>;
-  totalRewards?: InputMaybe<Scalars['Int']['input']>;
-  totalSTETH?: InputMaybe<Scalars['BigInt']['input']>;
-  totalSTETHBear?: InputMaybe<Scalars['BigInt']['input']>;
-  totalSTETHBull?: InputMaybe<Scalars['BigInt']['input']>;
-  totalSTETHClaimed?: InputMaybe<Scalars['BigInt']['input']>;
+  totalRewards?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETH?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETHBear?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETHBull?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETHClaimed?: InputMaybe<Scalars['Decimal']['input']>;
   totalShareHolders?: InputMaybe<Scalars['Int']['input']>;
   totalSharesHeld?: InputMaybe<Scalars['Int']['input']>;
   user: UserCreateNestedOneWithoutStatsInput;
-  winRate?: InputMaybe<Scalars['BigInt']['input']>;
+  winRate?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type UserStatsCreateManyInput = {
-  averageSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  averageSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   lastTransactionBlock?: InputMaybe<Scalars['Int']['input']>;
-  netSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  netSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   points?: InputMaybe<Scalars['Int']['input']>;
   rank?: InputMaybe<Scalars['Int']['input']>;
-  shareValue?: InputMaybe<Scalars['BigInt']['input']>;
+  shareValue?: InputMaybe<Scalars['Decimal']['input']>;
   totalBets?: InputMaybe<Scalars['Int']['input']>;
   totalBetsBear?: InputMaybe<Scalars['Int']['input']>;
   totalBetsBull?: InputMaybe<Scalars['Int']['input']>;
   totalBetsClaimed?: InputMaybe<Scalars['Int']['input']>;
-  totalRewards?: InputMaybe<Scalars['Int']['input']>;
-  totalSTETH?: InputMaybe<Scalars['BigInt']['input']>;
-  totalSTETHBear?: InputMaybe<Scalars['BigInt']['input']>;
-  totalSTETHBull?: InputMaybe<Scalars['BigInt']['input']>;
-  totalSTETHClaimed?: InputMaybe<Scalars['BigInt']['input']>;
+  totalRewards?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETH?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETHBear?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETHBull?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETHClaimed?: InputMaybe<Scalars['Decimal']['input']>;
   totalShareHolders?: InputMaybe<Scalars['Int']['input']>;
   totalSharesHeld?: InputMaybe<Scalars['Int']['input']>;
   userId: Scalars['String']['input'];
-  winRate?: InputMaybe<Scalars['BigInt']['input']>;
+  winRate?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type UserStatsCreateNestedOneWithoutUserInput = {
@@ -6263,25 +6161,25 @@ export type UserStatsCreateOrConnectWithoutUserInput = {
 };
 
 export type UserStatsCreateWithoutUserInput = {
-  averageSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  averageSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   id?: InputMaybe<Scalars['String']['input']>;
   lastTransactionBlock?: InputMaybe<Scalars['Int']['input']>;
-  netSTETH?: InputMaybe<Scalars['BigInt']['input']>;
+  netSTETH?: InputMaybe<Scalars['Decimal']['input']>;
   points?: InputMaybe<Scalars['Int']['input']>;
   rank?: InputMaybe<Scalars['Int']['input']>;
-  shareValue?: InputMaybe<Scalars['BigInt']['input']>;
+  shareValue?: InputMaybe<Scalars['Decimal']['input']>;
   totalBets?: InputMaybe<Scalars['Int']['input']>;
   totalBetsBear?: InputMaybe<Scalars['Int']['input']>;
   totalBetsBull?: InputMaybe<Scalars['Int']['input']>;
   totalBetsClaimed?: InputMaybe<Scalars['Int']['input']>;
-  totalRewards?: InputMaybe<Scalars['Int']['input']>;
-  totalSTETH?: InputMaybe<Scalars['BigInt']['input']>;
-  totalSTETHBear?: InputMaybe<Scalars['BigInt']['input']>;
-  totalSTETHBull?: InputMaybe<Scalars['BigInt']['input']>;
-  totalSTETHClaimed?: InputMaybe<Scalars['BigInt']['input']>;
+  totalRewards?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETH?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETHBear?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETHBull?: InputMaybe<Scalars['Decimal']['input']>;
+  totalSTETHClaimed?: InputMaybe<Scalars['Decimal']['input']>;
   totalShareHolders?: InputMaybe<Scalars['Int']['input']>;
   totalSharesHeld?: InputMaybe<Scalars['Int']['input']>;
-  winRate?: InputMaybe<Scalars['BigInt']['input']>;
+  winRate?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type UserStatsGroupBy = {
@@ -6291,50 +6189,50 @@ export type UserStatsGroupBy = {
   _max?: Maybe<UserStatsMaxAggregate>;
   _min?: Maybe<UserStatsMinAggregate>;
   _sum?: Maybe<UserStatsSumAggregate>;
-  averageSTETH: Scalars['BigInt']['output'];
+  averageSTETH: Scalars['Decimal']['output'];
   id: Scalars['String']['output'];
   lastTransactionBlock: Scalars['Int']['output'];
-  netSTETH: Scalars['BigInt']['output'];
+  netSTETH: Scalars['Decimal']['output'];
   points: Scalars['Int']['output'];
   rank: Scalars['Int']['output'];
-  shareValue: Scalars['BigInt']['output'];
+  shareValue: Scalars['Decimal']['output'];
   totalBets: Scalars['Int']['output'];
   totalBetsBear: Scalars['Int']['output'];
   totalBetsBull: Scalars['Int']['output'];
   totalBetsClaimed: Scalars['Int']['output'];
-  totalRewards: Scalars['Int']['output'];
-  totalSTETH: Scalars['BigInt']['output'];
-  totalSTETHBear: Scalars['BigInt']['output'];
-  totalSTETHBull: Scalars['BigInt']['output'];
-  totalSTETHClaimed: Scalars['BigInt']['output'];
+  totalRewards: Scalars['Decimal']['output'];
+  totalSTETH: Scalars['Decimal']['output'];
+  totalSTETHBear: Scalars['Decimal']['output'];
+  totalSTETHBull: Scalars['Decimal']['output'];
+  totalSTETHClaimed: Scalars['Decimal']['output'];
   totalShareHolders: Scalars['Int']['output'];
   totalSharesHeld: Scalars['Int']['output'];
   userId: Scalars['String']['output'];
-  winRate: Scalars['BigInt']['output'];
+  winRate: Scalars['Float']['output'];
 };
 
 export type UserStatsMaxAggregate = {
   __typename?: 'UserStatsMaxAggregate';
-  averageSTETH?: Maybe<Scalars['BigInt']['output']>;
+  averageSTETH?: Maybe<Scalars['Decimal']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   lastTransactionBlock?: Maybe<Scalars['Int']['output']>;
-  netSTETH?: Maybe<Scalars['BigInt']['output']>;
+  netSTETH?: Maybe<Scalars['Decimal']['output']>;
   points?: Maybe<Scalars['Int']['output']>;
   rank?: Maybe<Scalars['Int']['output']>;
-  shareValue?: Maybe<Scalars['BigInt']['output']>;
+  shareValue?: Maybe<Scalars['Decimal']['output']>;
   totalBets?: Maybe<Scalars['Int']['output']>;
   totalBetsBear?: Maybe<Scalars['Int']['output']>;
   totalBetsBull?: Maybe<Scalars['Int']['output']>;
   totalBetsClaimed?: Maybe<Scalars['Int']['output']>;
-  totalRewards?: Maybe<Scalars['Int']['output']>;
-  totalSTETH?: Maybe<Scalars['BigInt']['output']>;
-  totalSTETHBear?: Maybe<Scalars['BigInt']['output']>;
-  totalSTETHBull?: Maybe<Scalars['BigInt']['output']>;
-  totalSTETHClaimed?: Maybe<Scalars['BigInt']['output']>;
+  totalRewards?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETH?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHBear?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHBull?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHClaimed?: Maybe<Scalars['Decimal']['output']>;
   totalShareHolders?: Maybe<Scalars['Int']['output']>;
   totalSharesHeld?: Maybe<Scalars['Int']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
-  winRate?: Maybe<Scalars['BigInt']['output']>;
+  winRate?: Maybe<Scalars['Float']['output']>;
 };
 
 export type UserStatsMaxOrderByAggregateInput = {
@@ -6362,26 +6260,26 @@ export type UserStatsMaxOrderByAggregateInput = {
 
 export type UserStatsMinAggregate = {
   __typename?: 'UserStatsMinAggregate';
-  averageSTETH?: Maybe<Scalars['BigInt']['output']>;
+  averageSTETH?: Maybe<Scalars['Decimal']['output']>;
   id?: Maybe<Scalars['String']['output']>;
   lastTransactionBlock?: Maybe<Scalars['Int']['output']>;
-  netSTETH?: Maybe<Scalars['BigInt']['output']>;
+  netSTETH?: Maybe<Scalars['Decimal']['output']>;
   points?: Maybe<Scalars['Int']['output']>;
   rank?: Maybe<Scalars['Int']['output']>;
-  shareValue?: Maybe<Scalars['BigInt']['output']>;
+  shareValue?: Maybe<Scalars['Decimal']['output']>;
   totalBets?: Maybe<Scalars['Int']['output']>;
   totalBetsBear?: Maybe<Scalars['Int']['output']>;
   totalBetsBull?: Maybe<Scalars['Int']['output']>;
   totalBetsClaimed?: Maybe<Scalars['Int']['output']>;
-  totalRewards?: Maybe<Scalars['Int']['output']>;
-  totalSTETH?: Maybe<Scalars['BigInt']['output']>;
-  totalSTETHBear?: Maybe<Scalars['BigInt']['output']>;
-  totalSTETHBull?: Maybe<Scalars['BigInt']['output']>;
-  totalSTETHClaimed?: Maybe<Scalars['BigInt']['output']>;
+  totalRewards?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETH?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHBear?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHBull?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHClaimed?: Maybe<Scalars['Decimal']['output']>;
   totalShareHolders?: Maybe<Scalars['Int']['output']>;
   totalSharesHeld?: Maybe<Scalars['Int']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
-  winRate?: Maybe<Scalars['BigInt']['output']>;
+  winRate?: Maybe<Scalars['Float']['output']>;
 };
 
 export type UserStatsMinOrderByAggregateInput = {
@@ -6491,48 +6389,48 @@ export type UserStatsScalarWhereWithAggregatesInput = {
   AND?: InputMaybe<Array<UserStatsScalarWhereWithAggregatesInput>>;
   NOT?: InputMaybe<Array<UserStatsScalarWhereWithAggregatesInput>>;
   OR?: InputMaybe<Array<UserStatsScalarWhereWithAggregatesInput>>;
-  averageSTETH?: InputMaybe<BigIntWithAggregatesFilter>;
+  averageSTETH?: InputMaybe<DecimalWithAggregatesFilter>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   lastTransactionBlock?: InputMaybe<IntWithAggregatesFilter>;
-  netSTETH?: InputMaybe<BigIntWithAggregatesFilter>;
+  netSTETH?: InputMaybe<DecimalWithAggregatesFilter>;
   points?: InputMaybe<IntWithAggregatesFilter>;
   rank?: InputMaybe<IntWithAggregatesFilter>;
-  shareValue?: InputMaybe<BigIntWithAggregatesFilter>;
+  shareValue?: InputMaybe<DecimalWithAggregatesFilter>;
   totalBets?: InputMaybe<IntWithAggregatesFilter>;
   totalBetsBear?: InputMaybe<IntWithAggregatesFilter>;
   totalBetsBull?: InputMaybe<IntWithAggregatesFilter>;
   totalBetsClaimed?: InputMaybe<IntWithAggregatesFilter>;
-  totalRewards?: InputMaybe<IntWithAggregatesFilter>;
-  totalSTETH?: InputMaybe<BigIntWithAggregatesFilter>;
-  totalSTETHBear?: InputMaybe<BigIntWithAggregatesFilter>;
-  totalSTETHBull?: InputMaybe<BigIntWithAggregatesFilter>;
-  totalSTETHClaimed?: InputMaybe<BigIntWithAggregatesFilter>;
+  totalRewards?: InputMaybe<DecimalWithAggregatesFilter>;
+  totalSTETH?: InputMaybe<DecimalWithAggregatesFilter>;
+  totalSTETHBear?: InputMaybe<DecimalWithAggregatesFilter>;
+  totalSTETHBull?: InputMaybe<DecimalWithAggregatesFilter>;
+  totalSTETHClaimed?: InputMaybe<DecimalWithAggregatesFilter>;
   totalShareHolders?: InputMaybe<IntWithAggregatesFilter>;
   totalSharesHeld?: InputMaybe<IntWithAggregatesFilter>;
   userId?: InputMaybe<StringWithAggregatesFilter>;
-  winRate?: InputMaybe<BigIntWithAggregatesFilter>;
+  winRate?: InputMaybe<FloatWithAggregatesFilter>;
 };
 
 export type UserStatsSumAggregate = {
   __typename?: 'UserStatsSumAggregate';
-  averageSTETH?: Maybe<Scalars['BigInt']['output']>;
+  averageSTETH?: Maybe<Scalars['Decimal']['output']>;
   lastTransactionBlock?: Maybe<Scalars['Int']['output']>;
-  netSTETH?: Maybe<Scalars['BigInt']['output']>;
+  netSTETH?: Maybe<Scalars['Decimal']['output']>;
   points?: Maybe<Scalars['Int']['output']>;
   rank?: Maybe<Scalars['Int']['output']>;
-  shareValue?: Maybe<Scalars['BigInt']['output']>;
+  shareValue?: Maybe<Scalars['Decimal']['output']>;
   totalBets?: Maybe<Scalars['Int']['output']>;
   totalBetsBear?: Maybe<Scalars['Int']['output']>;
   totalBetsBull?: Maybe<Scalars['Int']['output']>;
   totalBetsClaimed?: Maybe<Scalars['Int']['output']>;
-  totalRewards?: Maybe<Scalars['Int']['output']>;
-  totalSTETH?: Maybe<Scalars['BigInt']['output']>;
-  totalSTETHBear?: Maybe<Scalars['BigInt']['output']>;
-  totalSTETHBull?: Maybe<Scalars['BigInt']['output']>;
-  totalSTETHClaimed?: Maybe<Scalars['BigInt']['output']>;
+  totalRewards?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETH?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHBear?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHBull?: Maybe<Scalars['Decimal']['output']>;
+  totalSTETHClaimed?: Maybe<Scalars['Decimal']['output']>;
   totalShareHolders?: Maybe<Scalars['Int']['output']>;
   totalSharesHeld?: Maybe<Scalars['Int']['output']>;
-  winRate?: Maybe<Scalars['BigInt']['output']>;
+  winRate?: Maybe<Scalars['Float']['output']>;
 };
 
 export type UserStatsSumOrderByAggregateInput = {
@@ -6557,48 +6455,48 @@ export type UserStatsSumOrderByAggregateInput = {
 };
 
 export type UserStatsUpdateInput = {
-  averageSTETH?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  averageSTETH?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   lastTransactionBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
-  netSTETH?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  netSTETH?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   points?: InputMaybe<IntFieldUpdateOperationsInput>;
   rank?: InputMaybe<IntFieldUpdateOperationsInput>;
-  shareValue?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  shareValue?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   totalBets?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalBetsBear?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalBetsBull?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalBetsClaimed?: InputMaybe<IntFieldUpdateOperationsInput>;
-  totalRewards?: InputMaybe<IntFieldUpdateOperationsInput>;
-  totalSTETH?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  totalSTETHBear?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  totalSTETHBull?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  totalSTETHClaimed?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  totalRewards?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETH?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETHBear?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETHBull?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETHClaimed?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   totalShareHolders?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalSharesHeld?: InputMaybe<IntFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutStatsNestedInput>;
-  winRate?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  winRate?: InputMaybe<FloatFieldUpdateOperationsInput>;
 };
 
 export type UserStatsUpdateManyMutationInput = {
-  averageSTETH?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  averageSTETH?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   lastTransactionBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
-  netSTETH?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  netSTETH?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   points?: InputMaybe<IntFieldUpdateOperationsInput>;
   rank?: InputMaybe<IntFieldUpdateOperationsInput>;
-  shareValue?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  shareValue?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   totalBets?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalBetsBear?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalBetsBull?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalBetsClaimed?: InputMaybe<IntFieldUpdateOperationsInput>;
-  totalRewards?: InputMaybe<IntFieldUpdateOperationsInput>;
-  totalSTETH?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  totalSTETHBear?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  totalSTETHBull?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  totalSTETHClaimed?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  totalRewards?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETH?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETHBear?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETHBull?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETHClaimed?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   totalShareHolders?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalSharesHeld?: InputMaybe<IntFieldUpdateOperationsInput>;
-  winRate?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  winRate?: InputMaybe<FloatFieldUpdateOperationsInput>;
 };
 
 export type UserStatsUpdateOneWithoutUserNestedInput = {
@@ -6617,25 +6515,25 @@ export type UserStatsUpdateToOneWithWhereWithoutUserInput = {
 };
 
 export type UserStatsUpdateWithoutUserInput = {
-  averageSTETH?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  averageSTETH?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   lastTransactionBlock?: InputMaybe<IntFieldUpdateOperationsInput>;
-  netSTETH?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  netSTETH?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   points?: InputMaybe<IntFieldUpdateOperationsInput>;
   rank?: InputMaybe<IntFieldUpdateOperationsInput>;
-  shareValue?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  shareValue?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   totalBets?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalBetsBear?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalBetsBull?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalBetsClaimed?: InputMaybe<IntFieldUpdateOperationsInput>;
-  totalRewards?: InputMaybe<IntFieldUpdateOperationsInput>;
-  totalSTETH?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  totalSTETHBear?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  totalSTETHBull?: InputMaybe<BigIntFieldUpdateOperationsInput>;
-  totalSTETHClaimed?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  totalRewards?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETH?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETHBear?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETHBull?: InputMaybe<DecimalFieldUpdateOperationsInput>;
+  totalSTETHClaimed?: InputMaybe<DecimalFieldUpdateOperationsInput>;
   totalShareHolders?: InputMaybe<IntFieldUpdateOperationsInput>;
   totalSharesHeld?: InputMaybe<IntFieldUpdateOperationsInput>;
-  winRate?: InputMaybe<BigIntFieldUpdateOperationsInput>;
+  winRate?: InputMaybe<FloatFieldUpdateOperationsInput>;
 };
 
 export type UserStatsUpsertWithoutUserInput = {
@@ -6648,61 +6546,60 @@ export type UserStatsWhereInput = {
   AND?: InputMaybe<Array<UserStatsWhereInput>>;
   NOT?: InputMaybe<Array<UserStatsWhereInput>>;
   OR?: InputMaybe<Array<UserStatsWhereInput>>;
-  averageSTETH?: InputMaybe<BigIntFilter>;
+  averageSTETH?: InputMaybe<DecimalFilter>;
   id?: InputMaybe<StringFilter>;
   lastTransactionBlock?: InputMaybe<IntFilter>;
-  netSTETH?: InputMaybe<BigIntFilter>;
+  netSTETH?: InputMaybe<DecimalFilter>;
   points?: InputMaybe<IntFilter>;
   rank?: InputMaybe<IntFilter>;
-  shareValue?: InputMaybe<BigIntFilter>;
+  shareValue?: InputMaybe<DecimalFilter>;
   totalBets?: InputMaybe<IntFilter>;
   totalBetsBear?: InputMaybe<IntFilter>;
   totalBetsBull?: InputMaybe<IntFilter>;
   totalBetsClaimed?: InputMaybe<IntFilter>;
-  totalRewards?: InputMaybe<IntFilter>;
-  totalSTETH?: InputMaybe<BigIntFilter>;
-  totalSTETHBear?: InputMaybe<BigIntFilter>;
-  totalSTETHBull?: InputMaybe<BigIntFilter>;
-  totalSTETHClaimed?: InputMaybe<BigIntFilter>;
+  totalRewards?: InputMaybe<DecimalFilter>;
+  totalSTETH?: InputMaybe<DecimalFilter>;
+  totalSTETHBear?: InputMaybe<DecimalFilter>;
+  totalSTETHBull?: InputMaybe<DecimalFilter>;
+  totalSTETHClaimed?: InputMaybe<DecimalFilter>;
   totalShareHolders?: InputMaybe<IntFilter>;
   totalSharesHeld?: InputMaybe<IntFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
-  winRate?: InputMaybe<BigIntFilter>;
+  winRate?: InputMaybe<FloatFilter>;
 };
 
 export type UserStatsWhereUniqueInput = {
   AND?: InputMaybe<Array<UserStatsWhereInput>>;
   NOT?: InputMaybe<Array<UserStatsWhereInput>>;
   OR?: InputMaybe<Array<UserStatsWhereInput>>;
-  averageSTETH?: InputMaybe<BigIntFilter>;
+  averageSTETH?: InputMaybe<DecimalFilter>;
   id?: InputMaybe<Scalars['String']['input']>;
   lastTransactionBlock?: InputMaybe<IntFilter>;
-  netSTETH?: InputMaybe<BigIntFilter>;
+  netSTETH?: InputMaybe<DecimalFilter>;
   points?: InputMaybe<IntFilter>;
   rank?: InputMaybe<IntFilter>;
-  shareValue?: InputMaybe<BigIntFilter>;
+  shareValue?: InputMaybe<DecimalFilter>;
   totalBets?: InputMaybe<IntFilter>;
   totalBetsBear?: InputMaybe<IntFilter>;
   totalBetsBull?: InputMaybe<IntFilter>;
   totalBetsClaimed?: InputMaybe<IntFilter>;
-  totalRewards?: InputMaybe<IntFilter>;
-  totalSTETH?: InputMaybe<BigIntFilter>;
-  totalSTETHBear?: InputMaybe<BigIntFilter>;
-  totalSTETHBull?: InputMaybe<BigIntFilter>;
-  totalSTETHClaimed?: InputMaybe<BigIntFilter>;
+  totalRewards?: InputMaybe<DecimalFilter>;
+  totalSTETH?: InputMaybe<DecimalFilter>;
+  totalSTETHBear?: InputMaybe<DecimalFilter>;
+  totalSTETHBull?: InputMaybe<DecimalFilter>;
+  totalSTETHClaimed?: InputMaybe<DecimalFilter>;
   totalShareHolders?: InputMaybe<IntFilter>;
   totalSharesHeld?: InputMaybe<IntFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<Scalars['String']['input']>;
-  winRate?: InputMaybe<BigIntFilter>;
+  winRate?: InputMaybe<FloatFilter>;
 };
 
 export type UserUpdateInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
   address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  allShares?: InputMaybe<ShareUpdateManyWithoutUserNestedInput>;
   bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
   boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -6804,16 +6701,6 @@ export type UserUpdateOneRequiredWithoutStatsNestedInput = {
   upsert?: InputMaybe<UserUpsertWithoutStatsInput>;
 };
 
-export type UserUpdateOneWithoutAllSharesNestedInput = {
-  connect?: InputMaybe<UserWhereUniqueInput>;
-  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutAllSharesInput>;
-  create?: InputMaybe<UserCreateWithoutAllSharesInput>;
-  delete?: InputMaybe<UserWhereInput>;
-  disconnect?: InputMaybe<UserWhereInput>;
-  update?: InputMaybe<UserUpdateToOneWithWhereWithoutAllSharesInput>;
-  upsert?: InputMaybe<UserUpsertWithoutAllSharesInput>;
-};
-
 export type UserUpdateToOneWithWhereWithoutAccountsInput = {
   data: UserUpdateWithoutAccountsInput;
   where?: InputMaybe<UserWhereInput>;
@@ -6821,11 +6708,6 @@ export type UserUpdateToOneWithWhereWithoutAccountsInput = {
 
 export type UserUpdateToOneWithWhereWithoutActivityLogsInput = {
   data: UserUpdateWithoutActivityLogsInput;
-  where?: InputMaybe<UserWhereInput>;
-};
-
-export type UserUpdateToOneWithWhereWithoutAllSharesInput = {
-  data: UserUpdateWithoutAllSharesInput;
   where?: InputMaybe<UserWhereInput>;
 };
 
@@ -6867,7 +6749,6 @@ export type UserUpdateToOneWithWhereWithoutStatsInput = {
 export type UserUpdateWithoutAccountsInput = {
   activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
   address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  allShares?: InputMaybe<ShareUpdateManyWithoutUserNestedInput>;
   bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
   boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -6887,28 +6768,6 @@ export type UserUpdateWithoutAccountsInput = {
 
 export type UserUpdateWithoutActivityLogsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
-  address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  allShares?: InputMaybe<ShareUpdateManyWithoutUserNestedInput>;
-  bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
-  boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
-  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
-  id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
-  rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
-  sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
-  soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
-  stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
-  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
-  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-};
-
-export type UserUpdateWithoutAllSharesInput = {
-  accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
-  activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
   address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
   boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
@@ -6931,7 +6790,6 @@ export type UserUpdateWithoutBetsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
   address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  allShares?: InputMaybe<ShareUpdateManyWithoutUserNestedInput>;
   boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -6952,7 +6810,6 @@ export type UserUpdateWithoutBoughtSharesInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
   address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  allShares?: InputMaybe<ShareUpdateManyWithoutUserNestedInput>;
   bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
@@ -6973,7 +6830,6 @@ export type UserUpdateWithoutReferralsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
   address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  allShares?: InputMaybe<ShareUpdateManyWithoutUserNestedInput>;
   bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
   boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -6994,7 +6850,6 @@ export type UserUpdateWithoutRewardsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
   address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  allShares?: InputMaybe<ShareUpdateManyWithoutUserNestedInput>;
   bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
   boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -7015,7 +6870,6 @@ export type UserUpdateWithoutSessionsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
   address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  allShares?: InputMaybe<ShareUpdateManyWithoutUserNestedInput>;
   bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
   boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -7036,7 +6890,6 @@ export type UserUpdateWithoutSoldSharesInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
   address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  allShares?: InputMaybe<ShareUpdateManyWithoutUserNestedInput>;
   bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
   boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -7057,7 +6910,6 @@ export type UserUpdateWithoutStatsInput = {
   accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
   activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
   address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
-  allShares?: InputMaybe<ShareUpdateManyWithoutUserNestedInput>;
   bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
   boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
   createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
@@ -7083,12 +6935,6 @@ export type UserUpsertWithoutAccountsInput = {
 export type UserUpsertWithoutActivityLogsInput = {
   create: UserCreateWithoutActivityLogsInput;
   update: UserUpdateWithoutActivityLogsInput;
-  where?: InputMaybe<UserWhereInput>;
-};
-
-export type UserUpsertWithoutAllSharesInput = {
-  create: UserCreateWithoutAllSharesInput;
-  update: UserUpdateWithoutAllSharesInput;
   where?: InputMaybe<UserWhereInput>;
 };
 
@@ -7141,7 +6987,6 @@ export type UserWhereInput = {
   accounts?: InputMaybe<AccountListRelationFilter>;
   activityLogs?: InputMaybe<ActivityLogListRelationFilter>;
   address?: InputMaybe<StringNullableFilter>;
-  allShares?: InputMaybe<ShareListRelationFilter>;
   bets?: InputMaybe<BetListRelationFilter>;
   boughtShares?: InputMaybe<ShareListRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
@@ -7166,7 +7011,6 @@ export type UserWhereUniqueInput = {
   accounts?: InputMaybe<AccountListRelationFilter>;
   activityLogs?: InputMaybe<ActivityLogListRelationFilter>;
   address?: InputMaybe<Scalars['String']['input']>;
-  allShares?: InputMaybe<ShareListRelationFilter>;
   bets?: InputMaybe<BetListRelationFilter>;
   boughtShares?: InputMaybe<ShareListRelationFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
@@ -7322,7 +7166,7 @@ export type VerificationTokenWhereUniqueInput = {
 export type DashboardDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DashboardDataQuery = { __typename?: 'Query', rounds: Array<{ __typename?: 'Round', id: string, epoch: number, closePrice: any, lockPrice: any }>, topTraders: Array<{ __typename?: 'User', id: string, image?: string | null, username?: string | null, address?: string | null, stats?: { __typename?: 'UserStats', netSTETH: any, winRate: any, totalBetsClaimed: number, totalBets: number } | null }> };
+export type DashboardDataQuery = { __typename?: 'Query', rounds: Array<{ __typename?: 'Round', id: string, epoch: number, closePrice: any, lockPrice: any }>, topTraders: Array<{ __typename?: 'User', id: string, image?: string | null, username?: string | null, address?: string | null, stats?: { __typename?: 'UserStats', netSTETH: any, winRate: number, totalBetsClaimed: number, totalBets: number } | null }> };
 
 export type ShareDataQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -7334,7 +7178,7 @@ export type PortfolioDataQueryVariables = Exact<{
 }>;
 
 
-export type PortfolioDataQuery = { __typename?: 'Query', portfolio?: { __typename?: 'User', id: string, username?: string | null, image?: string | null, address?: string | null, stats?: { __typename?: 'UserStats', id: string, lastTransactionBlock: number, totalBets: number, totalBetsBull: number, totalBetsBear: number, totalSTETH: any, totalSTETHBull: any, totalSTETHBear: any, totalBetsClaimed: number, totalSTETHClaimed: any, winRate: any, averageSTETH: any, netSTETH: any, totalSharesHeld: number, totalShareHolders: number, totalRewards: number, shareValue: any, rank: number, points: number } | null } | null, shares: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }>, bets: Array<{ __typename?: 'Bet', id: string, position: BetPosition, round: { __typename?: 'Round', id: string, epoch: number }, user: { __typename?: 'User', id: string, stats?: { __typename?: 'UserStats', id: string, netSTETH: any } | null } }>, holders: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }>, holding: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }>, rewards: Array<{ __typename?: 'Reward', id: string, amount: any, createdAt: any, user: { __typename?: 'User', id: string, image?: string | null } }> };
+export type PortfolioDataQuery = { __typename?: 'Query', portfolio?: { __typename?: 'User', id: string, username?: string | null, image?: string | null, address?: string | null, stats?: { __typename?: 'UserStats', id: string, lastTransactionBlock: number, totalBets: number, totalBetsBull: number, totalBetsBear: number, totalSTETH: any, totalSTETHBull: any, totalSTETHBear: any, totalBetsClaimed: number, totalSTETHClaimed: any, winRate: number, averageSTETH: any, netSTETH: any, totalSharesHeld: number, totalShareHolders: number, totalRewards: any, shareValue: any, rank: number, points: number } | null } | null, shares: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }>, bets: Array<{ __typename?: 'Bet', id: string, position: BetPosition, round: { __typename?: 'Round', id: string, epoch: number }, user: { __typename?: 'User', id: string, stats?: { __typename?: 'UserStats', id: string, netSTETH: any } | null } }>, holders: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }>, holding: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }>, rewards: Array<{ __typename?: 'Reward', id: string, amount: any, createdAt: any, user: { __typename?: 'User', id: string, image?: string | null } }> };
 
 export type ReferralDataQueryVariables = Exact<{
   userId?: InputMaybe<Scalars['String']['input']>;

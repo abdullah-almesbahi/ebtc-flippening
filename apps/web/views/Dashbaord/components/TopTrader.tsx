@@ -2,7 +2,7 @@ import TopTraderPlaceholder from './TopTraderPlacehoder'
 import TraderCard from './TraderCard'
 import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
-export default function TopTrader({ data }: { data: DashboardDataQuery['topTraders'] }): JSX.Element {
+export default function TopTrader({ data }: { data?: DashboardDataQuery['topTraders'] }): JSX.Element {
   if (!data) return <TopTraderPlaceholder />
 
   return (

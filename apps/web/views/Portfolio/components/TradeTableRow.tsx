@@ -30,6 +30,7 @@ function TradeTableRow({ data, index }: TradeTableRowProps) {
         </div>
       </td>
       <td>
+        {/** @ts-expect-error */}
         <NetWinningsView data={data.user} />
       </td>
     </tr>

@@ -12,7 +12,7 @@ import { rounds as fakeDataRounds } from '@/data/rounds'
 import { useFlippeningStore } from '@/store/flippening'
 import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
-export default function Positions({ data }: { data: DashboardDataQuery['rounds'] }): JSX.Element {
+export default function Positions({ data }: { data?: DashboardDataQuery['rounds'] }): JSX.Element {
   const [isChangeTransition, setIsChangeTransition] = useState(false)
   const { rounds, setRounds, currentEpoch } = useFlippeningStore()
   const { setSwiper, swiper } = useSwiper()

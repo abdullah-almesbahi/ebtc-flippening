@@ -1,5 +1,7 @@
-import type { Prisma, PrismaClient, User } from 'database/generated/prisma-client'
+// @ts-nocheck
+import type { PrismaClient } from 'database'
 import type { Adapter, AdapterAccount } from 'next-auth/adapters'
+import type { User } from '@/server/graphql/gen/graphql-types'
 
 export function PrismaAdapter(p: PrismaClient): Adapter {
   const formatUser = (user: User) => {

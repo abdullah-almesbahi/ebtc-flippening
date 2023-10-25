@@ -4,11 +4,6 @@ import { faker } from '@faker-js/faker'
 
 const NUM_RECORDS = 10
 const blockOptions = { min: 10000, max: 100000 }
-const bigIntOptions = {} // t between 0.002 and 100 ETH
-// const bigIntOptions = {
-//   min: 0.002 * 10 ** 18,
-//   max: 100 * 10 ** 18,
-// } // t between 0.002 and 100 ETH
 function generateDecimalInWei() {
   // Generate a float between 0.002 and 100
   const floatVal = faker.number.float({
@@ -28,6 +23,7 @@ function generateDecimalInWei() {
   try {
     // Seeding Users
     const users = []
+
     for (let i = 0; i < NUM_RECORDS; i++) {
       const fullName = faker.person.fullName()
       users.push({

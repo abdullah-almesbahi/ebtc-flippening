@@ -4,6 +4,8 @@ import Countdown from 'react-countdown'
 import type { PortfolioDataQuery } from '@/server/graphql/gen/graphql-types'
 import SharesPlaceholder from '@/views/Shares/components/SharesPlacehoder'
 import { timeAgo } from '@/utils/timeAgo'
+import { rewardTokenSymbol } from '@/utils/constants'
+import { weiToEth } from '@/utils/format'
 
 export default function RewardsTab({ data }: { data?: PortfolioDataQuery['rewards'] }): JSX.Element {
   const [countOfItemsShown, setCountOfItemsShown] = useState(1)
@@ -25,15 +27,19 @@ export default function RewardsTab({ data }: { data?: PortfolioDataQuery['reward
     )
   }
 
-  const rewardsInfo = ({ item, index }: { item: PortfolioDataQuery['rewards'][0] }) =>
+  const rewardsInfo = ({ item, index }: { item: PortfolioDataQuery['rewards'][0]; index: number }) =>
     index < countOfItemsShown * 6 ? (
       <li className="box-recent-post" key={index + 1}>
         <div className="">
-          <Image alt="image" className="rounded m-2" height={50} src={item?.user.image} width={50} />
+          {item?.user.image ? (
+            <Image alt="image" className="rounded m-2" height={50} src={item?.user.image} width={50} />
+          ) : null}
         </div>
         <div className="d-flex justify-content-between w-100">
           <div className="box-content">
-            <p className="m-0">got {item?.amount} fiBTC rewards</p>
+            <p className="m-0">
+              got {weiToEth(item?.amount).toString()} {rewardTokenSymbol} rewards
+            </p>
           </div>
           <div className="box-content">
             <p className="m-0">{timeAgo(item?.createdAt)}</p>

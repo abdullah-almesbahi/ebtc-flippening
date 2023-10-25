@@ -19,7 +19,7 @@ export default function LeaderboardRow({ data, index }: LeaderboardRowProps): JS
       <td>
         <div className="d-flex align-items-center">
           <div className="media ">
-            <Image alt="Images" height={80} src={data.image} width={80} />
+            {data.image ? <Image alt="Images" height={80} src={data.image} width={80} /> : null}
           </div>
           <div className="infor-item flex column1 align-items-center">
             <div className="content-collection">

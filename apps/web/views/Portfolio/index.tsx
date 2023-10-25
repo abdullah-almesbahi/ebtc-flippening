@@ -7,6 +7,8 @@ import HoldersTab from './components/HoldersTab'
 import HoldingTab from './components/HoldingTab'
 import RewardsTab from './components/RewardsTab'
 import { usePortfolioDataQuery } from '@/server/graphql/gen/graphql-types'
+import { weiToEth } from '@/utils/format'
+import { rewardTokenSymbol } from '@/utils/constants'
 
 const tabs = ['SHARES', 'TRADES', 'HOLDERS', 'HOLDING', 'REWARDS']
 
@@ -41,6 +43,8 @@ export default function Portfolio({ address }: { address?: string }): JSX.Elemen
     }
   }
 
+  console.log('eee', typeof data?.portfolio?.stats?.totalRewards)
+
   return (
     <section className="tf-section authors">
       <div className="ibthemes-container">
@@ -64,7 +68,9 @@ export default function Portfolio({ address }: { address?: string }): JSX.Elemen
                 {data?.portfolio?.username ? <h2 className="title">@{data?.portfolio?.username}</h2> : null}
                 <p className="content">Holding: {data?.portfolio?.stats?.totalSharesHeld}</p>
                 <p className="content">Holders: {data?.portfolio?.stats?.totalShareHolders}</p>
-                <p className="content">Rewards: {data?.portfolio?.stats?.totalRewards}</p>
+                <p className="content">
+                  Rewards: {weiToEth(data?.portfolio?.stats?.totalRewards).toString()} {rewardTokenSymbol}
+                </p>
                 <form>
                   <input className="inputcopy" defaultValue={data?.portfolio?.address || ''} readOnly type="text" />
                   <button className="btn-copycode" type="button">
@@ -73,8 +79,10 @@ export default function Portfolio({ address }: { address?: string }): JSX.Elemen
                 </form>
               </div>
               <div className="profile-header">
-                <p className="content">Share Value: {data?.portfolio?.stats?.shareValue}</p>
-                <p className="content">Claimed rewards: {data?.portfolio?.stats?.totalRewards}</p>
+                <p className="content">Share Value: {weiToEth(data?.portfolio?.stats?.shareValue).toString()} ETH</p>
+                <p className="content">
+                  Claimed rewards: {weiToEth(data?.portfolio?.stats?.totalRewards).toString()} {rewardTokenSymbol}
+                </p>
                 <p className="content">Points: {data?.portfolio?.stats?.points}</p>
                 <p className="content">Shares: 1</p>
                 <p className="content">Market price: 666</p>
