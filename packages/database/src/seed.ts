@@ -3,19 +3,41 @@ import { prisma } from '.'
 import { faker } from '@faker-js/faker'
 
 const NUM_RECORDS = 10
+const blockOptions = { min: 10000, max: 100000 }
+const bigIntOptions = {} // t between 0.002 and 100 ETH
+// const bigIntOptions = {
+//   min: 0.002 * 10 ** 18,
+//   max: 100 * 10 ** 18,
+// } // t between 0.002 and 100 ETH
+function generateDecimalInWei() {
+  // Generate a float between 0.002 and 100
+  const floatVal = faker.number.float({
+    min: 0.002,
+    max: 100,
+    precision: 0.001, // This ensures values like 0.002 can be generated
+  })
+
+  // Convert the float value from ETH to wei (1 ETH = 10^18 wei)
+  const weiVal = BigInt(Math.round(floatVal * 1e18))
+
+  // Return the value in wei as a string
+  return parseFloat(weiVal.toString()).toFixed(0)
+}
 
 ;(async () => {
   try {
     // Seeding Users
     const users = []
     for (let i = 0; i < NUM_RECORDS; i++) {
+      const fullName = faker.person.fullName()
       users.push({
         id: faker.string.uuid(),
-        name: faker.internet.displayName(),
+        name: fullName,
         email: faker.internet.email(),
+        emailVerified: faker.date.recent(),
         image: faker.image.avatar(),
-        username: faker.internet.userName(),
-        address: faker.finance.bitcoinAddress(),
+        username: faker.internet.userName({ firstName: fullName.split(' ')[0], lastName: fullName.split(' ')[1] }),
+        address: faker.finance.ethereumAddress(),
         createdAt: faker.date.recent(),
         updatedAt: faker.date.recent(),
       })
@@ -25,24 +47,26 @@ const NUM_RECORDS = 10
     // User stats
     const userStats = users.map((user) => ({
       userId: user.id,
+      lastTransactionBlock: faker.number.int(blockOptions),
       totalBets: faker.number.int({ min: 0, max: 1000 }),
       totalBetsBull: faker.number.int({ min: 0, max: 1000 }),
       totalBetsBear: faker.number.int({ min: 0, max: 1000 }),
-      totalSTETH: faker.number.bigInt(),
-      totalSTETHBull: faker.number.bigInt(),
-      totalSTETHBear: faker.number.bigInt(),
+      totalSTETH: generateDecimalInWei(),
+      totalSTETHBull: generateDecimalInWei(),
+      totalSTETHBear: generateDecimalInWei(),
       totalBetsClaimed: faker.number.int({ min: 0, max: 1000 }),
-      totalSTETHClaimed: faker.number.bigInt(),
-      winRate: faker.number.bigInt(),
-      averageSTETH: faker.number.bigInt(),
-      netSTETH: faker.number.bigInt(),
+      totalSTETHClaimed: generateDecimalInWei(),
+      winRate: faker.number.float({ min: 0, max: 1 }),
+      averageSTETH: generateDecimalInWei(),
+      netSTETH: generateDecimalInWei(),
       totalSharesHeld: faker.number.int({ min: 0, max: 1000 }),
       totalShareHolders: faker.number.int({ min: 0, max: 1000 }),
-      totalRewards: faker.number.bigInt(),
-      shareValue: faker.number.bigInt(),
+      totalRewards: generateDecimalInWei(),
+      shareValue: generateDecimalInWei(),
       rank: faker.number.int({ min: 0, max: 1000 }),
       points: faker.number.int({ min: 0, max: 1000 }),
     }))
+    console.log('userStats', userStats)
     await prisma.userStats.createMany({ data: userStats })
 
     // Seeding Account
@@ -73,50 +97,88 @@ const NUM_RECORDS = 10
     // Seeding Rounds
     const rounds = Array.from({ length: NUM_RECORDS }).map(() => ({
       id: faker.string.uuid(),
-      epoch: faker.number.int({ min: 0, max: 1000 }),
+      epoch: faker.number.int({ min: 10000, max: 100000 }),
       position: faker.helpers.arrayElement(['BULL', 'BEAR']),
       failed: faker.datatype.boolean(),
       startAt: faker.date.recent(),
-      startBlock: faker.number.int({ min: 0, max: 1000 }),
-      startHash: faker.finance.bitcoinAddress(),
+      startBlock: faker.number.int(blockOptions),
+      startHash: faker.string.sample(64),
       lockAt: faker.date.future(),
-      lockBlock: faker.number.int({ min: 0, max: 1000 }),
-      lockHash: faker.finance.bitcoinAddress(),
-      lockPrice: faker.number.bigInt(),
+      lockBlock: faker.number.int(blockOptions),
+      lockHash: faker.string.sample(64),
+      lockPrice: generateDecimalInWei(),
       lockRoundId: faker.string.uuid(),
       closeAt: faker.date.future(),
-      closeBlock: faker.number.int({ min: 0, max: 1000 }),
-      closeHash: faker.finance.bitcoinAddress(),
-      closePrice: faker.number.bigInt(),
+      closeBlock: faker.number.int(blockOptions),
+      closeHash: faker.string.sample(64),
+      closePrice: generateDecimalInWei(),
       closeRoundId: faker.string.uuid(),
       totalBets: faker.number.int({ min: 0, max: 1000 }),
-      totalAmount: faker.number.bigInt(),
+      totalAmount: generateDecimalInWei(),
       bullBets: faker.number.int({ min: 0, max: 1000 }),
-      bullAmount: faker.number.bigInt(),
+      bullAmount: generateDecimalInWei(),
       bearBets: faker.number.int({ min: 0, max: 1000 }),
-      bearAmount: faker.number.bigInt(),
+      bearAmount: generateDecimalInWei(),
     }))
     await prisma.round.createMany({ data: rounds })
 
+    // model Bet {
+    //   id              String      @id @default(cuid())
+    //   hash            String?     @unique // Transaction hash
+    //   block           Int?        @unique // Block number
+    //   amount          BigInt // Amount of stSTETH
+    //   position        BetPosition // Position of the bet
+    //   claimed         Boolean // Whether the bet is claimed
+    //   claimedAt       DateTime? // Date of the claim
+    //   claimedBlock    Int? // Block number of the claim
+    //   claimedHash     String? // Transaction hash of the claim
+    //   claimedSTETH    BigInt? // Amount of stSTETH claimed
+    //   claimedNetSTETH BigInt? // Net stSTETH claimed
+    //   outcome         String? // can be "win", "loss", or "ongoing"
+    //   pnl             BigInt? // Profit and loss
+    //   openedAt        DateTime    @default(now())
+    //   updatedAt       DateTime    @updatedAt
+    //   closedAt        DateTime? // Date of the close
+    //   userId          String
+    //   roundId         String
+    //   user            User        @relation(fields: [userId], references: [id])
+    //   round           Round       @relation(fields: [roundId], references: [id])
+    // }
+
     // Seeding Bets
-    const bets = users.map((user, index) => ({
-      userId: user.id,
-      roundId: rounds[index].id,
-      hash: faker.finance.bitcoinAddress(),
-      amount: faker.number.bigInt(),
-      position: rounds[index].position,
-      claimed: faker.datatype.boolean(),
-      openedAt: faker.date.recent(),
-      updatedAt: faker.date.recent(),
-    }))
+    const bets = users.map((user, index) => {
+      const claimed = faker.datatype.boolean()
+      return {
+        id: faker.string.uuid(),
+        hash: faker.string.sample(64),
+        block: faker.number.int(blockOptions),
+        amount: generateDecimalInWei(),
+        position: rounds[index].position,
+        claimed: claimed,
+        claimedAt: claimed ? faker.date.recent() : null,
+        claimedBlock: claimed ? faker.number.int(blockOptions) : null,
+        claimedHash: claimed ? faker.string.sample(64) : null,
+        claimedSTETH: claimed ? generateDecimalInWei() : null,
+        claimedNetSTETH: claimed ? generateDecimalInWei() : null,
+        outcome: faker.helpers.arrayElement(['win', 'loss', 'ongoing']),
+        pnl: generateDecimalInWei(),
+        openedAt: faker.date.recent(),
+        updatedAt: faker.date.recent(),
+        closedAt: faker.date.recent(),
+        userId: user.id,
+        roundId: rounds[index].id,
+      }
+    })
+
     await prisma.bet.createMany({ data: bets })
 
     // Seeding Reward
     const rewards = users.map((user) => ({
       userId: user.id,
       points: faker.number.int({ min: 0, max: 1000 }),
-      amount: faker.number.bigInt(),
-      epoch: faker.number.int({ min: 0, max: 1000 }),
+      amount: generateDecimalInWei(),
+      block: faker.number.int(blockOptions),
+      hash: faker.string.sample(64),
       createdAt: faker.date.recent(),
     }))
     await prisma.reward.createMany({ data: rewards })
@@ -134,8 +196,8 @@ const NUM_RECORDS = 10
       const isBuy = faker.datatype.boolean()
       return {
         isBuy: isBuy,
-        shareAmount: faker.number.bigInt(),
-        stethAmount: faker.number.bigInt(),
+        shareAmount: generateDecimalInWei(),
+        stethAmount: generateDecimalInWei(),
         createdAt: faker.date.recent(),
         traderId: isBuy ? user.id : users[(index + 1) % NUM_RECORDS].id, // For demonstration
         subjectId: isBuy ? users[(index + 1) % NUM_RECORDS].id : user.id, // For demonstration

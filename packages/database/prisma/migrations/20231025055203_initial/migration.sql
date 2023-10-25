@@ -64,9 +64,9 @@ CREATE TABLE "UserStats" (
     "totalSTETH" BIGINT NOT NULL DEFAULT 0,
     "totalSTETHBull" BIGINT NOT NULL DEFAULT 0,
     "totalSTETHBear" BIGINT NOT NULL DEFAULT 0,
-    "totalBetsClaimed" INTEGER NOT NULL DEFAULT 0,
     "totalSTETHClaimed" BIGINT NOT NULL DEFAULT 0,
-    "winRate" BIGINT NOT NULL DEFAULT 0,
+    "totalBetsClaimed" INTEGER NOT NULL DEFAULT 0,
+    "winRate" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "averageSTETH" BIGINT NOT NULL DEFAULT 0,
     "netSTETH" BIGINT NOT NULL DEFAULT 0,
     "totalSharesHeld" INTEGER NOT NULL DEFAULT 0,
@@ -139,7 +139,8 @@ CREATE TABLE "Reward" (
     "userId" TEXT NOT NULL,
     "points" INTEGER NOT NULL,
     "amount" BIGINT NOT NULL,
-    "epoch" INTEGER NOT NULL,
+    "hash" TEXT,
+    "block" INTEGER,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Reward_pkey" PRIMARY KEY ("id")
@@ -164,7 +165,6 @@ CREATE TABLE "Share" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "traderId" TEXT NOT NULL,
     "subjectId" TEXT NOT NULL,
-    "userId" TEXT,
 
     CONSTRAINT "Share_pkey" PRIMARY KEY ("id")
 );
@@ -209,6 +209,12 @@ CREATE UNIQUE INDEX "Bet_hash_key" ON "Bet"("hash");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Bet_block_key" ON "Bet"("block");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Reward_hash_key" ON "Reward"("hash");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Reward_block_key" ON "Reward"("block");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Referral_referralCode_key" ON "Referral"("referralCode");
