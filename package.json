@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "postinstall": "dotenv -- turbo run generate",
+    "start": "dotenv -- turbo run start",
     "build": "dotenv -- turbo run build",
     "dev": "dotenv -- turbo run dev",
     "lint": "turbo run lint",
