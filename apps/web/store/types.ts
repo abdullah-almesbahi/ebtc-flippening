@@ -1,3 +1,5 @@
+import type { Round } from '@/server/graphql/gen/graphql-types'
+
 export enum BetPosition {
   BULL = 'Bull',
   BEAR = 'Bear',
@@ -37,101 +39,6 @@ export interface LeaderboardFilter {
   timePeriod?: LeaderboardFilterTimePeriod
 }
 
-export interface User {
-  id: string
-  address: string
-  username: string
-  avatar: string
-  createdAt: number
-  updatedAt: number
-  block: number
-  totalBets: number
-  totalBetsBull: number
-  totalBetsBear: number
-  totalSTETH: number
-  totalSTETHBull: number
-  totalSTETHBear: number
-  totalBetsClaimed: number
-  totalSTETHClaimed: number
-  winRate: number
-  averageSTETH: number
-  netSTETH: number
-  bets?: Bet[]
-}
-
-export interface Bet {
-  id?: string
-  hash?: string
-  amount: number
-  position: BetPosition
-  claimed: boolean
-  claimedAt: number
-  claimedBlock: number
-  claimedHash: string
-  claimedBNB: number
-  claimedNetBNB: number
-  createdAt: number
-  updatedAt: number
-  user?: User
-  round?: Round
-}
-
-export interface Round {
-  id: string
-  epoch: number
-  position: BetPosition
-  failed: boolean
-  startAt: number
-  startBlock: number
-  startHash: string
-  lockAt: number
-  lockBlock: number
-  lockHash: string
-  lockPrice: number
-  lockRoundId: string
-  closeAt: number
-  closeBlock: number
-  closeHash: string
-  closePrice: number
-  closeRoundId: string
-  totalBets: number
-  totalAmount: number
-  bullBets: number
-  bullAmount: number
-  bearBets: number
-  bearAmount: number
-  bets?: Bet[]
-}
-
-export interface Reward {
-  pfpUrl: string
-  createdAt: number
-  rewardsAmount: string
-}
-export interface Holders {
-  username: string
-  address: string
-  pfpUrl: string
-  shareAmount: string
-  createdAt: number
-}
-
-interface TraderSubject {
-  address: string
-  pfpUrl: string
-  username: string
-  name: string
-}
-
-export interface Share {
-  trader: TraderSubject
-  subject: TraderSubject
-  isBuy: boolean
-  shareAmount: string
-  ethAmount: string
-  createdAt: number
-}
-
 export interface NodeRound {
   epoch: number
   startTimestamp: number | null
@@ -162,25 +69,18 @@ export interface FlippeningStore {
   intervalSeconds: number
   minBetAmount: string
   bufferSeconds: number
-  history: Bet[]
-  holders: Holders[]
-  holding: Holders[]
-  rewards: Reward[]
-  shares: Share[]
   totalHistory: number
   currentHistoryPage: number
   hasHistoryLoaded: boolean
   ledgers?: LedgerData
   claimableStatuses: Record<string, boolean>
-  leaderboard: {
-    selectedAddress: null | string
-    loadingState: string
-    filters: LeaderboardFilter
-    skip: number
-    hasMoreResults: boolean
-    addressResults: Record<string, null | User>
-    results: User[]
-  }
   setRounds: (data: NodeRound[]) => void
+  resetRounds: () => void
+}
+
+export interface RoundStore {
+  rounds: Round[]
+  loading: string
+  setRounds: (data: Round[]) => void
   resetRounds: () => void
 }

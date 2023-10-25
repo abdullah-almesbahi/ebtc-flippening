@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { navigation } from '@/data/navigation'
 import useMatchMedia from '@/hooks/useMatchMedia'
 import isActiveMenu from '@/utils/isActiveMenu'
+import { navigation } from '@/utils/constants'
 
 export default function Navigation(): JSX.Element {
   const path = usePathname()

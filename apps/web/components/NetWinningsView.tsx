@@ -1,16 +1,17 @@
-import type { User } from '@/store/types'
+import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
+import { formatBigNumber, weiToEth } from '@/utils/format'
 
 interface NetWinningsViewProps {
-  data?: User
+  data?: DashboardDataQuery['topTraders'][0]
 }
 
 export default function NetWinningsView({ data }: NetWinningsViewProps): JSX.Element {
   if (!data) return <></>
-  const netWinnings = `${data?.netSTETH > 0 ? '+' : ''}${data?.netSTETH?.toLocaleString(undefined, {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
-  })}`
-  const isPositive = data.netSTETH > 0
+
+  const net = weiToEth(data.stats?.netSTETH)
+
+  const netWinnings = `${net.isGreaterThan(0) ? '+' : ''}${formatBigNumber(net)}`
+  const isPositive = net.isGreaterThan(0)
   const tokenPrice = 2.0
   return (
     <>
@@ -18,13 +19,7 @@ export default function NetWinningsView({ data }: NetWinningsViewProps): JSX.Ele
         <span className={`fs-6 fw-bold ${isPositive ? 'text-success' : 'text-danger'}`}>{netWinnings}</span>
       </div>
       <div className=" fs-6 text-end">
-        <span className="text-xs text-end">
-          {' '}
-          {`~$${(tokenPrice * data?.netSTETH).toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}`}
-        </span>
+        <span className="text-xs text-end"> {`~$${formatBigNumber(net.multipliedBy(tokenPrice))}`}</span>
       </div>
     </>
   )

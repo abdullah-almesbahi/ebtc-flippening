@@ -1,3 +1,5 @@
+export const rewardTokenSymbol = 'fiBTC'
+
 interface NavigationType {
   id: number
   name: string

@@ -4,10 +4,10 @@ import CardHeader from './RoundCard/CardHeader'
 import SetPositionCard from './SetPositionCard'
 import Card from './Card'
 import { BetPosition } from '@/store/types'
-import type { NodeRound } from '@/store/types'
+import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
 interface OpenRoundCardProps {
-  round: NodeRound
+  data: DashboardDataQuery['rounds'][0]
 }
 
 interface StateType {
@@ -15,7 +15,7 @@ interface StateType {
   position: BetPosition
 }
 
-export default function OpenRoundCard({ round }: OpenRoundCardProps): JSX.Element {
+export default function OpenRoundCard({ data }: OpenRoundCardProps): JSX.Element {
   const [state, setState] = useState<StateType>({
     isSettingPosition: false,
     position: BetPosition.BULL,
@@ -51,7 +51,7 @@ export default function OpenRoundCard({ round }: OpenRoundCardProps): JSX.Elemen
     <CardFlip height="300px" isFlipped={isSettingPosition}>
       <Card>
         <div className="d-flex flex-column">
-          <CardHeader epoch={round.epoch} icon={<i className="fa fa-play text-default" />} status="next" title="Next" />
+          <CardHeader epoch={data.epoch} icon={<i className="fa fa-play text-default" />} status="next" title="Next" />
 
           <div className="p-4">
             <div className="text-grey-50 mt-20 fs-7">PLACE YOUR BET</div>
@@ -80,7 +80,7 @@ export default function OpenRoundCard({ round }: OpenRoundCardProps): JSX.Elemen
       </Card>
       <Card>
         <SetPositionCard
-          epoch={round.epoch}
+          epoch={data.epoch}
           onBack={handleBack}
           onSuccess={handleSuccess}
           position={position}

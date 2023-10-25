@@ -3,33 +3,32 @@ import ExpiredRoundCard from '../ExpiredRoundCard'
 import LiveRoundCard from '../LiveRoundCard'
 import OpenRoundCard from '../OpenRoundCard'
 import SoonRoundCard from '../SoonRoundCard'
-import { type NodeRound } from '@/store/types'
-import { useFlippeningStore } from '@/store/flippening'
+import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
 interface RoundCardProps {
-  round: NodeRound
+  data: DashboardDataQuery['rounds'][0]
   isActive?: boolean
+  currentEpoch: number
 }
 
-export default function RoundCard({ round }: RoundCardProps): JSX.Element {
-  const { epoch, lockPrice, closePrice } = round
-  const { currentEpoch } = useFlippeningStore()
+export default function RoundCard({ data, currentEpoch }: RoundCardProps): JSX.Element {
+  const { epoch, lockPrice, closePrice } = data
 
   // Fake future rounds
   if (epoch > currentEpoch) {
-    return <SoonRoundCard round={round} />
+    return <SoonRoundCard data={data} />
   }
 
   // Next (open) round
-  if (epoch === currentEpoch && lockPrice === null) {
-    return <OpenRoundCard round={round} />
+  if (epoch === currentEpoch && lockPrice === '0') {
+    return <OpenRoundCard data={data} />
   }
 
   // Live round
-  if (closePrice === null && epoch === currentEpoch - 1) {
-    return <LiveRoundCard round={round} />
+  if (closePrice === '0' && epoch === currentEpoch - 1) {
+    return <LiveRoundCard data={data} />
   }
 
   // Past rounds
-  return <ExpiredRoundCard round={round} />
+  return <ExpiredRoundCard data={data} />
 }

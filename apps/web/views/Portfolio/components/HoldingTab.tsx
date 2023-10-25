@@ -1,39 +1,20 @@
 'use client'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { holding as fakeData } from '@/data/holding'
-import { useFlippeningStore } from '@/store/flippening'
+import { useState } from 'react'
+import HolderRow from './HolderRow'
+import type { PortfolioDataQuery } from '@/server/graphql/gen/graphql-types'
+import SharesPlaceholder from '@/views/Shares/components/SharesPlacehoder'
 
-export default function HoldingTab(): JSX.Element {
-  const { holding } = useFlippeningStore()
-
-  useEffect(() => {
-    useFlippeningStore.setState({ holding: fakeData })
-  }, [])
-
+export default function HoldingTab({ data }: { data?: PortfolioDataQuery['holding'] }): JSX.Element {
   const [countOfItemsShown, setCountOfItemsShown] = useState(1)
-
-  const holdingInfo = ({ item, index }) =>
-    index < countOfItemsShown * 6 ? (
-      <li className="box-recent-post" key={index + 1}>
-        <div>
-          <Image alt="image" className="rounded m-2" height={50} src={item?.pfpUrl} width={50} />
-        </div>
-        <div className="d-flex justify-content-between w-100">
-          <div className="box-content">
-            <p className="m-0">{`${item?.address.slice(0, 4)}...${item?.username.slice(-4) || ''}`}</p>
-          </div>
-          <div className="box-content">
-            <p className="m-0">{`${item?.shareAmount} ${item?.shareAmount === '1' ? 'Share' : 'Shares'}`}</p>
-          </div>
-        </div>
-      </li>
-    ) : null
 
   return (
     <div className="side-bar details list-items col-lg-6 m-auto">
       <div className="widget widget-recent-post mg-bt-43">
-        {holding.length > 0 && <ul>{holding?.map((item, index) => holdingInfo({ item, index }))}</ul>}
+        {data ? (
+          <ul>{data?.map((item, index) => <HolderRow index={index} item={item} key={item.id} />)}</ul>
+        ) : (
+          <SharesPlaceholder />
+        )}
       </div>
       <div className="col-md-12 wrap-inner load-more text-center">
         <button

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Sidebar, Menu, SubMenu } from 'react-pro-sidebar'
 import isActiveMenu from '@/utils/isActiveMenu'
-import { navigation } from '@/data/navigation'
+import { navigation } from '@/utils/constants'
 
 export default function MobileNavigation() {
   const path = usePathname()

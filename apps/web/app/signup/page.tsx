@@ -1,6 +1,6 @@
-import type { Metadata } from 'next'
+'use client'
+import Twitter from '@/views/Auth/components/Twitter'
 import Breadcrumb from '@/components/breadcrumb'
-import SignupWizard from '@/views/Auth'
 
 const item = {
   title: 'Sign Up',
@@ -10,24 +10,20 @@ const item = {
       path: '/',
     },
     {
-      name: 'Page',
-      path: '/signup',
-    },
-    {
       name: 'Sign Up',
     },
   ],
 }
 
-export const metadata: Metadata = {
-  title: 'Axies | NFT Marketplace React/Next Js Template | Sign Up',
+interface SignupProps {
+  searchParams?: Record<'callbackUrl' | 'error', string>
 }
 
-export default function page(): JSX.Element {
+export default function Signup(props: SignupProps): JSX.Element {
   return (
     <>
       <Breadcrumb data={item} />
-      <SignupWizard />
+      <Twitter callbackUrl={props.searchParams?.callbackUrl} error={props.searchParams?.error} />
     </>
   )
 }

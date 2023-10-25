@@ -1,8 +1,10 @@
 'use client'
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi/react'
+import { SessionProvider } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { WagmiConfig } from 'wagmi'
 import { sepolia, mainnet } from 'wagmi/chains'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
 
 // 1. Get projectId
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || ''
@@ -21,11 +23,26 @@ const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 // 3. Create modal
 createWeb3Modal({ wagmiConfig, projectId, chains })
 
+export const client = new ApolloClient({
+  uri: '/api/graphql',
+  cache: new InMemoryCache(),
+})
+
 export function Providers({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
     setReady(true)
   }, [])
-  return <>{ready ? <WagmiConfig config={wagmiConfig}>{children}</WagmiConfig> : null}</>
+  return (
+    <>
+      {ready ? (
+        <WagmiConfig config={wagmiConfig}>
+          <ApolloProvider client={client}>
+            <SessionProvider>{children}</SessionProvider>
+          </ApolloProvider>
+        </WagmiConfig>
+      ) : null}
+    </>
+  )
 }
