@@ -122,29 +122,6 @@ function generateDecimalInWei() {
     })
     await prisma.round.createMany({ data: rounds })
 
-    // model Bet {
-    //   id              String      @id @default(cuid())
-    //   hash            String?     @unique // Transaction hash
-    //   block           Int?        @unique // Block number
-    //   amount          BigInt // Amount of stSTETH
-    //   position        BetPosition // Position of the bet
-    //   claimed         Boolean // Whether the bet is claimed
-    //   claimedAt       DateTime? // Date of the claim
-    //   claimedBlock    Int? // Block number of the claim
-    //   claimedHash     String? // Transaction hash of the claim
-    //   claimedSTETH    BigInt? // Amount of stSTETH claimed
-    //   claimedNetSTETH BigInt? // Net stSTETH claimed
-    //   outcome         String? // can be "win", "loss", or "ongoing"
-    //   pnl             BigInt? // Profit and loss
-    //   openedAt        DateTime    @default(now())
-    //   updatedAt       DateTime    @updatedAt
-    //   closedAt        DateTime? // Date of the close
-    //   userId          String
-    //   roundId         String
-    //   user            User        @relation(fields: [userId], references: [id])
-    //   round           Round       @relation(fields: [roundId], references: [id])
-    // }
-
     // Seeding Bets
     const bets = users.map((user, index) => {
       const claimed = faker.datatype.boolean()
