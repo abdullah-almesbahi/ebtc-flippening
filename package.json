@@ -2,6 +2,7 @@
   "name": "ebtc-flippening",
   "private": true,
   "scripts": {
+    "postinstall": "dotenv -- turbo run generate",
     "build": "dotenv -- turbo run build",
     "dev": "dotenv -- turbo run dev",
     "lint": "turbo run lint",
