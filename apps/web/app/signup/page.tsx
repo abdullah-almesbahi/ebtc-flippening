@@ -10,10 +10,6 @@ const item = {
       path: '/',
     },
     {
-      name: 'Page',
-      path: '/signup',
-    },
-    {
       name: 'Sign Up',
     },
   ],
@@ -24,9 +20,6 @@ interface SignupProps {
 }
 
 export default function Signup(props: SignupProps): JSX.Element {
-  // <Login
-
-  //     />
   return (
     <>
       <Breadcrumb data={item} />

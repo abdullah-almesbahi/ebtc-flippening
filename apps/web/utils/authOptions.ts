@@ -1,5 +1,5 @@
 import TwitterProvider from 'next-auth/providers/twitter'
-import type { NextAuthOptions as NextAuthConfig } from 'next-auth'
+import type { NextAuthOptions as NextAuthConfig, Profile } from 'next-auth'
 import { prisma } from 'database'
 import { PrismaAdapter } from '@/utils/PrismaAdapter'
 
@@ -13,19 +13,25 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    signIn: async ({ user, account, profile }) => {
-      console.log('signIn', { user, account, profile })
-      // try {
-      //   await prisma.user.create({
-      //     data: {
-      //       name: user.name,
-      //       image: user.image,
-      //       // twitterId: user.id,
-      //     },
-      //   })
-      // } catch (error) {
-      //   console.log('xxxx', error)
-      // }
+    // we need to create user in authOptions.ts file,because we need to store username and twitter id, here is the only place we can get it
+    signIn: async (params) => {
+      const { profile } = params
+      const p = profile as Profile & { data: { id: string; name: string; profile_image_url: string; username: string } }
+      if (profile) {
+        const userExists = await prisma.user.findUnique({
+          where: { id: p.data.id },
+        })
+        if (!userExists) {
+          await prisma.user.create({
+            data: {
+              id: p.data.id,
+              name: p.data.name,
+              image: p.data.profile_image_url,
+              username: p.data.username,
+            },
+          })
+        }
+      }
 
       return true
     },

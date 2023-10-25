@@ -1,19 +1,19 @@
 import { getRoundPosition } from '../../helpers'
-import type { NodeRound } from '@/store/types'
 import PriceTicker from '@/components/PriceTicker'
+import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
 interface RoundResultProps {
-  round: NodeRound
+  data: DashboardDataQuery['rounds'][0]
   hasFailed?: boolean
 }
 
 const RoundResult: React.FC<React.PropsWithChildren<RoundResultProps>> = ({
-  round,
+  data,
   hasFailed = false,
   children,
   ...props
 }) => {
-  const { lockPrice, closePrice } = round
+  const { lockPrice, closePrice } = data
 
   const betPosition = getRoundPosition(lockPrice, closePrice)
 

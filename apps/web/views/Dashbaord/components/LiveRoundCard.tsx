@@ -1,14 +1,14 @@
 import CardHeader from './RoundCard/CardHeader'
 import Card from './Card'
 import { BetPosition } from '@/store/types'
-import type { NodeRound } from '@/store/types'
+import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
 interface LiveRoundCardProps {
-  round: NodeRound
+  data: DashboardDataQuery['rounds'][0]
 }
 
-export default function LiveRoundCard({ round }: LiveRoundCardProps): JSX.Element {
-  const { lockPrice } = round
+export default function LiveRoundCard({ data }: LiveRoundCardProps): JSX.Element {
+  const { lockPrice } = data
   const price = 213.1658
 
   const isBull = lockPrice && price > Number(lockPrice)
@@ -17,7 +17,7 @@ export default function LiveRoundCard({ round }: LiveRoundCardProps): JSX.Elemen
 
   return (
     <Card>
-      <CardHeader epoch={round.epoch} icon={<i className="fa fa-podcast text-up" />} status="live" title="LIVE" />
+      <CardHeader epoch={data.epoch} icon={<i className="fa fa-podcast text-up" />} status="live" title="LIVE" />
 
       <div className="p-4">
         <div className="text-grey-50 mt-20 fs-7">LAST PRICE</div>

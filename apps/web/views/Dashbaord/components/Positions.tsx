@@ -8,21 +8,19 @@ import { useEffect, useState } from 'react'
 import useSwiper from '../hooks/useSwiper'
 import RoundCard from './RoundCard'
 import PostitionsPlaceholder from './PositionsPlaceholder'
-import { rounds as fakeDataRounds } from '@/data/rounds'
 import { useFlippeningStore } from '@/store/flippening'
 import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
 export default function Positions({ data }: { data?: DashboardDataQuery['rounds'] }): JSX.Element {
   const [isChangeTransition, setIsChangeTransition] = useState(false)
-  const { rounds, setRounds, currentEpoch } = useFlippeningStore()
+  const { currentEpoch } = useFlippeningStore()
   const { setSwiper, swiper } = useSwiper()
 
   const previousEpoch = currentEpoch > 0 ? currentEpoch - 1 : currentEpoch
-  const swiperIndex = rounds.findIndex((round) => round.epoch === previousEpoch)
+  const swiperIndex = data?.findIndex((round) => round.epoch === previousEpoch)
 
   useEffect(() => {
-    setRounds(fakeDataRounds)
-    useFlippeningStore.setState({ currentEpoch: 138619 })
+    // useFlippeningStore.setState({ currentEpoch: 138619 })
   }, [])
 
   return (
@@ -74,9 +72,9 @@ export default function Positions({ data }: { data?: DashboardDataQuery['rounds'
                 <div className="swiper-pagination mg-t-6" />
                 <div className="swiper-button-next live-bet-next btn-slide-next active" />
                 <div className="swiper-button-prev live-bet-right btn-slide-prev" />
-                {rounds.map((round) => (
+                {data.map((round) => (
                   <SwiperSlide key={round.epoch}>
-                    {({ isActive }) => <RoundCard isActive={isChangeTransition ? isActive : undefined} round={round} />}
+                    {({ isActive }) => <RoundCard data={round} isActive={isChangeTransition ? isActive : undefined} />}
                   </SwiperSlide>
                 ))}
               </Swiper>

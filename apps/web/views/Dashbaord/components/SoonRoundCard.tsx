@@ -1,13 +1,13 @@
 import Countdown from 'react-countdown'
 import CardHeader from './RoundCard/CardHeader'
 import Card from './Card'
-import type { NodeRound } from '@/store/types'
+import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
 interface SoonRoundCardProps {
-  round: NodeRound
+  data: DashboardDataQuery['rounds'][0]
 }
 
-export default function SoonRoundCard({ round }: SoonRoundCardProps): JSX.Element {
+export default function SoonRoundCard({ data }: SoonRoundCardProps): JSX.Element {
   const renderer = ({ days, hours, minutes, seconds, completed }: any): JSX.Element | string => {
     if (completed) {
       return 'Completed'
@@ -27,7 +27,7 @@ export default function SoonRoundCard({ round }: SoonRoundCardProps): JSX.Elemen
 
   return (
     <Card>
-      <CardHeader epoch={round.epoch} icon={<i className="fa fa-clock text-default" />} status="soon" title="Later" />
+      <CardHeader epoch={data.epoch} icon={<i className="fa fa-clock text-default" />} status="soon" title="Later" />
 
       <div className="p-4">
         <div className="text-grey-50 fs-7  mt-20">ENTRY START</div>

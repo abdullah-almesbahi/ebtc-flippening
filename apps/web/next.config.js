@@ -2,6 +2,7 @@ const { PrismaPlugin } = require('@prisma/nextjs-monorepo-workaround-plugin')
 
 module.exports = {
   webpack: (config, { isServer }) => {
+    config.externals.push('pino-pretty', 'lokijs', 'encoding')
     if (isServer) {
       config.plugins = [...config.plugins, new PrismaPlugin()]
     }

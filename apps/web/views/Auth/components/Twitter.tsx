@@ -21,17 +21,31 @@ export default function Twitter(props: TwitterProps): JSX.Element {
   }
 
   return (
-    <div>
-      {Boolean(props.error) && <p className="bg-red-100 text-red-600 text-center p-2">Authentication Failed</p>}
-      <button
-        className="btn btn-primary"
-        onClick={() => {
-          onSubmit()
-        }}
-        type="button"
-      >
-        Sign up with Twitter
-      </button>
-    </div>
+    <section className="tf-login tf-section">
+      <div className="ibthemes-container">
+        <div className="row">
+          <div className="col-12">
+            <h2 className="tf-title-heading ct style-1">Signup To Flippening dApp</h2>
+            {Boolean(props.error) && (
+              <p className="alert alert-danger" role="alert">
+                Authentication Failed
+              </p>
+            )}
+            <div className="flat-form box-login-email">
+              <div className="form-inner">
+                <button
+                  className="button"
+                  onClick={() => {
+                    onSubmit()
+                  }}
+                >
+                  Sign up with Twitter
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }

@@ -16,25 +16,24 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
 
   return {
     createUser: async (data) => {
-      console.log('createUser', data)
-      return formatUser(await p.user.create({ data }))
+      // ugly hack to get around, we had to create user in authOptions.ts file,because we need to store username and twitter id
+      const user = await p.user.findFirst({ where: { name: data.name, image: data.image } })
+
+      return formatUser(user)
     },
 
     getUser: async (id) => {
-      console.log('getUser', id)
       const user = await p.user.findUnique({ where: { id } })
       return user ? formatUser(user) : null
     },
 
     getUserByEmail: async (email) => {
-      console.log('getUserByEmail', email)
       const user = await p.user.findUnique({ where: { email } })
       return user ? formatUser(user) : null
     },
 
+    // getUserByAccount { providerAccountId: '181167167', provider: 'twitter' }
     getUserByAccount: async (provider_providerAccountId) => {
-      console.log('getUserByAccount', provider_providerAccountId)
-
       const account = await p.account.findUnique({
         where: { provider_providerAccountId },
         select: { user: true },
@@ -43,8 +42,6 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
     },
 
     updateUser: async ({ id, ...data }) => {
-      console.log('updateUser', id, data)
-
       const updatedUser = await p.user.update({ where: { id }, data })
       if (!updatedUser) throw new Error('Failed to update user.')
       return formatUser(updatedUser)
@@ -55,16 +52,12 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
     },
 
     linkAccount: (data) => {
-      console.log('linkAccount', data)
-
       return p.account.create({ data }) as unknown as AdapterAccount
     },
     unlinkAccount: (provider_providerAccountId) =>
       p.account.delete({ where: { provider_providerAccountId } }) as unknown as AdapterAccount,
 
     async getSessionAndUser(sessionToken: string) {
-      console.log('getSessionAndUser', sessionToken)
-
       const userAndSession = await p.session.findUnique({
         where: { sessionToken },
         include: { user: true },
@@ -81,23 +74,17 @@ export function PrismaAdapter(p: PrismaClient): Adapter {
     },
 
     createSession: (data) => {
-      console.log('createSession', data)
-
       return p.session.create({ data })
     },
     updateSession: (data) => p.session.update({ where: { sessionToken: data.sessionToken }, data }),
     deleteSession: (sessionToken) => p.session.delete({ where: { sessionToken } }),
 
     async createVerificationToken(data) {
-      console.log('createVerificationToken', data)
-
       const verificationToken = await p.verificationToken.create({ data })
       return verificationToken
     },
 
     async useVerificationToken(identifierToken) {
-      console.log('useVerificationToken', identifierToken)
-
       try {
         const verificationToken = await p.verificationToken.delete({
           where: { identifier_token: identifierToken },
