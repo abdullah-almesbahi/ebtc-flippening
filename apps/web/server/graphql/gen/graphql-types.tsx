@@ -7190,7 +7190,7 @@ export type ReferralDataQuery = { __typename?: 'Query', referrals: Array<{ __typ
 
 export const DashboardDataDocument = gql`
     query DashboardData {
-  rounds(take: 10) {
+  rounds(take: 7, orderBy: {epoch: asc}) {
     id
     epoch
     closePrice

@@ -4,24 +4,20 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
 import { Pagination, Navigation, Keyboard, Mousewheel, FreeMode } from 'swiper'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import useSwiper from '../hooks/useSwiper'
 import RoundCard from './RoundCard'
 import PostitionsPlaceholder from './PositionsPlaceholder'
-import { useFlippeningStore } from '@/store/flippening'
 import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
 export default function Positions({ data }: { data?: DashboardDataQuery['rounds'] }): JSX.Element {
   const [isChangeTransition, setIsChangeTransition] = useState(false)
-  const { currentEpoch } = useFlippeningStore()
+  // TODO: get current epoch from blockchain
+  const currentEpoch = 10003
   const { setSwiper, swiper } = useSwiper()
 
   const previousEpoch = currentEpoch > 0 ? currentEpoch - 1 : currentEpoch
   const swiperIndex = data?.findIndex((round) => round.epoch === previousEpoch)
-
-  useEffect(() => {
-    // useFlippeningStore.setState({ currentEpoch: 138619 })
-  }, [])
 
   return (
     <section className="tf-section live-bets home3 bg-style " style={{ paddingTop: 150 }}>
@@ -74,7 +70,13 @@ export default function Positions({ data }: { data?: DashboardDataQuery['rounds'
                 <div className="swiper-button-prev live-bet-right btn-slide-prev" />
                 {data.map((round) => (
                   <SwiperSlide key={round.epoch}>
-                    {({ isActive }) => <RoundCard data={round} isActive={isChangeTransition ? isActive : undefined} />}
+                    {({ isActive }) => (
+                      <RoundCard
+                        currentEpoch={currentEpoch}
+                        data={round}
+                        isActive={isChangeTransition ? isActive : undefined}
+                      />
+                    )}
                   </SwiperSlide>
                 ))}
               </Swiper>

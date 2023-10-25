@@ -62,7 +62,7 @@ function generateDecimalInWei() {
       rank: faker.number.int({ min: 0, max: 1000 }),
       points: faker.number.int({ min: 0, max: 1000 }),
     }))
-    console.log('userStats', userStats)
+
     await prisma.userStats.createMany({ data: userStats })
 
     // Seeding Account
@@ -91,31 +91,35 @@ function generateDecimalInWei() {
     await prisma.verificationToken.createMany({ data: verificationTokens })
 
     // Seeding Rounds
-    const rounds = Array.from({ length: NUM_RECORDS }).map(() => ({
-      id: faker.string.uuid(),
-      epoch: faker.number.int({ min: 10000, max: 100000 }),
-      position: faker.helpers.arrayElement(['BULL', 'BEAR']),
-      failed: faker.datatype.boolean(),
-      startAt: faker.date.recent(),
-      startBlock: faker.number.int(blockOptions),
-      startHash: faker.string.sample(64),
-      lockAt: faker.date.future(),
-      lockBlock: faker.number.int(blockOptions),
-      lockHash: faker.string.sample(64),
-      lockPrice: generateDecimalInWei(),
-      lockRoundId: faker.string.uuid(),
-      closeAt: faker.date.future(),
-      closeBlock: faker.number.int(blockOptions),
-      closeHash: faker.string.sample(64),
-      closePrice: generateDecimalInWei(),
-      closeRoundId: faker.string.uuid(),
-      totalBets: faker.number.int({ min: 0, max: 1000 }),
-      totalAmount: generateDecimalInWei(),
-      bullBets: faker.number.int({ min: 0, max: 1000 }),
-      bullAmount: generateDecimalInWei(),
-      bearBets: faker.number.int({ min: 0, max: 1000 }),
-      bearAmount: generateDecimalInWei(),
-    }))
+    let epoch = 9999
+    const rounds = Array.from({ length: NUM_RECORDS }).map(() => {
+      epoch++
+      return {
+        id: faker.string.uuid(),
+        epoch: epoch,
+        position: faker.helpers.arrayElement(['BULL', 'BEAR']),
+        failed: faker.datatype.boolean(),
+        startAt: faker.date.recent(),
+        startBlock: faker.number.int(blockOptions),
+        startHash: faker.string.sample(64),
+        lockAt: faker.date.future(),
+        lockBlock: faker.number.int(blockOptions),
+        lockHash: faker.string.sample(64),
+        lockPrice: epoch >= 10003 ? '0.0' : generateDecimalInWei(),
+        lockRoundId: faker.string.uuid(),
+        closeAt: faker.date.future(),
+        closeBlock: faker.number.int(blockOptions),
+        closeHash: faker.string.sample(64),
+        closePrice: epoch >= 10002 ? '0.0' : generateDecimalInWei(),
+        closeRoundId: faker.string.uuid(),
+        totalBets: faker.number.int({ min: 0, max: 1000 }),
+        totalAmount: generateDecimalInWei(),
+        bullBets: faker.number.int({ min: 0, max: 1000 }),
+        bullAmount: generateDecimalInWei(),
+        bearBets: faker.number.int({ min: 0, max: 1000 }),
+        bearAmount: generateDecimalInWei(),
+      }
+    })
     await prisma.round.createMany({ data: rounds })
 
     // model Bet {

@@ -2,7 +2,7 @@ import { gql } from '@apollo/client'
 
 export const DASBOARD_QUERY = gql`
   query DashboardData {
-    rounds(take: 10) {
+    rounds(take: 7, orderBy: { epoch: asc }) {
       id
       epoch
       closePrice

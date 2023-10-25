@@ -23,6 +23,7 @@
       "dotEnv": [".env.test.local", ".env.test", ".env"]
     },
     "db:seed": {
+      "cache": false,
       "outputs": []
     },
     "db:migrate:dev": {

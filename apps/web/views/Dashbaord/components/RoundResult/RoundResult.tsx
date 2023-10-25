@@ -1,6 +1,8 @@
 import { getRoundPosition } from '../../helpers'
 import PriceTicker from '@/components/PriceTicker'
 import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
+import { formatBigNumber, weiToEth } from '@/utils/format'
+import { getPriceDifference } from '@/utils/getPriceDifference'
 
 interface RoundResultProps {
   data: DashboardDataQuery['rounds'][0]
@@ -16,6 +18,7 @@ const RoundResult: React.FC<React.PropsWithChildren<RoundResultProps>> = ({
   const { lockPrice, closePrice } = data
 
   const betPosition = getRoundPosition(lockPrice, closePrice)
+  const priceDifference = getPriceDifference(closePrice, lockPrice)
 
   return (
     <div className="p-4" {...props}>
@@ -31,9 +34,9 @@ const RoundResult: React.FC<React.PropsWithChildren<RoundResultProps>> = ({
                 betPosition === 'Bear' ? 'text-down' : ''
               }`}
             >
-              $213.1658
+              ${formatBigNumber(weiToEth(closePrice))}
             </span>
-            <PriceTicker amount="$-0.3289" betPosition={betPosition} />
+            <PriceTicker amount={formatBigNumber(weiToEth(priceDifference.toString()))} betPosition={betPosition} />
           </div>
           {betPosition ? (
             <div className="d-flex justify-content-center align-items-center mt-20 ">
