@@ -1,5 +1,4 @@
 {
   "installCommand": "cd ../.. && pnpm install",
-  "buildCommand": "cd ../.. && pnpm build",
-  "rootDirectory": "apps/web"
+  "buildCommand": "cd ../.. && pnpm build"
 }
