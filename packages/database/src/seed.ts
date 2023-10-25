@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { prisma } from '.'
 import { faker } from '@faker-js/faker'
 
@@ -20,6 +21,29 @@ const NUM_RECORDS = 10
       })
     }
     await prisma.user.createMany({ data: users })
+
+    // User stats
+    const userStats = users.map((user) => ({
+      userId: user.id,
+      totalBets: faker.number.int({ min: 0, max: 1000 }),
+      totalBetsBull: faker.number.int({ min: 0, max: 1000 }),
+      totalBetsBear: faker.number.int({ min: 0, max: 1000 }),
+      totalSTETH: faker.number.bigInt(),
+      totalSTETHBull: faker.number.bigInt(),
+      totalSTETHBear: faker.number.bigInt(),
+      totalBetsClaimed: faker.number.int({ min: 0, max: 1000 }),
+      totalSTETHClaimed: faker.number.bigInt(),
+      winRate: faker.number.bigInt(),
+      averageSTETH: faker.number.bigInt(),
+      netSTETH: faker.number.bigInt(),
+      totalSharesHeld: faker.number.int({ min: 0, max: 1000 }),
+      totalShareHolders: faker.number.int({ min: 0, max: 1000 }),
+      totalRewards: faker.number.bigInt(),
+      shareValue: faker.number.bigInt(),
+      rank: faker.number.int({ min: 0, max: 1000 }),
+      points: faker.number.int({ min: 0, max: 1000 }),
+    }))
+    await prisma.userStats.createMany({ data: userStats })
 
     // Seeding Account
     const accounts = users.map((user) => ({
@@ -58,19 +82,19 @@ const NUM_RECORDS = 10
       lockAt: faker.date.future(),
       lockBlock: faker.number.int({ min: 0, max: 1000 }),
       lockHash: faker.finance.bitcoinAddress(),
-      lockPrice: parseFloat(faker.finance.amount()),
+      lockPrice: faker.number.bigInt(),
       lockRoundId: faker.string.uuid(),
       closeAt: faker.date.future(),
       closeBlock: faker.number.int({ min: 0, max: 1000 }),
       closeHash: faker.finance.bitcoinAddress(),
-      closePrice: parseFloat(faker.finance.amount()),
+      closePrice: faker.number.bigInt(),
       closeRoundId: faker.string.uuid(),
       totalBets: faker.number.int({ min: 0, max: 1000 }),
-      totalAmount: parseFloat(faker.finance.amount()),
+      totalAmount: faker.number.bigInt(),
       bullBets: faker.number.int({ min: 0, max: 1000 }),
-      bullAmount: parseFloat(faker.finance.amount()),
+      bullAmount: faker.number.bigInt(),
       bearBets: faker.number.int({ min: 0, max: 1000 }),
-      bearAmount: parseFloat(faker.finance.amount()),
+      bearAmount: faker.number.bigInt(),
     }))
     await prisma.round.createMany({ data: rounds })
 
@@ -79,7 +103,7 @@ const NUM_RECORDS = 10
       userId: user.id,
       roundId: rounds[index].id,
       hash: faker.finance.bitcoinAddress(),
-      amount: parseFloat(faker.finance.amount()),
+      amount: faker.number.bigInt(),
       position: rounds[index].position,
       claimed: faker.datatype.boolean(),
       openedAt: faker.date.recent(),
@@ -91,7 +115,7 @@ const NUM_RECORDS = 10
     const rewards = users.map((user) => ({
       userId: user.id,
       points: faker.number.int({ min: 0, max: 1000 }),
-      amount: parseFloat(faker.finance.amount()),
+      amount: faker.number.bigInt(),
       epoch: faker.number.int({ min: 0, max: 1000 }),
       createdAt: faker.date.recent(),
     }))
@@ -110,8 +134,8 @@ const NUM_RECORDS = 10
       const isBuy = faker.datatype.boolean()
       return {
         isBuy: isBuy,
-        shareAmount: parseFloat(faker.finance.amount()),
-        stethAmount: parseFloat(faker.finance.amount()),
+        shareAmount: faker.number.bigInt(),
+        stethAmount: faker.number.bigInt(),
         createdAt: faker.date.recent(),
         traderId: isBuy ? user.id : users[(index + 1) % NUM_RECORDS].id, // For demonstration
         subjectId: isBuy ? users[(index + 1) % NUM_RECORDS].id : user.id, // For demonstration

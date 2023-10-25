@@ -23,6 +23,9 @@
     "db:migrate:dev": {
       "outputs": []
     },
+    "db:migrate:reset": {
+      "outputs": []
+    },
     "generate": {
       "dependsOn": ["^generate"]
     }

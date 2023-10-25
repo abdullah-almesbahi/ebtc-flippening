@@ -87,7 +87,7 @@ model UserStats {
   netSTETH             BigInt @default(0) // Net stSTETH
   totalSharesHeld      Int    @default(0) // Total number of shares holding
   totalShareHolders    Int    @default(0) // Total number of people holding shares
-  totalRewards         Int    @default(0) // Total number of rewards earned
+  totalRewards         BigInt @default(0) // Total number of rewards earned
   shareValue           BigInt @default(0) // Total value of shares
   rank                 Int    @default(0) // Rank in the leaderboard
   points               Int    @default(0) // Points earned

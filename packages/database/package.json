@@ -13,6 +13,7 @@
     "clean": "rimraf .turbo node_modules dist",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
+    "db:migrate:reset": "prisma migrate reset --force",
     "db:push": "prisma db push",
     "db:seed": "tsx src/seed.ts",
     "dev": "tsup --watch",
@@ -35,7 +36,8 @@
     "rimraf": "^3.0.2",
     "tsconfig": "workspace:*",
     "tsx": "^3.7.1",
-    "@faker-js/faker": "8.2.0"
+    "@faker-js/faker": "8.2.0",
+    "reflect-metadata": "^0.1.13"
   },
   "prisma": {
     "schema": "prisma/schema.prisma"

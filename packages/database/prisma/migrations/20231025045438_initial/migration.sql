@@ -48,24 +48,6 @@ CREATE TABLE "User" (
     "image" TEXT,
     "username" TEXT,
     "address" TEXT,
-    "totalSharesHeld" INTEGER NOT NULL DEFAULT 0,
-    "totalShareHolders" INTEGER NOT NULL DEFAULT 0,
-    "totalRewards" INTEGER NOT NULL DEFAULT 0,
-    "shareValue" DOUBLE PRECISION NOT NULL DEFAULT 0,
-    "rank" INTEGER NOT NULL DEFAULT 0,
-    "points" INTEGER NOT NULL DEFAULT 0,
-    "lastTransactionBlock" INTEGER NOT NULL,
-    "totalBets" INTEGER NOT NULL,
-    "totalBetsBull" INTEGER NOT NULL,
-    "totalBetsBear" INTEGER NOT NULL,
-    "totalSTETH" DOUBLE PRECISION NOT NULL,
-    "totalSTETHBull" DOUBLE PRECISION NOT NULL,
-    "totalSTETHBear" DOUBLE PRECISION NOT NULL,
-    "totalBetsClaimed" INTEGER NOT NULL,
-    "totalSTETHClaimed" DOUBLE PRECISION NOT NULL,
-    "winRate" DOUBLE PRECISION NOT NULL,
-    "averageSTETH" DOUBLE PRECISION NOT NULL,
-    "netSTETH" DOUBLE PRECISION NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -73,19 +55,46 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
+CREATE TABLE "UserStats" (
+    "id" TEXT NOT NULL,
+    "lastTransactionBlock" INTEGER NOT NULL DEFAULT 0,
+    "totalBets" INTEGER NOT NULL DEFAULT 0,
+    "totalBetsBull" INTEGER NOT NULL DEFAULT 0,
+    "totalBetsBear" INTEGER NOT NULL DEFAULT 0,
+    "totalSTETH" BIGINT NOT NULL DEFAULT 0,
+    "totalSTETHBull" BIGINT NOT NULL DEFAULT 0,
+    "totalSTETHBear" BIGINT NOT NULL DEFAULT 0,
+    "totalBetsClaimed" INTEGER NOT NULL DEFAULT 0,
+    "totalSTETHClaimed" BIGINT NOT NULL DEFAULT 0,
+    "winRate" BIGINT NOT NULL DEFAULT 0,
+    "averageSTETH" BIGINT NOT NULL DEFAULT 0,
+    "netSTETH" BIGINT NOT NULL DEFAULT 0,
+    "totalSharesHeld" INTEGER NOT NULL DEFAULT 0,
+    "totalShareHolders" INTEGER NOT NULL DEFAULT 0,
+    "totalRewards" BIGINT NOT NULL DEFAULT 0,
+    "shareValue" BIGINT NOT NULL DEFAULT 0,
+    "rank" INTEGER NOT NULL DEFAULT 0,
+    "points" INTEGER NOT NULL DEFAULT 0,
+    "userId" TEXT NOT NULL,
+
+    CONSTRAINT "UserStats_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Bet" (
     "id" TEXT NOT NULL,
     "hash" TEXT,
-    "amount" DOUBLE PRECISION NOT NULL,
+    "block" INTEGER,
+    "amount" BIGINT NOT NULL,
     "position" "BetPosition" NOT NULL,
     "claimed" BOOLEAN NOT NULL,
     "claimedAt" TIMESTAMP(3),
     "claimedBlock" INTEGER,
     "claimedHash" TEXT,
-    "claimedSTETH" DOUBLE PRECISION,
-    "claimedNetSTETH" DOUBLE PRECISION,
+    "claimedSTETH" BIGINT,
+    "claimedNetSTETH" BIGINT,
     "outcome" TEXT,
-    "pnl" DOUBLE PRECISION,
+    "pnl" BIGINT,
     "openedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "closedAt" TIMESTAMP(3),
@@ -107,19 +116,19 @@ CREATE TABLE "Round" (
     "lockAt" TIMESTAMP(3) NOT NULL,
     "lockBlock" INTEGER NOT NULL,
     "lockHash" TEXT NOT NULL,
-    "lockPrice" DOUBLE PRECISION NOT NULL,
+    "lockPrice" BIGINT NOT NULL,
     "lockRoundId" TEXT NOT NULL,
     "closeAt" TIMESTAMP(3) NOT NULL,
     "closeBlock" INTEGER NOT NULL,
     "closeHash" TEXT NOT NULL,
-    "closePrice" DOUBLE PRECISION NOT NULL,
+    "closePrice" BIGINT NOT NULL,
     "closeRoundId" TEXT NOT NULL,
     "totalBets" INTEGER NOT NULL,
-    "totalAmount" DOUBLE PRECISION NOT NULL,
+    "totalAmount" BIGINT NOT NULL,
     "bullBets" INTEGER NOT NULL,
-    "bullAmount" DOUBLE PRECISION NOT NULL,
+    "bullAmount" BIGINT NOT NULL,
     "bearBets" INTEGER NOT NULL,
-    "bearAmount" DOUBLE PRECISION NOT NULL,
+    "bearAmount" BIGINT NOT NULL,
 
     CONSTRAINT "Round_pkey" PRIMARY KEY ("id")
 );
@@ -129,7 +138,7 @@ CREATE TABLE "Reward" (
     "id" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "points" INTEGER NOT NULL,
-    "amount" DOUBLE PRECISION NOT NULL,
+    "amount" BIGINT NOT NULL,
     "epoch" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
@@ -150,8 +159,8 @@ CREATE TABLE "Referral" (
 CREATE TABLE "Share" (
     "id" TEXT NOT NULL,
     "isBuy" BOOLEAN NOT NULL,
-    "shareAmount" DOUBLE PRECISION NOT NULL,
-    "stethAmount" DOUBLE PRECISION NOT NULL,
+    "shareAmount" BIGINT NOT NULL,
+    "stethAmount" BIGINT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "traderId" TEXT NOT NULL,
     "subjectId" TEXT NOT NULL,
@@ -187,7 +196,19 @@ CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationTok
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_address_key" ON "User"("address");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "UserStats_userId_key" ON "UserStats"("userId");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Bet_hash_key" ON "Bet"("hash");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Bet_block_key" ON "Bet"("block");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Referral_referralCode_key" ON "Referral"("referralCode");
