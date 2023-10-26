@@ -15,8 +15,9 @@ import BigNumber from 'bignumber.js'
 import { BetPosition } from '@/store/types'
 import { useUserStore } from '@/store/user'
 import borrowerOperationsContractAbi from '@/abi/borrowerOperations.json'
+import flippenZapABI from '@/abi/zap.json'
+import stethABI from '@/abi/steth.json'
 import { contractAddress } from '@/utils/constants'
-import { flippenZapABI, stethABI } from '@/utils/generated'
 
 interface SetPositionCardProps {
   position: BetPosition
@@ -89,6 +90,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
         args: [address!, contractAddress.zap],
       },
       {
+        // @ts-expect-error
         abi: stethABI,
         address: contractAddress.steth,
         functionName: 'allowance',
@@ -222,6 +224,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
         }
       case 'approve_zap':
         return {
+          // @ts-expect-error
           abi: stethABI,
           address: contractAddress.steth,
           functionName: 'approve',
@@ -230,6 +233,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
         }
       case 'increase_zap_allowance':
         return {
+          // @ts-expect-error
           abi: stethABI,
           address: contractAddress.steth,
           functionName: 'increaseAllowance',
@@ -238,8 +242,9 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
         }
       case 'submit':
         return {
-          address: contractAddress.zap,
+          // @ts-expect-error
           abi: flippenZapABI,
+          address: contractAddress.zap,
           functionName: 'enterLongEth',
           args: [parseUnits(getValues('amount'), token.decimals), Number(getValues('leverage'))],
           enabled: true,
