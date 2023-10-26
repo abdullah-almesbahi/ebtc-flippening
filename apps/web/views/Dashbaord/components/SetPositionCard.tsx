@@ -74,8 +74,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
         abi: erc20ABI,
         address: getValues('symbol') === 'stETH' ? contractAddress.steth : contractAddress.usdc,
         functionName: 'balanceOf',
-        args: [address],
-        enabled: Boolean(address),
+        args: [address!],
       },
       {
         abi: erc20ABI,
@@ -83,16 +82,17 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
         functionName: 'decimals',
       },
       {
+        // @ts-expect-error
         abi: borrowerOperationsContractAbi,
         address: contractAddress.borrowerOperations,
         functionName: 'getPositionManagerApproval',
-        args: [address, contractAddress.zap],
+        args: [address!, contractAddress.zap],
       },
       {
         abi: stethABI,
         address: contractAddress.steth,
         functionName: 'allowance',
-        args: [address, contractAddress.zap],
+        args: [address!, contractAddress.zap],
       },
     ],
     onSuccess(data) {
@@ -105,12 +105,12 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
       ] = data
       setToken({
         symbol: getValues('symbol'),
-        balanceOf,
-        decimals,
+        balanceOf: balanceOf as unknown as bigint,
+        decimals: decimals as unknown as number,
       })
       console.log(getPositionManagerApprovalAmount, getPositionManagerApprovalStatus)
-      setPMAAmount(getPositionManagerApprovalAmount)
-      setZapAllownce(allowance)
+      setPMAAmount(getPositionManagerApprovalAmount as unknown as number)
+      setZapAllownce(allowance as unknown as bigint)
     },
     onError(err) {
       console.log('onError', err)
@@ -213,6 +213,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
       case 'approve_position_manager':
         const positionManager = { none: 1, oneTime: 2, persistent: 3 }
         return {
+          // @ts-expect-error
           abi: borrowerOperationsContractAbi,
           address: contractAddress.borrowerOperations,
           functionName: 'setPositionManagerApproval',

@@ -1,15 +1,13 @@
-import {
-  useContractRead,
+// @ts-nocheck
+import type {
   UseContractReadConfig,
-  useContractWrite,
   Address,
   UseContractWriteConfig,
-  usePrepareContractWrite,
   UsePrepareContractWriteConfig,
-  useContractEvent,
   UseContractEventConfig,
 } from 'wagmi'
-import { ReadContractResult, WriteContractMode, PrepareWriteContractResult } from 'wagmi/actions'
+import { useContractRead, useContractWrite, usePrepareContractWrite, useContractEvent } from 'wagmi'
+import type { ReadContractResult, WriteContractMode, PrepareWriteContractResult } from 'wagmi/actions'
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // FlippenZap
@@ -1013,7 +1011,7 @@ export function useFlippenZapWrite<
 >(
   config: TMode extends 'prepared'
     ? UseContractWriteConfig<
-        PrepareWriteContractResult<typeof flippenZapABI, string>['request']['abi'],
+        PrepareWriteContractResult<typeof flippenZapABI>['request']['abi'],
         TFunctionName,
         TMode
       > & { address?: Address; chainId?: TChainId }
@@ -1826,11 +1824,10 @@ export function useStethWrite<
   TChainId extends number = keyof typeof stethAddress,
 >(
   config: TMode extends 'prepared'
-    ? UseContractWriteConfig<
-        PrepareWriteContractResult<typeof stethABI, string>['request']['abi'],
-        TFunctionName,
-        TMode
-      > & { address?: Address; chainId?: TChainId }
+    ? UseContractWriteConfig<PrepareWriteContractResult<typeof stethABI>['request']['abi'], TFunctionName, TMode> & {
+        address?: Address
+        chainId?: TChainId
+      }
     : UseContractWriteConfig<typeof stethABI, TFunctionName, TMode> & {
         abi?: never
         address?: never
@@ -3044,11 +3041,7 @@ export function useErc20TotalSupply<
  */
 export function useErc20Write<TFunctionName extends string, TMode extends WriteContractMode = undefined>(
   config: TMode extends 'prepared'
-    ? UseContractWriteConfig<
-        PrepareWriteContractResult<typeof erc20ABI, string>['request']['abi'],
-        TFunctionName,
-        TMode
-      >
+    ? UseContractWriteConfig<PrepareWriteContractResult<typeof erc20ABI>['request']['abi'], TFunctionName, TMode>
     : UseContractWriteConfig<typeof erc20ABI, TFunctionName, TMode> & {
         abi?: never
       } = {} as any,
