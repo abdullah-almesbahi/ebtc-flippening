@@ -13,7 +13,7 @@
     "db:migrate:dev": "dotenv -- turbo run db:migrate:dev",
     "db:push": "turbo run db:push",
     "db:seed": "dotenv -- turbo run db:seed",
-    "generate": "turbo run generate",
+    "generate": "dotenv -- turbo run generate",
     "reset": "find . -type dir -name node_modules | xargs rm -rf && rm -rf pnpm-lock.josn",
     "studio": "prisma studio",
     "generate-types": "graphql-codegen --config codegen.yml",

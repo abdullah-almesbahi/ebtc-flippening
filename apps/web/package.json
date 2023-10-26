@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate": "pnpm wagmi generate"
   },
   "dependencies": {
     "ui": "workspace:*",
     "database": "workspace:*",
+    "@badger-dao/ebtc-sdk": "1.4.0-beta.5",
     "next": "^13.4.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -43,7 +45,9 @@
     "graphql-yoga": "^4.0.3",
     "@graphql-tools/schema": "^10.0.0",
     "@apollo/client": "^3.7.17",
-    "bignumber.js": "^9.1.1"
+    "bignumber.js": "^9.1.1",
+    "react-hook-form": "7.46.1",
+    "@wagmi/cli": "1.5.2"
   },
   "devDependencies": {
     "eslint-config-custom": "workspace:*",

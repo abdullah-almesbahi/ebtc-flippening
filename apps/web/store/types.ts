@@ -1,4 +1,4 @@
-import type { Round } from '@/server/graphql/gen/graphql-types'
+import type { Round, User } from '@/server/graphql/gen/graphql-types'
 
 export enum BetPosition {
   BULL = 'Bull',
@@ -83,4 +83,10 @@ export interface RoundStore {
   loading: string
   setRounds: (data: Round[]) => void
   resetRounds: () => void
+}
+export interface UserStore {
+  user?: User
+  isUserLoggedIn: boolean
+  setUser: (data: User) => void
+  resetUser: () => void
 }

@@ -39,7 +39,7 @@ export default function FooterItems({ data }: Props) {
             <h5 className="title-widget">{index === 0 ? 'My Account' : index === 1 ? 'Resources' : 'Company'}</h5>
             <ul>
               {menu.map(({ href, label }) => (
-                <li key={href}>
+                <li key={label}>
                   <Link href={href}>{label}</Link>
                 </li>
               ))}

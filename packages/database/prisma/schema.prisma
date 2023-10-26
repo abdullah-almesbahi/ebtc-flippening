@@ -50,24 +50,27 @@ model VerificationToken {
 }
 
 model User {
-  id            String        @id @default(cuid()) // Twitter ID
-  name          String? // Twitter name
-  email         String?       @unique
-  emailVerified DateTime?
-  image         String? // Twitter profile image
-  username      String?       @unique // Twitter username
-  address       String?       @unique // Wallet address
-  createdAt     DateTime      @default(now()) // Date of registration
-  updatedAt     DateTime      @updatedAt
-  accounts      Account[] // Accounts connected to the user
-  sessions      Session[] // Sessions of the user
-  rewards       Reward[] // Rewards earned by the user
-  referrals     Referral[] // Referrals of the user
-  bets          Bet[] // Bets of the user
-  boughtShares  Share[]       @relation("TraderToShare") // Shares bought by the user
-  soldShares    Share[]       @relation("SubjectToShare") // Shares sold by the user
-  activityLogs  ActivityLog[] // Activity logs of the user to records how the user earned the points
-  stats         UserStats?
+  id                   String        @id @default(cuid()) // Twitter ID
+  name                 String? // Twitter name
+  email                String?       @unique
+  emailVerified        DateTime?
+  image                String? // Twitter profile image
+  username             String?       @unique // Twitter username
+  address              String?       @unique // Wallet address
+  verified             Boolean       @default(false) // Whether the user is verified,once signup via twitter, invite code and connect wallet, it will change to true
+  createdAt            DateTime      @default(now()) // Date of registration
+  updatedAt            DateTime      @updatedAt
+  accounts             Account[] // Accounts connected to the user
+  sessions             Session[] // Sessions of the user
+  rewards              Reward[] // Rewards earned by the user
+  bets                 Bet[] // Bets of the user
+  boughtShares         Share[]       @relation("TraderToShare") // Shares bought by the user
+  soldShares           Share[]       @relation("SubjectToShare") // Shares sold by the user
+  activityLogs         ActivityLog[] // Activity logs of the user to records how the user earned the points
+  stats                UserStats?
+  referrals            Referral[]    @relation("ReferrerToReferral") // Referrals of the user
+  referredByReferralId String?       @unique // The referral ID that this user used (if any)
+  referredBy           Referral?     @relation("ReferredUserToReferral")
 }
 
 model UserStats {
@@ -156,11 +159,13 @@ model Reward {
 }
 
 model Referral {
-  id           String  @id @default(cuid())
-  userId       String // User ID of the referrer
-  referralCode String  @unique // Referral code of the referrer
-  used         Boolean // Whether the referral code is used
-  user         User    @relation(fields: [userId], references: [id])
+  id             String  @id @default(cuid())
+  referralCode   String  @unique // Referral code of the referrer
+  used           Boolean // Whether the referral code is used
+  userId         String // User ID of the referrer
+  referredUserId String? @unique // User ID of the user who used the referral code
+  user           User    @relation("ReferrerToReferral", fields: [userId], references: [id], onDelete: Restrict) // Referrer
+  referredUser   User?   @relation("ReferredUserToReferral", fields: [referredUserId], references: [id]) // Referred User
 }
 
 model Share {

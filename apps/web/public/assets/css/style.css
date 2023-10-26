@@ -4002,3 +4002,9 @@ a {
 .pb-3 {
     padding-bottom: 1rem!important;
 }
+
+.btn-check:active+.btn-dark, .btn-check:checked+.btn-dark, .btn-dark.active, .btn-dark:active, .show>.btn-dark.dropdown-toggle {
+    color: #fff;
+    background-color: var(--primary-color3);
+    border-color: var(--primary-color3);
+}

@@ -13,7 +13,7 @@ import BigNumber from 'bignumber.js'
  * console.log(ether.toString());  // Outputs: 1
  */
 export function weiToEth(weiValue: string): BigNumber {
-  const wei = new BigNumber(parseFloat(weiValue).toFixed(0))
+  const wei = new BigNumber(parseFloat(weiValue.toString()).toFixed(0))
   const etherValue = wei.dividedBy(new BigNumber('1e18'))
   return etherValue
 }
