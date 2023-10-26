@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate": "pnpm wagmi generate"
+    "m-generate": "pnpm wagmi generate"
   },
   "dependencies": {
     "ui": "workspace:*",
