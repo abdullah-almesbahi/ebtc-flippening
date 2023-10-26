@@ -436,7 +436,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
           <div className="alert alert-danger" role="alert" style={{ maxWidth: 300 }}>
             Error:{' '}
             {(prepareError || writeError)?.message.substring(0, 300) +
-              ((prepareError || writeError)?.message.length > 300 ? '...' : '')}
+              (((prepareError || writeError)?.message || '').length > 300 ? '...' : '')}
           </div>
         ) : null}
         {isSuccess ? (
