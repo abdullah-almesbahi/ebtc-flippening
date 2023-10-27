@@ -1,0 +1,53 @@
+query ShareData {
+  me: shares(take: 10) {
+    id
+    isBuy
+    shareAmount
+    stethAmount
+    createdAt
+    subject {
+      id
+      address
+      image
+    }
+    trader {
+      id
+      address
+      image
+    }
+  }
+  holders: shares(take: 10) {
+    id
+    isBuy
+    shareAmount
+    stethAmount
+    createdAt
+    subject {
+      id
+      address
+      image
+    }
+    trader {
+      id
+      address
+      image
+    }
+  }
+  global: shares(take: 10) {
+    id
+    isBuy
+    shareAmount
+    stethAmount
+    createdAt
+    subject {
+      id
+      address
+      image
+    }
+    trader {
+      id
+      address
+      image
+    }
+  }
+}

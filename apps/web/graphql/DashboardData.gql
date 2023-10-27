@@ -1,0 +1,28 @@
+query DashboardData {
+  rounds(take: 7, orderBy: { epoch: asc }) {
+    id
+    epoch
+    closePrice
+    lockPrice
+    bets {
+      id
+      amount
+      claimed
+      position
+      userId
+      roundId
+    }
+  }
+  topTraders: users(take: 12) {
+    id
+    image
+    username
+    address
+    stats {
+      netSTETH
+      winRate
+      totalBetsClaimed
+      totalBets
+    }
+  }
+}

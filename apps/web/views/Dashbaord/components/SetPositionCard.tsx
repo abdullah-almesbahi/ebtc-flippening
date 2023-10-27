@@ -6,18 +6,22 @@ import {
   useAccount,
   useContractReads,
   useContractWrite,
+  useNetwork,
   usePrepareContractWrite,
   useWaitForTransaction,
 } from 'wagmi'
 import { useWeb3Modal } from '@web3modal/wagmi/react'
 import { formatUnits, parseUnits } from 'viem'
 import BigNumber from 'bignumber.js'
+import { readContract } from '@wagmi/core'
 import { BetPosition } from '@/store/types'
 import { useUserStore } from '@/store/user'
 import borrowerOperationsContractAbi from '@/abi/borrowerOperations.json'
 import flippenZapABI from '@/abi/zap.json'
 import stethABI from '@/abi/steth.json'
-import { contractAddress } from '@/utils/constants'
+import vaultABI from '@/abi/vault.json'
+import { contractAddress, poolIds } from '@/utils/constants'
+import { chainName } from '@/utils/getChianName'
 
 interface SetPositionCardProps {
   position: BetPosition
@@ -53,10 +57,12 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
     balanceOf: 0n,
     decimals: 18,
   })
+  const { chain } = useNetwork()
   const [PMAAmount, setPMAAmount] = useState<number>(0)
   const [zapAllownce, setZapAllownce] = useState<bigint>(0n)
   const { isUserLoggedIn } = useUserStore()
   const [loading, setLoading] = useState(false)
+  const [prepareContractConfig, setPrepareContractConfig] = useState<UsePrepareContractWriteConfig>({ enabled: false })
 
   const {
     register,
@@ -67,34 +73,48 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
   } = useForm<FormDataType>({
     mode: 'all',
   })
+  useEffect(() => {
+    const fetchData = async () => {
+      const config = await getPrepareContractWrite()
+      setPrepareContractConfig(config)
+    }
+
+    fetchData()
+  }, [getValues('amount'), getValues('symbol'), getValues('ratio'), getValues('leverage')])
   const { address, isConnected } = useAccount()
   const modal = useWeb3Modal()
   useContractReads({
     contracts: [
       {
         abi: erc20ABI,
-        address: getValues('symbol') === 'stETH' ? contractAddress.steth : contractAddress.usdc,
+        address:
+          getValues('symbol') === 'stETH'
+            ? contractAddress[chainName(chain)].steth
+            : contractAddress[chainName(chain)].usdc,
         functionName: 'balanceOf',
         args: [address!],
       },
       {
         abi: erc20ABI,
-        address: getValues('symbol') === 'stETH' ? contractAddress.steth : contractAddress.usdc,
+        address:
+          getValues('symbol') === 'stETH'
+            ? contractAddress[chainName(chain)].steth
+            : contractAddress[chainName(chain)].usdc,
         functionName: 'decimals',
       },
       {
         // @ts-expect-error
         abi: borrowerOperationsContractAbi,
-        address: contractAddress.borrowerOperations,
+        address: contractAddress[chainName(chain)].borrowerOperations,
         functionName: 'getPositionManagerApproval',
-        args: [address!, contractAddress.zap],
+        args: [address!, contractAddress[chainName(chain)].zap],
       },
       {
         // @ts-expect-error
         abi: stethABI,
-        address: contractAddress.steth,
+        address: contractAddress[chainName(chain)].steth,
         functionName: 'allowance',
-        args: [address!, contractAddress.zap],
+        args: [address!, contractAddress[chainName(chain)].zap],
       },
     ],
     onSuccess(data) {
@@ -124,7 +144,6 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
     // staleTime: 160_000,
     enabled: address && Number(getValues('amount')) > 0,
   })
-  console.log('enabled', address && Number(getValues('amount')) > 0)
 
   useEffect(() => {
     if (isConnected) {
@@ -142,8 +161,9 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
     return false
   }
 
-  const onSubmit = async (formData: any) => {
+  const onSubmit = async (formData: FormDataType) => {
     console.log('formData', formData)
+
     try {
       setLoading(true)
       write?.()
@@ -168,7 +188,11 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
     } else if (Number(getValues('amount')) > Number(formatUnits(token.balanceOf || 0n, token.decimals))) {
       return 'insufficient_balance'
     }
-    if (position === BetPosition.BULL) {
+    if (getValues('symbol') === 'USDC') {
+      return 'submit'
+    }
+    // ETC beat BTC
+    if (position === BetPosition.BEAR) {
       // if the user hasn't allowed approve the position manager contract for zap contract
       if (!PMAAmount) {
         return 'approve_position_manager'
@@ -183,6 +207,11 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
       if (BigNumber(zapAllownce.toString()).isLessThan(getValues('amount'))) {
         return 'increase_zap_allowance'
       }
+
+      return 'call_zap'
+      // BTC beat ETC
+    } else if (position === BetPosition.BULL) {
+      return 'swap_steth_to_ebtc'
     }
     return 'submit'
   }
@@ -205,50 +234,105 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
         return 'Approve Zap'
       case 'increase_zap_allowance':
         return 'Increase Zap Allowance'
+      case 'call_zap':
+        return 'Call Zap'
+      case 'swap_steth_to_ebtc':
+        return 'Swap stETH to eBTC'
       default:
         return 'submit'
     }
   }
 
-  const getPrepareContractWrite = (): UsePrepareContractWriteConfig => {
+  const getPrepareContractWrite = async (): Promise<UsePrepareContractWriteConfig> => {
+    const next = getNextStep()
+    console.log('xxxxxxxxxxxxxxxx', next)
     switch (getNextStep()) {
-      case 'approve_position_manager':
+      case 'approve_position_manager': {
         const positionManager = { none: 1, oneTime: 2, persistent: 3 }
         return {
           // @ts-expect-error
           abi: borrowerOperationsContractAbi,
-          address: contractAddress.borrowerOperations,
+          address: contractAddress[chainName(chain)].borrowerOperations,
           functionName: 'setPositionManagerApproval',
-          args: [contractAddress.zap, positionManager.persistent],
+          args: [contractAddress[chainName(chain)].zap, positionManager.persistent],
           enabled: true,
         }
+      }
       case 'approve_zap':
         return {
           // @ts-expect-error
           abi: stethABI,
-          address: contractAddress.steth,
+          address: contractAddress[chainName(chain)].steth,
           functionName: 'approve',
-          args: [contractAddress.zap, parseUnits(getValues('amount'), token.decimals)],
+          args: [contractAddress[chainName(chain)].zap, parseUnits(getValues('amount'), token.decimals)],
           enabled: true,
         }
       case 'increase_zap_allowance':
         return {
           // @ts-expect-error
           abi: stethABI,
-          address: contractAddress.steth,
+          address: contractAddress[chainName(chain)].steth,
           functionName: 'increaseAllowance',
-          args: [contractAddress.zap, parseUnits(getValues('amount'), token.decimals)],
+          args: [contractAddress[chainName(chain)].zap, parseUnits(getValues('amount'), token.decimals)],
           enabled: true,
         }
-      case 'submit':
+      case 'call_zap':
         return {
           // @ts-expect-error
           abi: flippenZapABI,
-          address: contractAddress.zap,
+          address: contractAddress[chainName(chain)].zap,
           functionName: 'enterLongEth',
           args: [parseUnits(getValues('amount'), token.decimals), Number(getValues('leverage'))],
           enabled: true,
         }
+      case 'swap_steth_to_ebtc': {
+        const batchSwap = {
+          kind: 0,
+          swaps: [
+            {
+              poolId: poolIds?.[chainName(chain)].steth_ebtc,
+              // stETH
+              assetInIndex: 0,
+              // eBTC
+              assetOutIndex: 1,
+              amount: String(parseUnits(getValues('amount'), token.decimals)),
+              userData: '0x',
+            },
+          ],
+          assets: [contractAddress[chainName(chain)].steth, contractAddress[chainName(chain)].ebtc],
+          funds: {
+            fromInternalBalance: false,
+            recipient: address as string,
+            sender: address as string,
+            toInternalBalance: false,
+          },
+          limit: [],
+          deadline: `${Math.ceil(Date.now() / 1000) + 60}`, //  // 60 seconds from now
+        }
+
+        const deltas = await readContract({
+          address: contractAddress[chainName(chain)].vault,
+          abi: vaultABI,
+          functionName: 'queryBatchSwap',
+          args: [batchSwap.kind, batchSwap.swaps, batchSwap.assets, batchSwap.funds],
+        })
+
+        return {
+          // @ts-expect-error
+          abi: vaultABI,
+          address: contractAddress[chainName(chain)].vault,
+          functionName: 'batchSwap',
+          args: [
+            batchSwap.kind,
+            batchSwap.swaps,
+            batchSwap.assets,
+            batchSwap.funds,
+            deltas, // +ve for max to send, -ve for min to receive
+            batchSwap.deadline,
+          ],
+          enabled: true,
+        }
+      }
       default:
         return {
           enabled: false,
@@ -256,9 +340,8 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
     }
   }
 
-  console.log('token', token)
-  console.log(getNextStep(), getPrepareContractWrite())
-  const { config, error: prepareError, isError: prepareIsError } = usePrepareContractWrite(getPrepareContractWrite())
+  // console.log('token', token)
+  const { config, error: prepareError, isError: prepareIsError } = usePrepareContractWrite(prepareContractConfig)
   const { data: writeData, error: writeError, isError: writeIsError, write } = useContractWrite(config)
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: writeData?.hash,
@@ -302,8 +385,8 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
           {...register('symbol', { required: true })}
         >
           <option value="stETH">stETH</option>
-          <option value="ETH">ETH</option>
-          <option value="USDC">USDC</option>
+          {/* <option value="ETH">ETH</option>
+          <option value="USDC">USDC</option> */}
         </select>
       </div>
       <div className="mb-3 text-end">

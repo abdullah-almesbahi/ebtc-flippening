@@ -5,9 +5,13 @@ import SetPositionCard from './SetPositionCard'
 import Card from './Card'
 import { BetPosition } from '@/store/types'
 import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
+import { useToast } from '@/contexts/ToastsContext'
 
 interface OpenRoundCardProps {
   data: DashboardDataQuery['rounds'][0]
+  hasEnteredUp: boolean
+  hasEnteredDown: boolean
+  betAmount: DashboardDataQuery['rounds'][0]['bets'][0]['amount']
 }
 
 interface StateType {
@@ -15,11 +19,12 @@ interface StateType {
   position: BetPosition
 }
 
-export default function OpenRoundCard({ data }: OpenRoundCardProps): JSX.Element {
+export default function OpenRoundCard({ data, hasEnteredUp, hasEnteredDown }: OpenRoundCardProps): JSX.Element {
   const [state, setState] = useState<StateType>({
     isSettingPosition: false,
     position: BetPosition.BULL,
   })
+  const { toastSuccess } = useToast()
 
   const { isSettingPosition, position } = state
 
@@ -45,37 +50,73 @@ export default function OpenRoundCard({ data }: OpenRoundCardProps): JSX.Element
     }))
   }
 
-  const handleSuccess = async (hash: string) => {}
+  const handleSuccess = async (hash: string) => {
+    handleBack()
+
+    toastSuccess(
+      'Success!',
+      <div>
+        {hasEnteredUp ? 'BTC beat ETH' : 'ETH beat BTC'} position entered. Your transaction hash is {hash}
+      </div>,
+    )
+  }
+
+  const getHasEnteredPosition = () => {
+    if (hasEnteredUp || hasEnteredDown) {
+      return false
+    }
+
+    if (data.lockPrice !== '0') {
+      return false
+    }
+
+    return true
+  }
+
+  const canEnterPosition = getHasEnteredPosition()
 
   return (
     <CardFlip height="300px" isFlipped={isSettingPosition}>
       <Card>
         <div className="d-flex flex-column">
           <CardHeader epoch={data.epoch} icon={<i className="fa fa-play text-default" />} status="next" title="Next" />
-
-          <div className="p-4">
-            <div className="text-grey-50 mt-20 fs-7">PLACE YOUR BET</div>
-            <div className="d-grid gap-4 col-12 mx-auto" style={{ marginTop: 20 }}>
-              <button
-                className="btn btn-lg fw-bold btn-success"
-                onClick={() => {
-                  handleSetPosition(BetPosition.BULL)
-                }}
-                type="button"
-              >
-                BTC beat ETH
-              </button>
-              <button
-                className="btn btn-lg fw-bold btn-danger"
-                onClick={() => {
-                  handleSetPosition(BetPosition.BEAR)
-                }}
-                type="button"
-              >
-                ETH beat BTC
-              </button>
+          {canEnterPosition ? (
+            <div className="p-4">
+              <div className="text-grey-50 mt-20 fs-7">PLACE YOUR BET</div>
+              <div className="d-grid gap-4 col-12 mx-auto" style={{ marginTop: 20 }}>
+                <button
+                  className="btn btn-lg fw-bold btn-success"
+                  onClick={() => {
+                    handleSetPosition(BetPosition.BULL)
+                  }}
+                  type="button"
+                >
+                  BTC beat ETH
+                </button>
+                <button
+                  className="btn btn-lg fw-bold btn-danger"
+                  onClick={() => {
+                    handleSetPosition(BetPosition.BEAR)
+                  }}
+                  type="button"
+                >
+                  ETH beat BTC
+                </button>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="p-4">
+              <div className="text-grey-50 mt-20 fs-7">ENTERED</div>
+              <div className="d-grid gap-4 col-12 mx-auto" style={{ marginTop: 20 }}>
+                <button
+                  className={`btn btn-lg disabled fw-bold btn-${hasEnteredUp ? 'success' : 'danger'}`}
+                  type="button"
+                >
+                  {hasEnteredUp ? 'BTC beat ETH' : 'ETH beat BTC'}
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </Card>
       <Card>

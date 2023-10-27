@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { WagmiConfig } from 'wagmi'
 import { sepolia, mainnet } from 'wagmi/chains'
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import { ToastListener, ToastsProvider } from '@/contexts/ToastsContext'
 
 // 1. Get projectId
 const projectId = process.env.NEXT_PUBLIC_PROJECT_ID || ''
@@ -39,7 +40,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
       {ready ? (
         <WagmiConfig config={wagmiConfig}>
           <ApolloProvider client={client}>
-            <SessionProvider>{children}</SessionProvider>
+            <ToastsProvider>
+              <>
+                <SessionProvider>{children}</SessionProvider>
+                <ToastListener />
+              </>
+            </ToastsProvider>
           </ApolloProvider>
         </WagmiConfig>
       ) : null}

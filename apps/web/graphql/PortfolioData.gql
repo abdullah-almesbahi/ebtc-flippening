@@ -1,0 +1,104 @@
+query PortfolioData($address: String) {
+  portfolio: user(where: { address: $address }) {
+    id
+    username
+    image
+    address
+    stats {
+      id
+      lastTransactionBlock
+      totalBets
+      totalBetsBull
+      totalBetsBear
+      totalSTETH
+      totalSTETHBull
+      totalSTETHBear
+      totalBetsClaimed
+      totalSTETHClaimed
+      winRate
+      averageSTETH
+      netSTETH
+      totalSharesHeld
+      totalShareHolders
+      totalRewards
+      shareValue
+      rank
+      points
+    }
+  }
+  shares(take: 10) {
+    id
+    isBuy
+    shareAmount
+    stethAmount
+    createdAt
+    subject {
+      id
+      address
+      image
+    }
+    trader {
+      id
+      address
+      image
+    }
+  }
+  bets(take: 10) {
+    id
+    position
+    round {
+      id
+      epoch
+    }
+    user {
+      id
+      stats {
+        id
+        netSTETH
+      }
+    }
+  }
+  holders: shares(take: 10) {
+    id
+    isBuy
+    shareAmount
+    stethAmount
+    createdAt
+    subject {
+      id
+      address
+      image
+    }
+    trader {
+      id
+      address
+      image
+    }
+  }
+  holding: shares(take: 10, orderBy: { createdAt: desc }) {
+    id
+    isBuy
+    shareAmount
+    stethAmount
+    createdAt
+    subject {
+      id
+      address
+      image
+    }
+    trader {
+      id
+      address
+      image
+    }
+  }
+  rewards {
+    id
+    amount
+    createdAt
+    user {
+      id
+      image
+    }
+  }
+}

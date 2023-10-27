@@ -5,6 +5,11 @@ import type { DashboardDataQuery } from '@/server/graphql/gen/graphql-types'
 
 interface ExpiredRoundCardProps {
   data: DashboardDataQuery['rounds'][0]
+  betAmount: DashboardDataQuery['rounds'][0]['bets'][0]['amount']
+  hasEnteredUp: boolean
+  hasEnteredDown: boolean
+  hasClaimedUp: boolean
+  hasClaimedDown: boolean
 }
 
 export default function ExpiredRoundCard({ data }: ExpiredRoundCardProps): JSX.Element {

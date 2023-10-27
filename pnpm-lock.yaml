@@ -62,15 +62,9 @@ importers:
       '@graphql-tools/schema':
         specifier: ^10.0.0
         version: 10.0.0(graphql@15.8.0)
-      '@lossdev/react-text-loop':
-        specifier: ^0.1.0
-        version: 0.1.0(react-dom@18.2.0)(react@18.2.0)
       '@next-auth/prisma-adapter':
         specifier: latest
         version: 1.0.7(@prisma/client@5.4.2)(next-auth@4.24.3)
-      '@popperjs/core':
-        specifier: ^2.11.7
-        version: 2.11.8
       '@prisma/nextjs-monorepo-workaround-plugin':
         specifier: 5.4.2
         version: 5.4.2
@@ -80,6 +74,9 @@ importers:
       '@wagmi/cli':
         specifier: 1.5.2
         version: 1.5.2(@wagmi/core@1.4.5)(typescript@5.0.4)(wagmi@1.4.5)
+      '@wagmi/core':
+        specifier: 1.4.5
+        version: 1.4.5(@types/react@18.2.31)(react@18.2.0)(typescript@5.0.4)(viem@1.16.6)
       '@web3modal/wagmi':
         specifier: 3.1.0
         version: 3.1.0(@types/react@18.2.31)(@wagmi/core@1.4.5)(typescript@5.0.4)(viem@1.16.6)
@@ -122,9 +119,6 @@ importers:
       react:
         specifier: ^18.2.0
         version: 18.2.0
-      react-collapse:
-        specifier: ^5.1.1
-        version: 5.1.1(react@18.2.0)
       react-copy-to-clipboard:
         specifier: 5.1.0
         version: 5.1.0(react@18.2.0)
@@ -140,9 +134,9 @@ importers:
       react-pro-sidebar:
         specifier: ^1.1.0-alpha.1
         version: 1.1.0-alpha.1(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)
-      react-slider:
-        specifier: ^2.0.5
-        version: 2.0.6(react@18.2.0)
+      react-transition-group:
+        specifier: '*'
+        version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
       reflect-metadata:
         specifier: ^0.1.13
         version: 0.1.13
@@ -162,7 +156,7 @@ importers:
         specifier: ^1.13.1
         version: 1.16.6(typescript@5.0.4)(zod@3.22.4)
       wagmi:
-        specifier: ^1.4.2
+        specifier: 1.4.5
         version: 1.4.5(@types/react@18.2.31)(react-dom@18.2.0)(react@18.2.0)(typescript@5.0.4)(viem@1.16.6)
       zustand:
         specifier: ^4.3.8
@@ -2738,19 +2732,6 @@ packages:
       '@lit-labs/ssr-dom-shim': 1.1.2
     dev: false
 
-  /@lossdev/react-text-loop@0.1.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-zl2LeHwbFInITRVK8QLxB+jIrNWjN5EJShn4gFcNFzMhIU3h8Fyq3Y4YCGiYuirLG2qHgwFTOX1SJmQf3U88vg==}
-    peerDependencies:
-      react: ^15.0.1 || ^16.0.1
-      react-dom: ^15.0.1 || ^16.0.1
-    dependencies:
-      '@serprex/react-motion': 0.6.3
-      cxs: 6.2.0
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-fast-compare: 3.2.0
-    dev: false
-
   /@metamask/safe-event-emitter@2.0.0:
     resolution: {integrity: sha512-/kSXhY692qiV1MXu6EeOZvg5nECLclxNXcKCxJ3cXQgYuRymRHpdx/t7JXfsK+JLjwA1e1c1/SBrlQYpusC29Q==}
     dev: false
@@ -3376,14 +3357,6 @@ packages:
     dependencies:
       '@noble/hashes': 1.3.2
       '@scure/base': 1.1.3
-    dev: false
-
-  /@serprex/react-motion@0.6.3:
-    resolution: {integrity: sha512-TC5QpaMFVLTSKoWisGvUvavNvlnjeDlXvSGR+uNVZRXmj85DZWtL3S1oobbGTXOsbGCo3u2c/IM8cjmPegOIGQ==}
-    dependencies:
-      performance-now: 2.1.0
-      prop-types: 15.8.1
-      raf: 3.4.1
     dev: false
 
   /@solana/buffer-layout@4.0.1:
@@ -5830,10 +5803,6 @@ packages:
   /csstype@3.1.2:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==}
 
-  /cxs@6.2.0:
-    resolution: {integrity: sha512-RGatb1BUwVMBzV8DRo9Kapc55bdGfAxMcukVk+ZzE3Ts8xaTve0GVz730kBDxjhEBU2LK+RPuAcjZb00Q3O24w==}
-    dev: false
-
   /damerau-levenshtein@1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
 
@@ -6050,6 +6019,13 @@ packages:
     engines: {node: '>=6.0.0'}
     dependencies:
       esutils: 2.0.3
+
+  /dom-helpers@5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
+    dependencies:
+      '@babel/runtime': 7.23.2
+      csstype: 3.1.2
+    dev: false
 
   /dot-case@2.1.1:
     resolution: {integrity: sha512-HnM6ZlFqcajLsyudHq7LeeLDr2rFAVYtDv/hV5qchQEidSck8j9OPUsXY9KwJv/lHMtYlX4DjRQqwFYa+0r8Ug==}
@@ -9457,10 +9433,6 @@ packages:
     resolution: {integrity: sha512-d+RQGp0MAYTIaDBIMmOfMwz3E+LOZnxx1HZd5R18mmCZY0QBlK0LDZfPc8FW8Ed2DlvsuE6PRjroDY+wg4+j/Q==}
     dev: false
 
-  /performance-now@2.1.0:
-    resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==}
-    dev: false
-
   /picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
 
@@ -9735,12 +9707,6 @@ packages:
     resolution: {integrity: sha512-tYC1Q1hgyRuHgloV/YXs2w15unPVh8qfu/qCTfhTYamaw7fyhumKa2yGpdSo87vY32rIclj+4fWYQXUMs9EHvg==}
     dev: false
 
-  /raf@3.4.1:
-    resolution: {integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==}
-    dependencies:
-      performance-now: 2.1.0
-    dev: false
-
   /randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
     dependencies:
@@ -9756,14 +9722,6 @@ packages:
       minimist: 1.2.8
       strip-json-comments: 2.0.1
     dev: true
-
-  /react-collapse@5.1.1(react@18.2.0):
-    resolution: {integrity: sha512-k6cd7csF1o9LBhQ4AGBIdxB60SUEUMQDAnL2z1YvYNr9KoKr+nDkhN6FK7uGaBd/rYrYfrMpzpmJEIeHRYogBw==}
-    peerDependencies:
-      react: '>=16.3.0'
-    dependencies:
-      react: 18.2.0
-    dev: false
 
   /react-copy-to-clipboard@5.1.0(react@18.2.0):
     resolution: {integrity: sha512-k61RsNgAayIJNoy9yDsYzDe/yAZAzEbEgcz3DZMhF686LEyukcE1hzurxe85JandPUG+yTfGVFzuEw3xt8WP/A==}
@@ -9796,10 +9754,6 @@ packages:
       scheduler: 0.23.0
     dev: false
 
-  /react-fast-compare@3.2.0:
-    resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
-    dev: false
-
   /react-hook-form@7.46.1(react@18.2.0):
     resolution: {integrity: sha512-0GfI31LRTBd5tqbXMGXT1Rdsv3rnvy0FjEk8Gn9/4tp6+s77T7DPZuGEpBRXOauL+NhyGT5iaXzdIM2R6F/E+w==}
     engines: {node: '>=12.22.0'}
@@ -9828,13 +9782,18 @@ packages:
       - '@types/react'
     dev: false
 
-  /react-slider@2.0.6(react@18.2.0):
-    resolution: {integrity: sha512-gJxG1HwmuMTJ+oWIRCmVWvgwotNCbByTwRkFZC6U4MBsHqJBmxwbYRJUmxy4Tke1ef8r9jfXjgkmY/uHOCEvbA==}
+  /react-transition-group@4.4.5(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
     peerDependencies:
-      react: ^16 || ^17 || ^18
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
     dependencies:
+      '@babel/runtime': 7.23.2
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
       prop-types: 15.8.1
       react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:

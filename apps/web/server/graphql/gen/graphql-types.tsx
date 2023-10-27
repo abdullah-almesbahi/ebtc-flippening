@@ -3405,9 +3405,16 @@ export type Referral = {
   __typename?: 'Referral';
   id: Scalars['String']['output'];
   referralCode: Scalars['String']['output'];
+  referredUser?: Maybe<User>;
+  referredUserId?: Maybe<Scalars['String']['output']>;
   used: Scalars['Boolean']['output'];
   user: User;
   userId: Scalars['String']['output'];
+};
+
+
+export type ReferralReferredUserArgs = {
+  where?: InputMaybe<UserWhereInput>;
 };
 
 export type ReferralCountAggregate = {
@@ -3415,6 +3422,7 @@ export type ReferralCountAggregate = {
   _all: Scalars['Int']['output'];
   id: Scalars['Int']['output'];
   referralCode: Scalars['Int']['output'];
+  referredUserId: Scalars['Int']['output'];
   used: Scalars['Int']['output'];
   userId: Scalars['Int']['output'];
 };
@@ -3422,6 +3430,7 @@ export type ReferralCountAggregate = {
 export type ReferralCountOrderByAggregateInput = {
   id?: InputMaybe<SortOrder>;
   referralCode?: InputMaybe<SortOrder>;
+  referredUserId?: InputMaybe<SortOrder>;
   used?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
@@ -3429,6 +3438,7 @@ export type ReferralCountOrderByAggregateInput = {
 export type ReferralCreateInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   referralCode: Scalars['String']['input'];
+  referredUser?: InputMaybe<UserCreateNestedOneWithoutReferredByInput>;
   used: Scalars['Boolean']['input'];
   user: UserCreateNestedOneWithoutReferralsInput;
 };
@@ -3436,6 +3446,7 @@ export type ReferralCreateInput = {
 export type ReferralCreateManyInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   referralCode: Scalars['String']['input'];
+  referredUserId?: InputMaybe<Scalars['String']['input']>;
   used: Scalars['Boolean']['input'];
   userId: Scalars['String']['input'];
 };
@@ -3443,6 +3454,7 @@ export type ReferralCreateManyInput = {
 export type ReferralCreateManyUserInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   referralCode: Scalars['String']['input'];
+  referredUserId?: InputMaybe<Scalars['String']['input']>;
   used: Scalars['Boolean']['input'];
 };
 
@@ -3458,14 +3470,33 @@ export type ReferralCreateNestedManyWithoutUserInput = {
   createMany?: InputMaybe<ReferralCreateManyUserInputEnvelope>;
 };
 
+export type ReferralCreateNestedOneWithoutReferredUserInput = {
+  connect?: InputMaybe<ReferralWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ReferralCreateOrConnectWithoutReferredUserInput>;
+  create?: InputMaybe<ReferralCreateWithoutReferredUserInput>;
+};
+
+export type ReferralCreateOrConnectWithoutReferredUserInput = {
+  create: ReferralCreateWithoutReferredUserInput;
+  where: ReferralWhereUniqueInput;
+};
+
 export type ReferralCreateOrConnectWithoutUserInput = {
   create: ReferralCreateWithoutUserInput;
   where: ReferralWhereUniqueInput;
 };
 
+export type ReferralCreateWithoutReferredUserInput = {
+  id?: InputMaybe<Scalars['String']['input']>;
+  referralCode: Scalars['String']['input'];
+  used: Scalars['Boolean']['input'];
+  user: UserCreateNestedOneWithoutReferralsInput;
+};
+
 export type ReferralCreateWithoutUserInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   referralCode: Scalars['String']['input'];
+  referredUser?: InputMaybe<UserCreateNestedOneWithoutReferredByInput>;
   used: Scalars['Boolean']['input'];
 };
 
@@ -3476,6 +3507,7 @@ export type ReferralGroupBy = {
   _min?: Maybe<ReferralMinAggregate>;
   id: Scalars['String']['output'];
   referralCode: Scalars['String']['output'];
+  referredUserId?: Maybe<Scalars['String']['output']>;
   used: Scalars['Boolean']['output'];
   userId: Scalars['String']['output'];
 };
@@ -3490,6 +3522,7 @@ export type ReferralMaxAggregate = {
   __typename?: 'ReferralMaxAggregate';
   id?: Maybe<Scalars['String']['output']>;
   referralCode?: Maybe<Scalars['String']['output']>;
+  referredUserId?: Maybe<Scalars['String']['output']>;
   used?: Maybe<Scalars['Boolean']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
 };
@@ -3497,6 +3530,7 @@ export type ReferralMaxAggregate = {
 export type ReferralMaxOrderByAggregateInput = {
   id?: InputMaybe<SortOrder>;
   referralCode?: InputMaybe<SortOrder>;
+  referredUserId?: InputMaybe<SortOrder>;
   used?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
@@ -3505,6 +3539,7 @@ export type ReferralMinAggregate = {
   __typename?: 'ReferralMinAggregate';
   id?: Maybe<Scalars['String']['output']>;
   referralCode?: Maybe<Scalars['String']['output']>;
+  referredUserId?: Maybe<Scalars['String']['output']>;
   used?: Maybe<Scalars['Boolean']['output']>;
   userId?: Maybe<Scalars['String']['output']>;
 };
@@ -3512,8 +3547,14 @@ export type ReferralMinAggregate = {
 export type ReferralMinOrderByAggregateInput = {
   id?: InputMaybe<SortOrder>;
   referralCode?: InputMaybe<SortOrder>;
+  referredUserId?: InputMaybe<SortOrder>;
   used?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
+};
+
+export type ReferralNullableRelationFilter = {
+  is?: InputMaybe<ReferralWhereInput>;
+  isNot?: InputMaybe<ReferralWhereInput>;
 };
 
 export type ReferralOrderByRelationAggregateInput = {
@@ -3526,6 +3567,7 @@ export type ReferralOrderByWithAggregationInput = {
   _min?: InputMaybe<ReferralMinOrderByAggregateInput>;
   id?: InputMaybe<SortOrder>;
   referralCode?: InputMaybe<SortOrder>;
+  referredUserId?: InputMaybe<SortOrderInput>;
   used?: InputMaybe<SortOrder>;
   userId?: InputMaybe<SortOrder>;
 };
@@ -3533,6 +3575,8 @@ export type ReferralOrderByWithAggregationInput = {
 export type ReferralOrderByWithRelationInput = {
   id?: InputMaybe<SortOrder>;
   referralCode?: InputMaybe<SortOrder>;
+  referredUser?: InputMaybe<UserOrderByWithRelationInput>;
+  referredUserId?: InputMaybe<SortOrderInput>;
   used?: InputMaybe<SortOrder>;
   user?: InputMaybe<UserOrderByWithRelationInput>;
   userId?: InputMaybe<SortOrder>;
@@ -3541,6 +3585,7 @@ export type ReferralOrderByWithRelationInput = {
 export enum ReferralScalarFieldEnum {
   Id = 'id',
   ReferralCode = 'referralCode',
+  ReferredUserId = 'referredUserId',
   Used = 'used',
   UserId = 'userId'
 }
@@ -3551,6 +3596,7 @@ export type ReferralScalarWhereInput = {
   OR?: InputMaybe<Array<ReferralScalarWhereInput>>;
   id?: InputMaybe<StringFilter>;
   referralCode?: InputMaybe<StringFilter>;
+  referredUserId?: InputMaybe<StringNullableFilter>;
   used?: InputMaybe<BoolFilter>;
   userId?: InputMaybe<StringFilter>;
 };
@@ -3561,6 +3607,7 @@ export type ReferralScalarWhereWithAggregatesInput = {
   OR?: InputMaybe<Array<ReferralScalarWhereWithAggregatesInput>>;
   id?: InputMaybe<StringWithAggregatesFilter>;
   referralCode?: InputMaybe<StringWithAggregatesFilter>;
+  referredUserId?: InputMaybe<StringNullableWithAggregatesFilter>;
   used?: InputMaybe<BoolWithAggregatesFilter>;
   userId?: InputMaybe<StringWithAggregatesFilter>;
 };
@@ -3568,6 +3615,7 @@ export type ReferralScalarWhereWithAggregatesInput = {
 export type ReferralUpdateInput = {
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   referralCode?: InputMaybe<StringFieldUpdateOperationsInput>;
+  referredUser?: InputMaybe<UserUpdateOneWithoutReferredByNestedInput>;
   used?: InputMaybe<BoolFieldUpdateOperationsInput>;
   user?: InputMaybe<UserUpdateOneRequiredWithoutReferralsNestedInput>;
 };
@@ -3597,14 +3645,37 @@ export type ReferralUpdateManyWithoutUserNestedInput = {
   upsert?: InputMaybe<Array<ReferralUpsertWithWhereUniqueWithoutUserInput>>;
 };
 
+export type ReferralUpdateOneWithoutReferredUserNestedInput = {
+  connect?: InputMaybe<ReferralWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<ReferralCreateOrConnectWithoutReferredUserInput>;
+  create?: InputMaybe<ReferralCreateWithoutReferredUserInput>;
+  delete?: InputMaybe<ReferralWhereInput>;
+  disconnect?: InputMaybe<ReferralWhereInput>;
+  update?: InputMaybe<ReferralUpdateToOneWithWhereWithoutReferredUserInput>;
+  upsert?: InputMaybe<ReferralUpsertWithoutReferredUserInput>;
+};
+
+export type ReferralUpdateToOneWithWhereWithoutReferredUserInput = {
+  data: ReferralUpdateWithoutReferredUserInput;
+  where?: InputMaybe<ReferralWhereInput>;
+};
+
 export type ReferralUpdateWithWhereUniqueWithoutUserInput = {
   data: ReferralUpdateWithoutUserInput;
   where: ReferralWhereUniqueInput;
 };
 
+export type ReferralUpdateWithoutReferredUserInput = {
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  referralCode?: InputMaybe<StringFieldUpdateOperationsInput>;
+  used?: InputMaybe<BoolFieldUpdateOperationsInput>;
+  user?: InputMaybe<UserUpdateOneRequiredWithoutReferralsNestedInput>;
+};
+
 export type ReferralUpdateWithoutUserInput = {
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   referralCode?: InputMaybe<StringFieldUpdateOperationsInput>;
+  referredUser?: InputMaybe<UserUpdateOneWithoutReferredByNestedInput>;
   used?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
@@ -3614,12 +3685,20 @@ export type ReferralUpsertWithWhereUniqueWithoutUserInput = {
   where: ReferralWhereUniqueInput;
 };
 
+export type ReferralUpsertWithoutReferredUserInput = {
+  create: ReferralCreateWithoutReferredUserInput;
+  update: ReferralUpdateWithoutReferredUserInput;
+  where?: InputMaybe<ReferralWhereInput>;
+};
+
 export type ReferralWhereInput = {
   AND?: InputMaybe<Array<ReferralWhereInput>>;
   NOT?: InputMaybe<Array<ReferralWhereInput>>;
   OR?: InputMaybe<Array<ReferralWhereInput>>;
   id?: InputMaybe<StringFilter>;
   referralCode?: InputMaybe<StringFilter>;
+  referredUser?: InputMaybe<UserNullableRelationFilter>;
+  referredUserId?: InputMaybe<StringNullableFilter>;
   used?: InputMaybe<BoolFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
@@ -3631,6 +3710,8 @@ export type ReferralWhereUniqueInput = {
   OR?: InputMaybe<Array<ReferralWhereInput>>;
   id?: InputMaybe<Scalars['String']['input']>;
   referralCode?: InputMaybe<Scalars['String']['input']>;
+  referredUser?: InputMaybe<UserNullableRelationFilter>;
+  referredUserId?: InputMaybe<Scalars['String']['input']>;
   used?: InputMaybe<BoolFilter>;
   user?: InputMaybe<UserRelationFilter>;
   userId?: InputMaybe<StringFilter>;
@@ -5370,12 +5451,15 @@ export type User = {
   image?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   referrals: Array<Referral>;
+  referredBy?: Maybe<Referral>;
+  referredByReferralId?: Maybe<Scalars['String']['output']>;
   rewards: Array<Reward>;
   sessions: Array<Session>;
   soldShares: Array<Share>;
   stats?: Maybe<UserStats>;
   updatedAt: Scalars['DateTime']['output'];
   username?: Maybe<Scalars['String']['output']>;
+  verified: Scalars['Boolean']['output'];
 };
 
 
@@ -5425,6 +5509,11 @@ export type UserReferralsArgs = {
   orderBy?: InputMaybe<Array<ReferralOrderByWithRelationInput>>;
   skip?: InputMaybe<Scalars['Int']['input']>;
   take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<ReferralWhereInput>;
+};
+
+
+export type UserReferredByArgs = {
   where?: InputMaybe<ReferralWhereInput>;
 };
 
@@ -5525,8 +5614,10 @@ export type UserCountAggregate = {
   id: Scalars['Int']['output'];
   image: Scalars['Int']['output'];
   name: Scalars['Int']['output'];
+  referredByReferralId: Scalars['Int']['output'];
   updatedAt: Scalars['Int']['output'];
   username: Scalars['Int']['output'];
+  verified: Scalars['Int']['output'];
 };
 
 export type UserCountOrderByAggregateInput = {
@@ -5537,8 +5628,10 @@ export type UserCountOrderByAggregateInput = {
   id?: InputMaybe<SortOrder>;
   image?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  referredByReferralId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   username?: InputMaybe<SortOrder>;
+  verified?: InputMaybe<SortOrder>;
 };
 
 export type UserCreateInput = {
@@ -5554,12 +5647,15 @@ export type UserCreateInput = {
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
+  referredBy?: InputMaybe<ReferralCreateNestedOneWithoutReferredUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
   sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
   soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
   stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserCreateManyInput = {
@@ -5570,8 +5666,10 @@ export type UserCreateManyInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserCreateNestedOneWithoutAccountsInput = {
@@ -5602,6 +5700,12 @@ export type UserCreateNestedOneWithoutReferralsInput = {
   connect?: InputMaybe<UserWhereUniqueInput>;
   connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutReferralsInput>;
   create?: InputMaybe<UserCreateWithoutReferralsInput>;
+};
+
+export type UserCreateNestedOneWithoutReferredByInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutReferredByInput>;
+  create?: InputMaybe<UserCreateWithoutReferredByInput>;
 };
 
 export type UserCreateNestedOneWithoutRewardsInput = {
@@ -5653,6 +5757,11 @@ export type UserCreateOrConnectWithoutReferralsInput = {
   where: UserWhereUniqueInput;
 };
 
+export type UserCreateOrConnectWithoutReferredByInput = {
+  create: UserCreateWithoutReferredByInput;
+  where: UserWhereUniqueInput;
+};
+
 export type UserCreateOrConnectWithoutRewardsInput = {
   create: UserCreateWithoutRewardsInput;
   where: UserWhereUniqueInput;
@@ -5685,12 +5794,15 @@ export type UserCreateWithoutAccountsInput = {
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
+  referredBy?: InputMaybe<ReferralCreateNestedOneWithoutReferredUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
   sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
   soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
   stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserCreateWithoutActivityLogsInput = {
@@ -5705,12 +5817,15 @@ export type UserCreateWithoutActivityLogsInput = {
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
+  referredBy?: InputMaybe<ReferralCreateNestedOneWithoutReferredUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
   sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
   soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
   stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserCreateWithoutBetsInput = {
@@ -5725,12 +5840,15 @@ export type UserCreateWithoutBetsInput = {
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
+  referredBy?: InputMaybe<ReferralCreateNestedOneWithoutReferredUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
   sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
   soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
   stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserCreateWithoutBoughtSharesInput = {
@@ -5745,12 +5863,15 @@ export type UserCreateWithoutBoughtSharesInput = {
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
+  referredBy?: InputMaybe<ReferralCreateNestedOneWithoutReferredUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
   sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
   soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
   stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserCreateWithoutReferralsInput = {
@@ -5765,12 +5886,38 @@ export type UserCreateWithoutReferralsInput = {
   id?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  referredBy?: InputMaybe<ReferralCreateNestedOneWithoutReferredUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
   sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
   soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
   stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type UserCreateWithoutReferredByInput = {
+  accounts?: InputMaybe<AccountCreateNestedManyWithoutUserInput>;
+  activityLogs?: InputMaybe<ActivityLogCreateNestedManyWithoutUserInput>;
+  address?: InputMaybe<Scalars['String']['input']>;
+  bets?: InputMaybe<BetCreateNestedManyWithoutUserInput>;
+  boughtShares?: InputMaybe<ShareCreateNestedManyWithoutTraderInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  emailVerified?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
+  rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
+  sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
+  soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
+  stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserCreateWithoutRewardsInput = {
@@ -5786,11 +5933,14 @@ export type UserCreateWithoutRewardsInput = {
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
+  referredBy?: InputMaybe<ReferralCreateNestedOneWithoutReferredUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
   soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
   stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserCreateWithoutSessionsInput = {
@@ -5806,11 +5956,14 @@ export type UserCreateWithoutSessionsInput = {
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
+  referredBy?: InputMaybe<ReferralCreateNestedOneWithoutReferredUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
   soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
   stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserCreateWithoutSoldSharesInput = {
@@ -5826,11 +5979,14 @@ export type UserCreateWithoutSoldSharesInput = {
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
+  referredBy?: InputMaybe<ReferralCreateNestedOneWithoutReferredUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
   sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
   stats?: InputMaybe<UserStatsCreateNestedOneWithoutUserInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserCreateWithoutStatsInput = {
@@ -5846,11 +6002,14 @@ export type UserCreateWithoutStatsInput = {
   image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   referrals?: InputMaybe<ReferralCreateNestedManyWithoutUserInput>;
+  referredBy?: InputMaybe<ReferralCreateNestedOneWithoutReferredUserInput>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   rewards?: InputMaybe<RewardCreateNestedManyWithoutUserInput>;
   sessions?: InputMaybe<SessionCreateNestedManyWithoutUserInput>;
   soldShares?: InputMaybe<ShareCreateNestedManyWithoutSubjectInput>;
   updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type UserGroupBy = {
@@ -5865,8 +6024,10 @@ export type UserGroupBy = {
   id: Scalars['String']['output'];
   image?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  referredByReferralId?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
   username?: Maybe<Scalars['String']['output']>;
+  verified: Scalars['Boolean']['output'];
 };
 
 export type UserMaxAggregate = {
@@ -5878,8 +6039,10 @@ export type UserMaxAggregate = {
   id?: Maybe<Scalars['String']['output']>;
   image?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  referredByReferralId?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   username?: Maybe<Scalars['String']['output']>;
+  verified?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type UserMaxOrderByAggregateInput = {
@@ -5890,8 +6053,10 @@ export type UserMaxOrderByAggregateInput = {
   id?: InputMaybe<SortOrder>;
   image?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  referredByReferralId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   username?: InputMaybe<SortOrder>;
+  verified?: InputMaybe<SortOrder>;
 };
 
 export type UserMinAggregate = {
@@ -5903,8 +6068,10 @@ export type UserMinAggregate = {
   id?: Maybe<Scalars['String']['output']>;
   image?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+  referredByReferralId?: Maybe<Scalars['String']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   username?: Maybe<Scalars['String']['output']>;
+  verified?: Maybe<Scalars['Boolean']['output']>;
 };
 
 export type UserMinOrderByAggregateInput = {
@@ -5915,8 +6082,15 @@ export type UserMinOrderByAggregateInput = {
   id?: InputMaybe<SortOrder>;
   image?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
+  referredByReferralId?: InputMaybe<SortOrder>;
   updatedAt?: InputMaybe<SortOrder>;
   username?: InputMaybe<SortOrder>;
+  verified?: InputMaybe<SortOrder>;
+};
+
+export type UserNullableRelationFilter = {
+  is?: InputMaybe<UserWhereInput>;
+  isNot?: InputMaybe<UserWhereInput>;
 };
 
 export type UserOrderByWithAggregationInput = {
@@ -5930,8 +6104,10 @@ export type UserOrderByWithAggregationInput = {
   id?: InputMaybe<SortOrder>;
   image?: InputMaybe<SortOrderInput>;
   name?: InputMaybe<SortOrderInput>;
+  referredByReferralId?: InputMaybe<SortOrderInput>;
   updatedAt?: InputMaybe<SortOrder>;
   username?: InputMaybe<SortOrderInput>;
+  verified?: InputMaybe<SortOrder>;
 };
 
 export type UserOrderByWithRelationInput = {
@@ -5947,12 +6123,15 @@ export type UserOrderByWithRelationInput = {
   image?: InputMaybe<SortOrderInput>;
   name?: InputMaybe<SortOrderInput>;
   referrals?: InputMaybe<ReferralOrderByRelationAggregateInput>;
+  referredBy?: InputMaybe<ReferralOrderByWithRelationInput>;
+  referredByReferralId?: InputMaybe<SortOrderInput>;
   rewards?: InputMaybe<RewardOrderByRelationAggregateInput>;
   sessions?: InputMaybe<SessionOrderByRelationAggregateInput>;
   soldShares?: InputMaybe<ShareOrderByRelationAggregateInput>;
   stats?: InputMaybe<UserStatsOrderByWithRelationInput>;
   updatedAt?: InputMaybe<SortOrder>;
   username?: InputMaybe<SortOrderInput>;
+  verified?: InputMaybe<SortOrder>;
 };
 
 export type UserRelationFilter = {
@@ -5968,8 +6147,10 @@ export enum UserScalarFieldEnum {
   Id = 'id',
   Image = 'image',
   Name = 'name',
+  ReferredByReferralId = 'referredByReferralId',
   UpdatedAt = 'updatedAt',
-  Username = 'username'
+  Username = 'username',
+  Verified = 'verified'
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -5983,8 +6164,10 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: InputMaybe<StringWithAggregatesFilter>;
   image?: InputMaybe<StringNullableWithAggregatesFilter>;
   name?: InputMaybe<StringNullableWithAggregatesFilter>;
+  referredByReferralId?: InputMaybe<StringNullableWithAggregatesFilter>;
   updatedAt?: InputMaybe<DateTimeWithAggregatesFilter>;
   username?: InputMaybe<StringNullableWithAggregatesFilter>;
+  verified?: InputMaybe<BoolWithAggregatesFilter>;
 };
 
 export type UserStats = {
@@ -6609,12 +6792,15 @@ export type UserUpdateInput = {
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
+  referredBy?: InputMaybe<ReferralUpdateOneWithoutReferredUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
   sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
   soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
   stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateManyMutationInput = {
@@ -6625,8 +6811,10 @@ export type UserUpdateManyMutationInput = {
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
@@ -6701,6 +6889,16 @@ export type UserUpdateOneRequiredWithoutStatsNestedInput = {
   upsert?: InputMaybe<UserUpsertWithoutStatsInput>;
 };
 
+export type UserUpdateOneWithoutReferredByNestedInput = {
+  connect?: InputMaybe<UserWhereUniqueInput>;
+  connectOrCreate?: InputMaybe<UserCreateOrConnectWithoutReferredByInput>;
+  create?: InputMaybe<UserCreateWithoutReferredByInput>;
+  delete?: InputMaybe<UserWhereInput>;
+  disconnect?: InputMaybe<UserWhereInput>;
+  update?: InputMaybe<UserUpdateToOneWithWhereWithoutReferredByInput>;
+  upsert?: InputMaybe<UserUpsertWithoutReferredByInput>;
+};
+
 export type UserUpdateToOneWithWhereWithoutAccountsInput = {
   data: UserUpdateWithoutAccountsInput;
   where?: InputMaybe<UserWhereInput>;
@@ -6723,6 +6921,11 @@ export type UserUpdateToOneWithWhereWithoutBoughtSharesInput = {
 
 export type UserUpdateToOneWithWhereWithoutReferralsInput = {
   data: UserUpdateWithoutReferralsInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type UserUpdateToOneWithWhereWithoutReferredByInput = {
+  data: UserUpdateWithoutReferredByInput;
   where?: InputMaybe<UserWhereInput>;
 };
 
@@ -6758,12 +6961,15 @@ export type UserUpdateWithoutAccountsInput = {
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
+  referredBy?: InputMaybe<ReferralUpdateOneWithoutReferredUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
   sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
   soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
   stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutActivityLogsInput = {
@@ -6778,12 +6984,15 @@ export type UserUpdateWithoutActivityLogsInput = {
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
+  referredBy?: InputMaybe<ReferralUpdateOneWithoutReferredUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
   sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
   soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
   stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutBetsInput = {
@@ -6798,12 +7007,15 @@ export type UserUpdateWithoutBetsInput = {
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
+  referredBy?: InputMaybe<ReferralUpdateOneWithoutReferredUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
   sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
   soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
   stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutBoughtSharesInput = {
@@ -6818,12 +7030,15 @@ export type UserUpdateWithoutBoughtSharesInput = {
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
+  referredBy?: InputMaybe<ReferralUpdateOneWithoutReferredUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
   sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
   soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
   stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutReferralsInput = {
@@ -6838,12 +7053,38 @@ export type UserUpdateWithoutReferralsInput = {
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  referredBy?: InputMaybe<ReferralUpdateOneWithoutReferredUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
   sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
   soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
   stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
+};
+
+export type UserUpdateWithoutReferredByInput = {
+  accounts?: InputMaybe<AccountUpdateManyWithoutUserNestedInput>;
+  activityLogs?: InputMaybe<ActivityLogUpdateManyWithoutUserNestedInput>;
+  address?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  bets?: InputMaybe<BetUpdateManyWithoutUserNestedInput>;
+  boughtShares?: InputMaybe<ShareUpdateManyWithoutTraderNestedInput>;
+  createdAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  email?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  emailVerified?: InputMaybe<NullableDateTimeFieldUpdateOperationsInput>;
+  id?: InputMaybe<StringFieldUpdateOperationsInput>;
+  image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
+  sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
+  soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
+  stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
+  updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
+  username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutRewardsInput = {
@@ -6859,11 +7100,14 @@ export type UserUpdateWithoutRewardsInput = {
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
+  referredBy?: InputMaybe<ReferralUpdateOneWithoutReferredUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
   soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
   stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutSessionsInput = {
@@ -6879,11 +7123,14 @@ export type UserUpdateWithoutSessionsInput = {
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
+  referredBy?: InputMaybe<ReferralUpdateOneWithoutReferredUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
   soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
   stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutSoldSharesInput = {
@@ -6899,11 +7146,14 @@ export type UserUpdateWithoutSoldSharesInput = {
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
+  referredBy?: InputMaybe<ReferralUpdateOneWithoutReferredUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
   sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
   stats?: InputMaybe<UserStatsUpdateOneWithoutUserNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpdateWithoutStatsInput = {
@@ -6919,11 +7169,14 @@ export type UserUpdateWithoutStatsInput = {
   image?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   name?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   referrals?: InputMaybe<ReferralUpdateManyWithoutUserNestedInput>;
+  referredBy?: InputMaybe<ReferralUpdateOneWithoutReferredUserNestedInput>;
+  referredByReferralId?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
   rewards?: InputMaybe<RewardUpdateManyWithoutUserNestedInput>;
   sessions?: InputMaybe<SessionUpdateManyWithoutUserNestedInput>;
   soldShares?: InputMaybe<ShareUpdateManyWithoutSubjectNestedInput>;
   updatedAt?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   username?: InputMaybe<NullableStringFieldUpdateOperationsInput>;
+  verified?: InputMaybe<BoolFieldUpdateOperationsInput>;
 };
 
 export type UserUpsertWithoutAccountsInput = {
@@ -6953,6 +7206,12 @@ export type UserUpsertWithoutBoughtSharesInput = {
 export type UserUpsertWithoutReferralsInput = {
   create: UserCreateWithoutReferralsInput;
   update: UserUpdateWithoutReferralsInput;
+  where?: InputMaybe<UserWhereInput>;
+};
+
+export type UserUpsertWithoutReferredByInput = {
+  create: UserCreateWithoutReferredByInput;
+  update: UserUpdateWithoutReferredByInput;
   where?: InputMaybe<UserWhereInput>;
 };
 
@@ -6996,12 +7255,15 @@ export type UserWhereInput = {
   image?: InputMaybe<StringNullableFilter>;
   name?: InputMaybe<StringNullableFilter>;
   referrals?: InputMaybe<ReferralListRelationFilter>;
+  referredBy?: InputMaybe<ReferralNullableRelationFilter>;
+  referredByReferralId?: InputMaybe<StringNullableFilter>;
   rewards?: InputMaybe<RewardListRelationFilter>;
   sessions?: InputMaybe<SessionListRelationFilter>;
   soldShares?: InputMaybe<ShareListRelationFilter>;
   stats?: InputMaybe<UserStatsNullableRelationFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   username?: InputMaybe<StringNullableFilter>;
+  verified?: InputMaybe<BoolFilter>;
 };
 
 export type UserWhereUniqueInput = {
@@ -7020,12 +7282,15 @@ export type UserWhereUniqueInput = {
   image?: InputMaybe<StringNullableFilter>;
   name?: InputMaybe<StringNullableFilter>;
   referrals?: InputMaybe<ReferralListRelationFilter>;
+  referredBy?: InputMaybe<ReferralNullableRelationFilter>;
+  referredByReferralId?: InputMaybe<Scalars['String']['input']>;
   rewards?: InputMaybe<RewardListRelationFilter>;
   sessions?: InputMaybe<SessionListRelationFilter>;
   soldShares?: InputMaybe<ShareListRelationFilter>;
   stats?: InputMaybe<UserStatsNullableRelationFilter>;
   updatedAt?: InputMaybe<DateTimeFilter>;
   username?: InputMaybe<Scalars['String']['input']>;
+  verified?: InputMaybe<BoolFilter>;
 };
 
 export type VerificationToken = {
@@ -7166,12 +7431,7 @@ export type VerificationTokenWhereUniqueInput = {
 export type DashboardDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DashboardDataQuery = { __typename?: 'Query', rounds: Array<{ __typename?: 'Round', id: string, epoch: number, closePrice: any, lockPrice: any }>, topTraders: Array<{ __typename?: 'User', id: string, image?: string | null, username?: string | null, address?: string | null, stats?: { __typename?: 'UserStats', netSTETH: any, winRate: number, totalBetsClaimed: number, totalBets: number } | null }> };
-
-export type ShareDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ShareDataQuery = { __typename?: 'Query', me: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }>, holders: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }>, global: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }> };
+export type DashboardDataQuery = { __typename?: 'Query', rounds: Array<{ __typename?: 'Round', id: string, epoch: number, closePrice: any, lockPrice: any, bets: Array<{ __typename?: 'Bet', id: string, amount: any, claimed: boolean, position: BetPosition, userId: string, roundId: string }> }>, topTraders: Array<{ __typename?: 'User', id: string, image?: string | null, username?: string | null, address?: string | null, stats?: { __typename?: 'UserStats', netSTETH: any, winRate: number, totalBetsClaimed: number, totalBets: number } | null }> };
 
 export type PortfolioDataQueryVariables = Exact<{
   address?: InputMaybe<Scalars['String']['input']>;
@@ -7187,6 +7447,11 @@ export type ReferralDataQueryVariables = Exact<{
 
 export type ReferralDataQuery = { __typename?: 'Query', referrals: Array<{ __typename?: 'Referral', id: string, used: boolean, referralCode: string }> };
 
+export type ShareDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ShareDataQuery = { __typename?: 'Query', me: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }>, holders: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }>, global: Array<{ __typename?: 'Share', id: string, isBuy: boolean, shareAmount: any, stethAmount: any, createdAt: any, subject: { __typename?: 'User', id: string, address?: string | null, image?: string | null }, trader: { __typename?: 'User', id: string, address?: string | null, image?: string | null } }> };
+
 
 export const DashboardDataDocument = gql`
     query DashboardData {
@@ -7195,6 +7460,14 @@ export const DashboardDataDocument = gql`
     epoch
     closePrice
     lockPrice
+    bets {
+      id
+      amount
+      claimed
+      position
+      userId
+      roundId
+    }
   }
   topTraders: users(take: 12) {
     id
@@ -7237,88 +7510,6 @@ export function useDashboardDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type DashboardDataQueryHookResult = ReturnType<typeof useDashboardDataQuery>;
 export type DashboardDataLazyQueryHookResult = ReturnType<typeof useDashboardDataLazyQuery>;
 export type DashboardDataQueryResult = Apollo.QueryResult<DashboardDataQuery, DashboardDataQueryVariables>;
-export const ShareDataDocument = gql`
-    query ShareData {
-  me: shares(take: 10) {
-    id
-    isBuy
-    shareAmount
-    stethAmount
-    createdAt
-    subject {
-      id
-      address
-      image
-    }
-    trader {
-      id
-      address
-      image
-    }
-  }
-  holders: shares(take: 10) {
-    id
-    isBuy
-    shareAmount
-    stethAmount
-    createdAt
-    subject {
-      id
-      address
-      image
-    }
-    trader {
-      id
-      address
-      image
-    }
-  }
-  global: shares(take: 10) {
-    id
-    isBuy
-    shareAmount
-    stethAmount
-    createdAt
-    subject {
-      id
-      address
-      image
-    }
-    trader {
-      id
-      address
-      image
-    }
-  }
-}
-    `;
-
-/**
- * __useShareDataQuery__
- *
- * To run a query within a React component, call `useShareDataQuery` and pass it any options that fit your needs.
- * When your component renders, `useShareDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useShareDataQuery({
- *   variables: {
- *   },
- * });
- */
-export function useShareDataQuery(baseOptions?: Apollo.QueryHookOptions<ShareDataQuery, ShareDataQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ShareDataQuery, ShareDataQueryVariables>(ShareDataDocument, options);
-      }
-export function useShareDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ShareDataQuery, ShareDataQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ShareDataQuery, ShareDataQueryVariables>(ShareDataDocument, options);
-        }
-export type ShareDataQueryHookResult = ReturnType<typeof useShareDataQuery>;
-export type ShareDataLazyQueryHookResult = ReturnType<typeof useShareDataLazyQuery>;
-export type ShareDataQueryResult = Apollo.QueryResult<ShareDataQuery, ShareDataQueryVariables>;
 export const PortfolioDataDocument = gql`
     query PortfolioData($address: String) {
   portfolio: user(where: {address: $address}) {
@@ -7490,3 +7681,85 @@ export function useReferralDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type ReferralDataQueryHookResult = ReturnType<typeof useReferralDataQuery>;
 export type ReferralDataLazyQueryHookResult = ReturnType<typeof useReferralDataLazyQuery>;
 export type ReferralDataQueryResult = Apollo.QueryResult<ReferralDataQuery, ReferralDataQueryVariables>;
+export const ShareDataDocument = gql`
+    query ShareData {
+  me: shares(take: 10) {
+    id
+    isBuy
+    shareAmount
+    stethAmount
+    createdAt
+    subject {
+      id
+      address
+      image
+    }
+    trader {
+      id
+      address
+      image
+    }
+  }
+  holders: shares(take: 10) {
+    id
+    isBuy
+    shareAmount
+    stethAmount
+    createdAt
+    subject {
+      id
+      address
+      image
+    }
+    trader {
+      id
+      address
+      image
+    }
+  }
+  global: shares(take: 10) {
+    id
+    isBuy
+    shareAmount
+    stethAmount
+    createdAt
+    subject {
+      id
+      address
+      image
+    }
+    trader {
+      id
+      address
+      image
+    }
+  }
+}
+    `;
+
+/**
+ * __useShareDataQuery__
+ *
+ * To run a query within a React component, call `useShareDataQuery` and pass it any options that fit your needs.
+ * When your component renders, `useShareDataQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useShareDataQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useShareDataQuery(baseOptions?: Apollo.QueryHookOptions<ShareDataQuery, ShareDataQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ShareDataQuery, ShareDataQueryVariables>(ShareDataDocument, options);
+      }
+export function useShareDataLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ShareDataQuery, ShareDataQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ShareDataQuery, ShareDataQueryVariables>(ShareDataDocument, options);
+        }
+export type ShareDataQueryHookResult = ReturnType<typeof useShareDataQuery>;
+export type ShareDataLazyQueryHookResult = ReturnType<typeof useShareDataLazyQuery>;
+export type ShareDataQueryResult = Apollo.QueryResult<ShareDataQuery, ShareDataQueryVariables>;
