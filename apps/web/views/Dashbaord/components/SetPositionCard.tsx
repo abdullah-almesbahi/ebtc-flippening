@@ -1,19 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import type { UsePrepareContractWriteConfig } from 'wagmi'
-import {
-  erc20ABI,
-  useAccount,
-  useContractReads,
-  useContractWrite,
-  useNetwork,
-  usePrepareContractWrite,
-  useWaitForTransaction,
-} from 'wagmi'
+import { useAccount, useContractWrite, useNetwork, usePrepareContractWrite, useWaitForTransaction } from 'wagmi'
 import { useWeb3Modal } from '@web3modal/wagmi/react'
 import { formatUnits, parseUnits } from 'viem'
 import BigNumber from 'bignumber.js'
 import { readContract } from '@wagmi/core'
+import { fetchZapData } from '../helpers/fetchZapData'
 import { BetPosition } from '@/store/types'
 import { useUserStore } from '@/store/user'
 import borrowerOperationsContractAbi from '@/abi/borrowerOperations.json'
@@ -22,6 +15,7 @@ import stethABI from '@/abi/steth.json'
 import vaultABI from '@/abi/vault.json'
 import { contractAddress, poolIds } from '@/utils/constants'
 import { chainName } from '@/utils/getChianName'
+import { useToast } from '@/contexts/ToastsContext'
 
 interface SetPositionCardProps {
   position: BetPosition
@@ -38,13 +32,18 @@ interface FormDataType {
   leverage: string
 }
 
-interface Token {
-  symbol: string
-  balanceOf: bigint
-  decimals: number
-}
-
-// PMA = Position Manager Approval
+/**
+ *
+ *
+ * @param {*} {
+ *   position,
+ *   togglePosition,
+ *   epoch,
+ *   onBack,
+ *   onSuccess,
+ * }
+ * @return {*}
+ */
 const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> = ({
   position,
   togglePosition,
@@ -52,17 +51,20 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
   onBack,
   onSuccess,
 }) => {
-  const [token, setToken] = useState<Token>({
-    symbol: 'stETH',
-    balanceOf: 0n,
-    decimals: 18,
+  const [data, setData] = useState<{ token: Token; PMAAmount: number; zapAllownce: bigint }>({
+    token: {
+      symbol: 'stETH',
+      balanceOf: 0n,
+      decimals: 18,
+    },
+    PMAAmount: 0,
+    zapAllownce: 0n,
   })
+  const { token, PMAAmount, zapAllownce } = data
   const { chain } = useNetwork()
-  const [PMAAmount, setPMAAmount] = useState<number>(0)
-  const [zapAllownce, setZapAllownce] = useState<bigint>(0n)
   const { isUserLoggedIn } = useUserStore()
-  const [loading, setLoading] = useState(false)
   const [prepareContractConfig, setPrepareContractConfig] = useState<UsePrepareContractWriteConfig>({ enabled: false })
+  const { toastSuccess } = useToast()
 
   const {
     register,
@@ -80,70 +82,24 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
     }
 
     fetchData()
-  }, [getValues('amount'), getValues('symbol'), getValues('ratio'), getValues('leverage')])
+  }, [getValues('amount'), getValues('symbol'), /*getValues('ratio'),*/ getValues('leverage'), data])
+
   const { address, isConnected } = useAccount()
+
+  useEffect(() => {
+    //  set it to be called every 5 seconds
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    const interval = setInterval(async () => {
+      const rs = await fetchZapData({ symbol: getValues('symbol'), address, chain })
+      setData(rs)
+    }, 5000)
+
+    // Clear the interval when the component unmounts
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
   const modal = useWeb3Modal()
-  useContractReads({
-    contracts: [
-      {
-        abi: erc20ABI,
-        address:
-          getValues('symbol') === 'stETH'
-            ? contractAddress[chainName(chain)].steth
-            : contractAddress[chainName(chain)].usdc,
-        functionName: 'balanceOf',
-        args: [address!],
-      },
-      {
-        abi: erc20ABI,
-        address:
-          getValues('symbol') === 'stETH'
-            ? contractAddress[chainName(chain)].steth
-            : contractAddress[chainName(chain)].usdc,
-        functionName: 'decimals',
-      },
-      {
-        // @ts-expect-error
-        abi: borrowerOperationsContractAbi,
-        address: contractAddress[chainName(chain)].borrowerOperations,
-        functionName: 'getPositionManagerApproval',
-        args: [address!, contractAddress[chainName(chain)].zap],
-      },
-      {
-        // @ts-expect-error
-        abi: stethABI,
-        address: contractAddress[chainName(chain)].steth,
-        functionName: 'allowance',
-        args: [address!, contractAddress[chainName(chain)].zap],
-      },
-    ],
-    onSuccess(data) {
-      console.log('success', data)
-      const [
-        { result: balanceOf },
-        { result: decimals },
-        { result: getPositionManagerApprovalAmount, status: getPositionManagerApprovalStatus },
-        { result: allowance },
-      ] = data
-      setToken({
-        symbol: getValues('symbol'),
-        balanceOf: balanceOf as unknown as bigint,
-        decimals: decimals as unknown as number,
-      })
-      console.log(getPositionManagerApprovalAmount, getPositionManagerApprovalStatus)
-      setPMAAmount(getPositionManagerApprovalAmount as unknown as number)
-      setZapAllownce(allowance as unknown as bigint)
-    },
-    onError(err) {
-      console.log('onError', err)
-    },
-    onSettled(data, error) {
-      console.log('onSettled', data, error)
-    },
-    // watch: true,
-    // staleTime: 160_000,
-    enabled: address && Number(getValues('amount')) > 0,
-  })
 
   useEffect(() => {
     if (isConnected) {
@@ -162,22 +118,11 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
   }
 
   const onSubmit = async (formData: FormDataType) => {
-    console.log('formData', formData)
-
-    try {
-      setLoading(true)
-      write?.()
-    } catch (error) {
-      alert(error.message)
-    } finally {
-      setLoading(false)
-    }
+    write?.()
   }
 
   const getNextStep = () => {
-    if (loading) {
-      return 'wait'
-    } else if (!isConnected) {
+    if (!isConnected) {
       return 'connect'
     } else if (!getValues('amount')) {
       return 'enter_amount'
@@ -218,8 +163,8 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
 
   const getButtonText = () => {
     switch (getNextStep()) {
-      case 'wait':
-        return <span aria-hidden="true" className="spinner-border spinner-border-sm" role="status" />
+      // case 'wait':
+      //   return <span aria-hidden="true" className="spinner-border spinner-border-sm" role="status" />
       case 'enter_amount':
         return 'Enter amount'
       case 'valid_amount':
@@ -342,7 +287,22 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
 
   // console.log('token', token)
   const { config, error: prepareError, isError: prepareIsError } = usePrepareContractWrite(prepareContractConfig)
-  const { data: writeData, error: writeError, isError: writeIsError, write } = useContractWrite(config)
+  const {
+    data: writeData,
+    error: writeError,
+    isError: writeIsError,
+    write,
+  } = useContractWrite({
+    ...config,
+    onSuccess: async (d) => {
+      if (['call_zap', 'swap_steth_to_ebtc'].includes(getNextStep())) {
+        await onSuccess(d.hash)
+      } else {
+        toastSuccess('Success', <div>Transaction submitted successfully</div>)
+      }
+      console.log('onSuccess', d)
+    },
+  })
   const { isLoading, isSuccess } = useWaitForTransaction({
     hash: writeData?.hash,
   })
@@ -350,7 +310,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
   watch('amount')
   watch('symbol')
 
-  if ((prepareError || writeError)?.message) console.log('prepareError', (prepareError || writeError)?.message)
+  // if ((prepareError || writeError)?.message) console.log('prepareError', (prepareError || writeError)?.message)
   return (
     <div className="p-3 d-flex flex-column justify-content-between" style={{ minHeight: 380 }}>
       <div className="pb-3">
@@ -393,7 +353,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
         Balance: {formatUnits(token.balanceOf || 0n, token.decimals)} {getValues('symbol')}
       </div>
 
-      <div className="d-flex flex-row justify-content-between mb-3">
+      {/* <div className="d-flex flex-row justify-content-between mb-3">
         <span className="mt-10 fw-6"> Ratio</span>
         <div aria-label="Basic radio toggle button group" className="btn-group" role="group">
           <input
@@ -445,7 +405,7 @@ const SetPositionCard: React.FC<React.PropsWithChildren<SetPositionCardProps>> =
             200%
           </label>
         </div>
-      </div>
+      </div> */}
 
       <div className="d-flex flex-row justify-content-between mb-3">
         <span className="fw-6 mt-10">Leverage</span>
